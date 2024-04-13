@@ -1,7 +1,25 @@
 minion = entity:new({
   r = 3,
 
+  mode = "follow",
+  target = nil,
+
   update = function(_ENV)
+    if (mode == "follow") _ENV:follow()
+    if (mode == "attack") _ENV:attack()
+  end,
+
+  draw = function(_ENV)
+    spr(2,x-4,y-4)
+  end,
+
+  attack = function(_ENV)
+    -- jump at target
+    -- hit target
+    -- bounce back to previous position
+  end,
+
+  follow = function(_ENV)
     local pos = player.positions[#player.positions]
     local px = pos[1]
     local py = pos[2]
@@ -19,9 +37,5 @@ minion = entity:new({
       x = ox
       y = oy
     end
-  end,
-
-  draw = function(_ENV)
-    spr(2,x-4,y-4)
   end
 })
