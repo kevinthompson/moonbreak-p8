@@ -2,6 +2,7 @@ player = entity:new({
   x=64,
   y=64,
   speed=.5,
+  r=5,
 
   positions={},
 

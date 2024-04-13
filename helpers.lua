@@ -18,3 +18,10 @@ function pad(str,len,char)
 	if (#str==len) return str
 	return char..pad(str, len-1)
 end
+
+-- circle collision
+function ccol(c1,c2)
+  local dx = c1.x - c2.x
+  local dy = c1.y - c2.y
+  return sqrt(dx * dx + dy * dy) < c1.r + c2.r
+end
