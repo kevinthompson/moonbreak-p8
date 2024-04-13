@@ -3,6 +3,8 @@ player = entity:new({
   y=64,
   speed=.5,
   r=5,
+  ar = 10, -- attack radius
+  target = nil,
 
   positions={},
 
@@ -25,6 +27,14 @@ player = entity:new({
       local angle = atan2(dx,dy)
       x+=cos(angle) * speed
       y+=sin(angle) * speed
+    end
+
+    target = nil
+    for objective in all(objectives) do
+      if #minions >= objective.minions_required
+      and ccol({x=x,y=y,r=ar}, objective) then
+        target = objective
+      end
     end
   end,
 

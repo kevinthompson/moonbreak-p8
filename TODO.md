@@ -8,8 +8,10 @@
 [x] Minion Follow
 [ ] Player art
 [ ] Level art
-[ ] Objectives
+[x] Objectives
 [ ] Objective Indicators
+[ ] Harvest energy from objectives
+[ ] Spawn minions with energy
 [ ] Minion Attack
 [ ] Map collision
 [ ] Win condition

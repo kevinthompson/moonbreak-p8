@@ -2,22 +2,15 @@ time_limit = 601
 
 function game_init()
   time_start = time()
-  minions = {
-    minion:new({
-      x = player.x,
-      y = player.y,
-      a = rnd()
-    })
-  }
+  entities = {}
+  minions = {}
+  objectives = {}
+  create_minion()
+  create_objective()
 end
 
 function game_update()
   player:update()
-
-  for m in all(minions) do
-    m:update()
-  end
-
   update_camera()
 end
 
@@ -25,8 +18,9 @@ function game_draw()
   cls(0)
   map()
 
-  for m in all(minions) do
-    m:draw()
+  for e in all(entities) do
+    e:update()
+    e:draw()
   end
 
   player:draw()
@@ -58,4 +52,24 @@ function draw_ui()
   spr(2,cx+4,cy+mcy)
   spr(0,cx+12,cy+mcy+1)
   print(#minions,cx+20,cy+mcy+2,7)
+end
+
+function create_minion()
+  local m = minion:new({
+    x = player.x,
+    y = player.y
+  })
+
+  add(minions,m)
+  add(entities,m)
+end
+
+function create_objective()
+  local o = objective:new({
+    x=72,
+    y=72
+  })
+
+  add(objectives, o)
+  add(entities, o)
 end

@@ -17,6 +17,7 @@ __lua__
 -- entities
 #include player.lua
 #include minion.lua
+#include objective.lua
 
 -- main
 #include main.lua
