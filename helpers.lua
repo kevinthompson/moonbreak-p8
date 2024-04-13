@@ -21,7 +21,11 @@ end
 
 -- circle collision
 function ccol(c1,c2)
+  return dist(c1,c2) < c1.r + c2.r
+end
+
+function dist(c1,c2)
   local dx = c1.x - c2.x
   local dy = c1.y - c2.y
-  return sqrt(dx * dx + dy * dy) < c1.r + c2.r
+  return sqrt(dx * dx + dy * dy)
 end

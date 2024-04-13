@@ -1,12 +1,22 @@
 minion = entity:new({
   r = 3,
-
+  speed = .25,
   mode = "follow",
-  target = nil,
+  target = player,
 
   update = function(_ENV)
-    if (mode == "follow") _ENV:follow()
-    if (mode == "attack") _ENV:attack()
+    if dist(_ENV,target) > 32 then
+      speed = .35
+    else
+      speed = .25
+    end
+
+    if (mode == "attack") then
+      _ENV:attack()
+      speed = .5
+    end
+
+    _ENV:follow()
   end,
 
   draw = function(_ENV)
@@ -20,20 +30,17 @@ minion = entity:new({
   end,
 
   follow = function(_ENV)
-    local pos = player.positions[#player.positions]
-    local px = pos[1]
-    local py = pos[2]
-
-    tx = px --+ cos(a) * 10
-    ty = py --+ sin(a) * 10
+    local px = target.x
+    local py = target.y
 
     local ox = x
     local oy = y
 
-    x = lerp(x,tx,.1)
-    y = lerp(y,ty,.1)
+    local a = atan2(px-x,py-y)
+    x = x + cos(a) * speed
+    y = y + sin(a) * speed
 
-    if ccol(player,_ENV) then
+    if ccol(target,_ENV) then
       x = ox
       y = oy
     end

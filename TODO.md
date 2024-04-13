@@ -9,7 +9,7 @@
 [x] Objectives
 [x] Manually attack with minions
 [x] Call minions back
-[ ] Change minion movement to speed instead of lerp
+[x] Change minion movement to speed instead of lerp
 [ ] Target indicator
 [ ] Attack animations
 [ ] Harvest energy from objectives

@@ -3,18 +3,10 @@ player = entity:new({
   y=64,
   speed=.5,
   r=5,
-  ar = 10, -- attack radius
+  ar = 16, -- attack radius
   target = nil,
 
-  positions={},
-
   update=function(_ENV)
-    -- record last position
-    if #positions == 0 or x != positions[1][1] or y != positions[1][2] then
-      add(positions,{x,y},1)
-      if (#positions > 20) deli(positions,#positions)
-    end
-
     -- find target
     target = nil
     for objective in all(objectives) do
@@ -45,7 +37,7 @@ player = entity:new({
     end
 
     -- handle attack
-    if btnp(5) then
+    if target and btnp(5) then
       for m in all(minions) do
         if m.mode == "follow" then
           m.mode = "attack"
@@ -54,7 +46,6 @@ player = entity:new({
         end
       end
     end
-
 
     -- normalize movement speed
     if dx!=0 or dy != 0 then
@@ -66,5 +57,9 @@ player = entity:new({
 
   draw=function(_ENV)
     circfill(x,y,3,3)
+
+    if target then
+      circfill(target.x,target.y - target.r - 3,2,7)
+    end
   end
 })
