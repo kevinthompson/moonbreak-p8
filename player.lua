@@ -3,7 +3,14 @@ player = entity:new({
   y=64,
   speed=.5,
 
+  positions={},
+
   update=function(_ENV)
+    if #positions == 0 or x != positions[1][1] or y != positions[1][2] then
+      add(positions,{x,y},1)
+      if (#positions > 20) deli(positions,#positions)
+    end
+
     local dx=0
     local dy=0
 

@@ -5,15 +5,21 @@
 [x] Camera
 [x] Display Time Left
 [x] Minion Count
-[ ] Minion Follow
+[x] Minion Follow
+[ ] Player art
+[ ] Level art
+[ ] Objectives
+[ ] Objective Indicators
 [ ] Minion Attack
-[ ] Objective Display
 [ ] Map collision
 [ ] Win condition
 
 ## Nice to Have
 
+[ ] Character animations
 [ ] Animate player spawn
+[ ] Smarter minion Follow
+[ ] Minion idle wander
 [ ] VFX for new minion
 [ ] VFX for final countdown
 [ ] Randomize levels
