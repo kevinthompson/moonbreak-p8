@@ -16,6 +16,7 @@ energy = entity:new({
 
     if ccol(_ENV,{x=tx,y=ty,r=5}) then
       del(entities,_ENV)
+      sfx(1)
       player.energy += 1
     end
   end,

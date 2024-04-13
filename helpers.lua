@@ -7,7 +7,7 @@ end
 
 -- print shadow
 function prints(str,x,y,clr)
-	print(str,x+1,y+1,0)
+	print(str,x,y+1,0)
 	print(str,x,y,clr)
 end
 

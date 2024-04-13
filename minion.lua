@@ -27,6 +27,7 @@ minion = entity:new({
 
   attack = function(_ENV)
     if attack_timer <= 0 then
+      sfx(0)
       target.health -= 1
       attack_timer = attack_speed
     else

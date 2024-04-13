@@ -7,7 +7,7 @@ objective = entity:new({
   type = "objective",
 
   health = 1,
-  energy_count = 1,
+  energy_count = 5,
   minions_required = 1,
 
   update = function(_ENV)
@@ -16,6 +16,7 @@ objective = entity:new({
 
   draw = function(_ENV)
     circfill(x,y,r,4)
+    prints(minions_required,x-1,y+2,7)
   end,
 
   destroy = function(_ENV)

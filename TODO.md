@@ -14,15 +14,16 @@
 [x] Harvest energy from objectives
 [x] Spawn minions with energy
 [x] Minion Attack
-[ ] Attack animations
-[ ] Player art
-[ ] Level art
+[ ] Map
 [ ] Map collision
 [ ] Win condition
 [ ] Lose condition (time, no more minions?)
 
 ## Nice to Have
 
+[ ] Attack animations
+[ ] Player art
+[ ] Level art
 [ ] Render energy over UI
 [ ] Objective Indicators
 [ ] Character animations

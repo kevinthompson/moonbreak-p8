@@ -7,8 +7,6 @@ player = entity:new({
   target = nil,
   minions = {},
   energy = 0,
-  attack_timer = 0,
-  attack_time_limit = 60,
 
   update=function(_ENV)
     -- find target
@@ -39,7 +37,7 @@ player = entity:new({
     if (btn(3)) dy+=1
 
     -- handle calling minions
-    if btn(4) then
+    if btnp(4) then
       for m in all(global_minions) do
         if m.mode == "attack" then
           m.mode = "follow"
@@ -51,25 +49,20 @@ player = entity:new({
     end
 
     -- handle attack
-    if target and btn(5) then
-      if attack_timer <= 0 then
-        attack_timer = attack_time_limit
-        if target.type == "objective" then
-          for m in all(minions) do
-            if m.mode == "follow" then
-              m.mode = "attack"
-              m.target = target
-              m.attack_timer = m.attack_speed
-              del(minions,m)
-              break
-            end
+    if target and btnp(5) then
+      if target.type == "objective" then
+        for m in all(minions) do
+          if m.mode == "follow" then
+            m.mode = "attack"
+            m.target = target
+            m.attack_timer = m.attack_speed
+            del(minions,m)
+            break
           end
-        elseif target.type == "altar" and energy > 0 then
-          energy -= 1
-          altar.energy += 1
         end
-      else
-        attack_timer -= 1
+      elseif target.type == "altar" and energy > 0 then
+        energy -= 1
+        altar:add_energy(1)
       end
     end
 
