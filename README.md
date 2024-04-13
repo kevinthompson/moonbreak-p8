@@ -1,7 +1,28 @@
 # LD55 – Summoning
 
+## General Guidelines
+
+- <10min
+- Cute
+- PICO-8
+
 ## Phase 1: Ideation
 
-- Summon minions to do a thing
-- Collect resources to summon a creature
-- Stop enemies from summoning a boss
+### \*\*\* Collect resources to summon minions
+
+- Pikmin Style
+- Creatures auto attack and complete objectives
+- End in boss fight?
+- No physics
+
+### Stop enemies from summoning a boss
+
+- 10min Time limit
+- Near impossible to stop summon
+- Interesting boss fight
+
+### Summon a creature for platformer movement
+
+- Gunbrella
+- Hell Pie
+- Penny's Big Breakaway
