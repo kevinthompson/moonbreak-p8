@@ -4,9 +4,10 @@ objective = entity:new({
   r = 4,
 
   name = "target",
+  type = "objective",
 
-  health = 4,
-  energy_count = 5,
+  health = 1,
+  energy_count = 1,
   minions_required = 1,
 
   update = function(_ENV)

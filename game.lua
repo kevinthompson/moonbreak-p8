@@ -5,10 +5,11 @@ function game_init()
   entities = {}
   global_minions = {}
   objectives = {}
-  for i=1,5 do
-    create_minion()
-  end
+  altars = {}
+
+  create_minion()
   create_objective()
+  create_altar()
 end
 
 function game_update()
@@ -80,4 +81,14 @@ function create_objective()
 
   add(objectives, o)
   add(entities, o)
+end
+
+function create_altar()
+  local a = altar:new({
+    x=32,
+    y=32
+  })
+
+  add(altars,a)
+  add(entities,a)
 end

@@ -12,11 +12,11 @@
 [x] Change minion movement to speed instead of lerp
 [x] Target indicator
 [x] Harvest energy from objectives
+[x] Spawn minions with energy
+[x] Minion Attack
 [ ] Attack animations
 [ ] Player art
 [ ] Level art
-[ ] Spawn minions with energy
-[ ] Minion Attack
 [ ] Map collision
 [ ] Win condition
 [ ] Lose condition (time, no more minions?)

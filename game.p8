@@ -19,6 +19,7 @@ __lua__
 #include minion.lua
 #include objective.lua
 #include energy.lua
+#include altar.lua
 
 -- main
 #include main.lua

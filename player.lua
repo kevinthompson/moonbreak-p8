@@ -7,14 +7,25 @@ player = entity:new({
   target = nil,
   minions = {},
   energy = 0,
+  attack_timer = 0,
+  attack_time_limit = 60,
 
   update=function(_ENV)
     -- find target
     target = nil
-    for objective in all(objectives) do
-      if #minions >= objective.minions_required
-      and ccol({x=x,y=y,r=ar}, objective) then
-        target = objective
+
+    for altar in all(altars) do
+      if ccol({x=x,y=y,r=ar}, altar) then
+        target = altar
+      end
+    end
+
+    if target == nil then
+      for objective in all(objectives) do
+        if #minions >= objective.minions_required
+        and ccol({x=x,y=y,r=ar}, objective) then
+          target = objective
+        end
       end
     end
 
@@ -40,14 +51,25 @@ player = entity:new({
     end
 
     -- handle attack
-    if target and btnp(5) then
-      for m in all(minions) do
-        if m.mode == "follow" then
-          m.mode = "attack"
-          m.target = target
-          del(minions,m)
-          break
+    if target and btn(5) then
+      if attack_timer <= 0 then
+        attack_timer = attack_time_limit
+        if target.type == "objective" then
+          for m in all(minions) do
+            if m.mode == "follow" then
+              m.mode = "attack"
+              m.target = target
+              m.attack_timer = m.attack_speed
+              del(minions,m)
+              break
+            end
+          end
+        elseif target.type == "altar" and energy > 0 then
+          energy -= 1
+          altar.energy += 1
         end
+      else
+        attack_timer -= 1
       end
     end
 
