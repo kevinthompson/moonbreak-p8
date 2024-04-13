@@ -10,9 +10,9 @@
 [x] Manually attack with minions
 [x] Call minions back
 [x] Change minion movement to speed instead of lerp
-[ ] Target indicator
+[x] Target indicator
+[x] Harvest energy from objectives
 [ ] Attack animations
-[ ] Harvest energy from objectives
 [ ] Player art
 [ ] Level art
 [ ] Spawn minions with energy
@@ -23,9 +23,11 @@
 
 ## Nice to Have
 
+[ ] Render energy over UI
 [ ] Objective Indicators
 [ ] Character animations
 [ ] Ending graphics
+[ ] Target indicator animation
 [ ] Animate player spawn
 [ ] Smarter minion Follow
 [ ] Minion idle wander

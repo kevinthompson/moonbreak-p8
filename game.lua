@@ -54,6 +54,11 @@ function draw_ui()
   spr(2,cx+4,cy+mcy)
   spr(0,cx+12,cy+mcy+1)
   print(#player.minions,cx+20,cy+mcy+2,7)
+
+  -- show energy count
+  spr(4,cx+104,cy+mcy+1)
+  spr(0,cx+112,cy+mcy+1)
+  print(player.energy,cx+120,cy+mcy+2,7)
 end
 
 function create_minion()

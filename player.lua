@@ -6,6 +6,7 @@ player = entity:new({
   ar = 16, -- attack radius
   target = nil,
   minions = {},
+  energy = 0,
 
   update=function(_ENV)
     -- find target
@@ -62,7 +63,7 @@ player = entity:new({
     circfill(x,y,3,3)
 
     if target then
-      circfill(target.x,target.y - target.r - 3,2,7)
+      spr(3,target.x-3,target.y - target.r - 7)
     end
   end
 })
