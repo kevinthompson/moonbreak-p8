@@ -1,10 +1,11 @@
 minion = entity:new({
-  r = 2,
+  r = 3,
   speed = .25,
   mode = "follow",
   target = player,
   attack_timer = 0,
   attack_speed = 60,
+  flip = false,
 
   update = function(_ENV)
     if dist(_ENV,target) > 32 then
@@ -22,7 +23,7 @@ minion = entity:new({
   end,
 
   draw = function(_ENV)
-    spr(5,x-2,y-2)
+    spr(5,x-2,y-2,1,1,flip)
   end,
 
   attack = function(_ENV)
@@ -48,8 +49,14 @@ minion = entity:new({
     local oy = y
 
     local a = atan2(px-x,py-y)
-    x = x + cos(a) * speed
-    y = y + sin(a) * speed
+    local dx = cos(a) * speed
+    local dy = sin(a) * speed
+
+    if (dx < 0) flip = true
+    if (dx > 0) flip = false
+
+    x = x + dx
+    y = y + dy
 
     if ccol(target,_ENV) then
       x = ox

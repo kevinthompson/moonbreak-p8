@@ -7,6 +7,7 @@ player = entity:new({
   target = nil,
   minions = {},
   energy = 0,
+  flip = false,
 
   update=function(_ENV)
     local nx = x
@@ -38,6 +39,9 @@ player = entity:new({
     if (btn(1)) dx+=1
     if (btn(2)) dy-=1
     if (btn(3)) dy+=1
+
+    if (dx < 0) flip = true
+    if (dx > 0) flip = false
 
     -- handle calling minions
     if btnp(4) then
@@ -81,7 +85,7 @@ player = entity:new({
   end,
 
   draw=function(_ENV)
-    spr(1,x-3,y-3)
+    spr(1,x-3,y-3,1,1,flip)
 
     -- draw target indicator
     if target then
