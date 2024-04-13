@@ -2,13 +2,16 @@ player = entity:new({
   x=64,
   y=64,
   speed=.5,
-  r=5,
+  r=4,
   ar = 16, -- attack radius
   target = nil,
   minions = {},
   energy = 0,
 
   update=function(_ENV)
+    local nx = x
+    local ny = y
+
     -- find target
     target = nil
 
@@ -62,23 +65,27 @@ player = entity:new({
         end
       elseif target.type == "altar" and energy > 0 then
         energy -= 1
-        altar:add_energy(1)
+        target:add_energy(1)
       end
     end
 
     -- normalize movement speed
     if dx!=0 or dy != 0 then
       local angle = atan2(dx,dy)
-      x+=cos(angle) * speed
-      y+=sin(angle) * speed
+      nx+=cos(angle) * speed
+      ny+=sin(angle) * speed
     end
+
+    x = nx
+    y = ny
   end,
 
   draw=function(_ENV)
-    circfill(x,y,3,3)
+    spr(1,x-3,y-3)
 
+    -- draw target indicator
     if target then
-      spr(3,target.x-3,target.y - target.r - 7)
+      sspr(24,0,3,3,target.x - 1,target.y - target.r - 4)
     end
   end
 })

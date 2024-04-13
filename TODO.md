@@ -14,6 +14,7 @@
 [x] Harvest energy from objectives
 [x] Spawn minions with energy
 [x] Minion Attack
+[ ] Objective collision
 [ ] Map
 [ ] Map collision
 [ ] Win condition
@@ -36,3 +37,4 @@
 [ ] VFX for final countdown
 [ ] Randomize world
 [ ] Music
+[ ] UI detail

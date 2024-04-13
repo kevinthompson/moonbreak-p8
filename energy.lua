@@ -22,6 +22,6 @@ energy = entity:new({
   end,
 
   draw = function(_ENV)
-    spr(5,x,y)
+    sspr(29,0,3,3,x,y)
   end
 })

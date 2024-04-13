@@ -7,7 +7,7 @@ altar = entity:new({
   update = function(_ENV)
     if energy >= 5 then
       create_minion()
-      energy = energy - 5
+      energy -= 5
     end
   end,
 
@@ -22,6 +22,6 @@ altar = entity:new({
 
   add_energy = function(_ENV, amt)
     energy += amt
-    sfx(sounds[flr((energy/5)*5)])
+    sfx(sounds[ceil((energy/5)*5)])
   end
 })

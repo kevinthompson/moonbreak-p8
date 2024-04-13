@@ -7,9 +7,12 @@ function game_init()
   objectives = {}
   altars = {}
 
-  create_minion()
   create_objective()
   create_altar()
+
+  for i=1,5 do
+    create_energy(player.x,player.y,rnd())
+  end
 end
 
 function game_update()
@@ -91,4 +94,12 @@ function create_altar()
 
   add(altars,a)
   add(entities,a)
+end
+
+function create_energy(x,y,a)
+  add(entities, energy:new({
+    x=x,
+    y=y,
+    a=a
+  }))
 end

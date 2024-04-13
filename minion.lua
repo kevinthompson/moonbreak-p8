@@ -1,10 +1,10 @@
 minion = entity:new({
-  r = 3,
+  r = 2,
   speed = .25,
   mode = "follow",
   target = player,
   attack_timer = 0,
-  attack_speed = 120,
+  attack_speed = 60,
 
   update = function(_ENV)
     if dist(_ENV,target) > 32 then
@@ -22,13 +22,12 @@ minion = entity:new({
   end,
 
   draw = function(_ENV)
-    spr(2,x-4,y-4)
+    spr(5,x-2,y-2)
   end,
 
   attack = function(_ENV)
     if attack_timer <= 0 then
-      sfx(0)
-      target.health -= 1
+      target:hit()
       attack_timer = attack_speed
     else
       attack_timer -= 1
