@@ -33,11 +33,12 @@ end
 
 function game_update()
   player:update()
-
+  update_camera()
 end
 
 function game_draw()
-  cls(1)
+  cls(0)
+  map()
   player:draw()
   print_time()
 end
@@ -47,4 +48,10 @@ function print_time()
   local m = pad(time_left \ 60,2,"0")
   local s = pad(time_left % 60,2,"0")
   printc(m .. ":" .. s,4,7,6)
+end
+
+function update_camera()
+  cx = mid(0, player.x - 64, 896)
+  cy = mid(0, player.y - 64, 384)
+  camera(cx,cy)
 end

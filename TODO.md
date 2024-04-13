@@ -2,6 +2,7 @@
 
 ## Required
 
+[x] Camera
 [ ] Minion Count
 [ ] Objective Display
 [x] Display Time Left

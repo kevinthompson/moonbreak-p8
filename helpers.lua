@@ -2,7 +2,7 @@
 function printc(str,y,clr,w)
   w=w or 4
 	local x=64-(#str*w)/2
-	print(str,x,y,clr)
+	print(str,cx+x,cy+y,clr)
 end
 
 -- print shadow
