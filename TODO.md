@@ -4,6 +4,9 @@
 
 [ ] Minion Count
 [ ] Objective Display
-[ ] Timer
+[x] Display Time Left
+[ ] Win condition
 
 ## Nice to Have
+
+[ ] Animate player spawn

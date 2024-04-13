@@ -8,12 +8,14 @@
 
 ## Phase 1: Ideation
 
-### \*\*\* Collect resources to summon minions
+### ⭐️ Collect resources to summon minions
 
 - Pikmin Style
 - Creatures auto attack and complete objectives
 - End in boss fight?
 - No physics
+- Goal is to end the world
+  - "Congratulations! The world was destroyed!"
 
 ### Stop enemies from summoning a boss
 
@@ -26,3 +28,5 @@
 - Gunbrella
 - Hell Pie
 - Penny's Big Breakaway
+
+## Phase 2: Prototyping

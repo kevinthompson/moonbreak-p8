@@ -5,8 +5,11 @@ __lua__
 -- made by kevin
 
 #include debug.lua
+#include class.lua
+#include helpers.lua
 #include splash.lua
 #include title.lua
+#include game.lua
 #include main.lua
 __gfx__
 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
