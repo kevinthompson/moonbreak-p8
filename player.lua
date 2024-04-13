@@ -5,6 +5,7 @@ player = entity:new({
   r=5,
   ar = 16, -- attack radius
   target = nil,
+  minions = {},
 
   update=function(_ENV)
     -- find target
@@ -27,10 +28,11 @@ player = entity:new({
 
     -- handle calling minions
     if btn(4) then
-      for m in all(minions) do
+      for m in all(global_minions) do
         if m.mode == "attack" then
           m.mode = "follow"
           m.target = nil
+          add(minions,m)
           break
         end
       end
@@ -42,6 +44,7 @@ player = entity:new({
         if m.mode == "follow" then
           m.mode = "attack"
           m.target = target
+          del(minions,m)
           break
         end
       end

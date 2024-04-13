@@ -3,9 +3,11 @@ time_limit = 601
 function game_init()
   time_start = time()
   entities = {}
-  minions = {}
+  global_minions = {}
   objectives = {}
-  create_minion()
+  for i=1,5 do
+    create_minion()
+  end
   create_objective()
 end
 
@@ -51,7 +53,7 @@ function draw_ui()
   local mcy=2
   spr(2,cx+4,cy+mcy)
   spr(0,cx+12,cy+mcy+1)
-  print(#minions,cx+20,cy+mcy+2,7)
+  print(#player.minions,cx+20,cy+mcy+2,7)
 end
 
 function create_minion()
@@ -60,7 +62,8 @@ function create_minion()
     y = player.y
   })
 
-  add(minions,m)
+  add(global_minions,m)
+  add(player.minions,m)
   add(entities,m)
 end
 

@@ -44,5 +44,13 @@ minion = entity:new({
       x = ox
       y = oy
     end
+
+    for m in all(global_minions) do
+      if m != _ENV and ccol(_ENV, m) then
+        local a = atan2(m.x - x,m.y - y)
+        x = x + cos(a+.5)
+        y = y + sin(a+.5)
+      end
+    end
   end
 })
