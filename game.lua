@@ -21,7 +21,7 @@ function game_update()
 end
 
 function game_draw()
-  cls(0)
+  cls(3)
   map()
 
   for e in all(entities) do

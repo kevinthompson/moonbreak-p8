@@ -1,5 +1,5 @@
 altar = entity:new({
-  r = 8,
+  r = 4,
   type = "altar",
   energy = 0,
   sounds = {2,3,4,5,6},
@@ -12,7 +12,7 @@ altar = entity:new({
   end,
 
   draw = function(_ENV)
-    rectfill(x-4,y-4,x+4,y+4,5)
+    spr(6,x-3,y-3)
 
     if energy > 0 then
       rect(x-4,y+6,x+4,y+8,7)
