@@ -13,8 +13,7 @@ splash = scene:extend({
     ? "by",70,62,7
     line(51,68,77,68,10)
     sfx(63)
-
-    routine=cocreate(function()
+    async:call(function()
       local wgt=1
       local points=split("49,66;45,74;41,80,1;44,77;53,71,1;44,77;50,75;51,75,0;52,76,1;55,76;56,74;55,76;59,76,0;60,75;61,74,1;62,76,0;64,76,0;65,74,1;65,76;68,75;72,74;73,76;79,76,0;82,75;84,73",";")
       local current=split(points[1])
@@ -43,10 +42,4 @@ splash = scene:extend({
       scene:load(game)
     end)
   end,
-
-  update = function(_ENV)
-    if costatus(routine) != "dead" then
-      assert(coresume(routine))
-    end
-  end
 })

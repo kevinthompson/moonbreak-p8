@@ -1,9 +1,10 @@
 function _init()
   log("Initializing...", true)
-  scene:load(splash)
+  scene:load(game)
 end
 
 function _update60()
+  async:update()
   scene.current:update()
 end
 

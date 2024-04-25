@@ -8,6 +8,7 @@ __lua__
 #include scripts/utilities/globals.lua
 #include scripts/utilities/debug.lua
 #include scripts/utilities/class.lua
+#include scripts/utilities/async.lua
 #include scripts/utilities/gameobject.lua
 #include scripts/utilities/helpers.lua
 
