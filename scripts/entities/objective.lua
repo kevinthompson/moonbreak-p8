@@ -1,4 +1,4 @@
-objective = entity:new({
+objective = entity:extend({
   x = 64,
   y = 64,
   r = 4,

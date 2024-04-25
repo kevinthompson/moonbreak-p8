@@ -3,7 +3,7 @@ global_bots = {}
 objectives = {}
 targets = {}
 
-game = scene:new({
+game = scene:extend({
   init=function(_ENV)
     time_limit = 601
     time_start = time()

@@ -1,4 +1,4 @@
-player = entity:new({
+player = entity:extend({
   x=64,
   y=64,
   speed=0.5,

@@ -5,16 +5,20 @@ __lua__
 -- made by kevin
 
 -- utilities
+#include scripts/utilities/globals.lua
 #include scripts/utilities/debug.lua
 #include scripts/utilities/class.lua
+#include scripts/utilities/gameobject.lua
 #include scripts/utilities/helpers.lua
 
 -- scenes
+#include scripts/scenes/scene.lua
 #include scripts/scenes/splash.lua
 #include scripts/scenes/title.lua
 #include scripts/scenes/game.lua
 
 -- entities
+#include scripts/entities/entity.lua
 #include scripts/entities/player.lua
 #include scripts/entities/bot.lua
 #include scripts/entities/objective.lua

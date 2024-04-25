@@ -1,4 +1,4 @@
-energy = entity:new({
+energy = entity:extend({
   speed = .8,
   r=3,
   a=0,

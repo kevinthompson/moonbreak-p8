@@ -1,4 +1,4 @@
-bot = entity:new({
+bot = entity:extend({
   r = 3,
   speed = .25,
   mode = "follow",

@@ -40,3 +40,7 @@ function aabb(rect1,rect2)
     rect1.y < rect2.y + rect2.h and
     rect1.y + rect1.h > rect2.y
 end
+
+function lerp(a,b,t)
+  return a+(b-a)*t
+end
