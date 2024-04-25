@@ -4,21 +4,21 @@
 
 [x] Camera
 [x] Display Time Left
-[x] Minion Count
-[x] Minion Follow
+[x] bot Count
+[x] bot Follow
 [x] Objectives
-[x] Manually attack with minions
-[x] Call minions back
-[x] Change minion movement to speed instead of lerp
+[x] Manually attack with bots
+[x] Call bots back
+[x] Change bot movement to speed instead of lerp
 [x] Target indicator
 [x] Harvest energy from objectives
-[x] Spawn minions with energy
-[x] Minion Attack
+[x] Spawn bots with energy
+[x] bot Attack
 [ ] Objective collision
 [ ] Map
 [ ] Map collision
 [ ] Win condition
-[ ] Lose condition (time, no more minions?)
+[ ] Lose condition (time, no more bots?)
 
 ## Nice to Have
 
@@ -31,9 +31,9 @@
 [ ] Ending graphics
 [ ] Target indicator animation
 [ ] Animate player spawn
-[ ] Smarter minion Follow
-[ ] Minion idle wander
-[ ] VFX for new minion
+[ ] Smarter bot Follow
+[ ] bot idle wander
+[ ] VFX for new bot
 [ ] VFX for final countdown
 [ ] Randomize world
 [ ] Music

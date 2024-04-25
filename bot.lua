@@ -1,4 +1,4 @@
-minion = entity:new({
+bot = entity:new({
   r = 3,
   speed = .25,
   mode = "follow",
@@ -37,7 +37,7 @@ minion = entity:new({
     if target.health <= 0 then
       target = nil
       mode = "follow"
-      add(player.minions,_ENV)
+      add(player.bots,_ENV)
     end
   end,
 
@@ -63,7 +63,7 @@ minion = entity:new({
       y = oy
     end
 
-    for m in all(global_minions) do
+    for m in all(global_bots) do
       if m != _ENV and ccol(_ENV, m) then
         local a = atan2(m.x - x,m.y - y)
         x = x + cos(a+.5)

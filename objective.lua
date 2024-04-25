@@ -3,12 +3,12 @@ objective = entity:new({
   y = 64,
   r = 4,
 
-  name = "target",
+  name = "none",
   type = "objective",
 
   health = 5,
   energy_count = 5,
-  minions_required = 1,
+  bots_required = 1,
   flash_timer = 0,
 
   update = function(_ENV)
@@ -17,10 +17,10 @@ objective = entity:new({
   end,
 
   draw = function(_ENV)
-    if (flash_timer > 0) pal({7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7})
+    if (flash_timer > 0) pal({7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7},0)
     circfill(x,y,r,4)
-    if (flash_timer > 0) pal()
-    prints(minions_required,x-1,y+2,7)
+    if (flash_timer > 0) pal(0)
+    prints(name,x-1,y+2,7)
   end,
 
   hit = function(_ENV)

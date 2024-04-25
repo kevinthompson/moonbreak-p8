@@ -25,7 +25,18 @@ function ccol(c1,c2)
 end
 
 function dist(c1,c2)
-  local dx = c1.x - c2.x
-  local dy = c1.y - c2.y
+  --[[
+  Numbers larger than 32767.99999 will overflow
+  and cause invalid distance values
+  ]]
+  local dx = c2.x - c1.x
+  local dy = c2.y - c1.y
   return sqrt(dx * dx + dy * dy)
+end
+
+function aabb(rect1,rect2)
+  return rect1.x < rect2.x + rect2.w and
+    rect1.x + rect1.w > rect2.x and
+    rect1.y < rect2.y + rect2.h and
+    rect1.y + rect1.h > rect2.y
 end

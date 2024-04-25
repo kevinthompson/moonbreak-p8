@@ -12,7 +12,17 @@ class=setmetatable({
 	init=function()end
 },{__index=_ENV})
 
-entity=class:new({
+noop = function()end
+
+gameobject = class:new({
+  init=noop,
+  update=noop,
+  draw=noop
+})
+
+entity=gameobject:new({
 	x=0,
 	y=0,
 })
+
+scene=gameobject:new()

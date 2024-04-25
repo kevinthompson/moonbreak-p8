@@ -8,7 +8,7 @@
 
 ## Phase 1: Ideation
 
-### ⭐️ Collect resources to summon minions
+### ⭐️ Collect resources to summon bots
 
 - Pikmin Style
 - Creatures auto attack and complete objectives
