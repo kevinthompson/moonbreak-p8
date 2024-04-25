@@ -20,7 +20,6 @@ objective = entity:new({
     if (flash_timer > 0) pal({7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7},0)
     circfill(x,y,r,4)
     if (flash_timer > 0) pal(0)
-    prints(name,x-1,y+2,7)
   end,
 
   hit = function(_ENV)
@@ -33,6 +32,7 @@ objective = entity:new({
     if health <= 0 then
       del(objectives,_ENV)
       del(entities,_ENV)
+      del(targets,_ENV)
 
       for i=1,energy_count do
         create_energy(x,y,rnd())

@@ -11,11 +11,15 @@ game = scene:new({
     create_terminal()
 
     for i=1,3 do
-      create_objective(i)
+      create_objective()
     end
 
     for i=1,5 do
       create_energy(player.x,player.y,rnd())
+    end
+
+    for i=1,100 do
+      create_bot()
     end
   end,
 
@@ -81,12 +85,10 @@ function create_bot()
   add(entities,m)
 end
 
-function create_objective(name)
-  name = name or "none"
+function create_objective()
   local o = objective:new({
-    x=rnd(256),
-    y=rnd(256),
-    name=name
+    x=rnd(128),
+    y=rnd(128)
   })
 
   add(targets, o)

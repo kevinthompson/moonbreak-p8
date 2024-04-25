@@ -6,6 +6,8 @@ bot = entity:new({
   attack_timer = 0,
   attack_speed = 60,
   flip = false,
+  ox = 0,
+  oy = 0,
 
   update = function(_ENV)
     if dist(_ENV,target) > 32 then
@@ -42,13 +44,10 @@ bot = entity:new({
   end,
 
   follow = function(_ENV)
-    local px = target.x
-    local py = target.y
+    local px = x
+    local py = y
 
-    local ox = x
-    local oy = y
-
-    local a = atan2(px-x,py-y)
+    local a = atan2(target.x-x,target.y-y)
     local dx = cos(a) * speed
     local dy = sin(a) * speed
 
@@ -59,16 +58,8 @@ bot = entity:new({
     y = y + dy
 
     if ccol(target,_ENV) then
-      x = ox
-      y = oy
-    end
-
-    for m in all(global_bots) do
-      if m != _ENV and ccol(_ENV, m) then
-        local a = atan2(m.x - x,m.y - y)
-        x = x + cos(a+.5)
-        y = y + sin(a+.5)
-      end
+      x = px
+      y = py
     end
   end
 })
