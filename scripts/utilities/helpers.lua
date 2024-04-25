@@ -44,3 +44,9 @@ end
 function lerp(a,b,t)
   return a+(b-a)*t
 end
+
+function wait(frames)
+  for i=1,frames do
+    yield()
+  end
+end
