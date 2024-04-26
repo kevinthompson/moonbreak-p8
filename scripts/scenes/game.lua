@@ -18,7 +18,7 @@ game = scene:extend({
       create_energy(player.x,player.y,rnd())
     end
 
-    for i=1,100 do
+    for i=1,1 do
       create_bot()
     end
   end,

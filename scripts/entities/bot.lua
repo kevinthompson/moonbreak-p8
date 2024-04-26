@@ -1,7 +1,7 @@
 bot = entity:extend({
   r = 3,
   speed = .25,
-  mode = "follow",
+  state = "follow",
   target = player,
   attack_timer = 0,
   attack_speed = 60,
@@ -16,7 +16,7 @@ bot = entity:extend({
       speed = max(.25,speed - .05)
     end
 
-    if (mode == "attack") then
+    if (state == "attack") then
       _ENV:attack()
       speed = .5
     end
@@ -38,7 +38,7 @@ bot = entity:extend({
 
     if target.health <= 0 then
       target = nil
-      mode = "follow"
+      state = "follow"
       add(player.bots,_ENV)
     end
   end,
