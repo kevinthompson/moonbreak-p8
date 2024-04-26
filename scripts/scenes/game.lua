@@ -32,8 +32,14 @@ game = scene:extend({
     cls(13)
     map()
 
+    -- draw shadows
     for e in all(entities) do
       e:update()
+      e:draw_shadow()
+    end
+
+    -- draw entities
+    for e in all(entities) do
       e:draw()
     end
 
