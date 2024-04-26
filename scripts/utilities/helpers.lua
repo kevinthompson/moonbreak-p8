@@ -50,3 +50,9 @@ function wait(frames)
     yield()
   end
 end
+
+function point(max_x, max_y, x)
+  local b = (4 * max_y) / max_x
+  local a = -b / max_x
+  return a * x^2 + b * x
+end

@@ -30,14 +30,18 @@ player = entity:extend({
   end,
 
   draw=function(_ENV)
-    spr(16,x-3,y-3,1,2,flip)
-
     if state == "aiming" then
       -- draw arc to target position
+      local px = cos(target.ang)
+      local py = sin(target.ang)
 
-      -- draw impact point
-      circfill(target.x,target.y,1,7)
+      for d=0,target.dist,2 do
+        local h = point(target.dist,8,d)
+        pset(x+px*d,y-h+py*d,d%4==0 and 7 or 6)
+      end
     end
+
+    spr(16,x-3,y-3,1,2,flip)
   end,
 
   handle_aiming = function(_ENV)
@@ -60,8 +64,8 @@ player = entity:extend({
     if (btn(1)) target.ang = (target.ang - .01) % 1
 
     -- adjust distance of throw
-    if (btn(2)) target.dist = mid(8,target.dist + 0.5,24)
-    if (btn(3)) target.dist = mid(8,target.dist - 0.5,24)
+    if (btn(2)) target.dist = mid(8,target.dist + 0.5,32)
+    if (btn(3)) target.dist = mid(8,target.dist - 0.5,32)
 
     -- set target position
     target.x = x + cos(target.ang) * target.dist
