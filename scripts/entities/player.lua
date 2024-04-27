@@ -10,6 +10,11 @@ player = entity:extend({
   state = "walking",
   ang = 0,
 
+  animations = {
+    idle = {16},
+    walk = {18,17}
+  },
+
   update=function(_ENV)
     bot = bots[1]
 
@@ -25,23 +30,26 @@ player = entity:extend({
     if state == "walking" then
       _ENV:handle_walk()
     elseif state == "aiming" then
+      _ENV:animate("idle")
       _ENV:handle_aiming()
     end
   end,
 
   draw=function(_ENV)
+    spr(current_animation[frame],x-3,y-3,1,2,flip)
+
     if state == "aiming" then
       -- draw arc to target position
       local px = cos(target.ang)
       local py = sin(target.ang)
 
-      for d=0,target.dist,2 do
+      pset(target.x,target.y,1)
+
+      for d=4,target.dist-1,2 do
         local h = point(target.dist,8,d)
         pset(x+px*d,y-h+py*d,d%4==0 and 7 or 6)
       end
     end
-
-    spr(16,x-3,y-3,1,2,flip)
   end,
 
   handle_aiming = function(_ENV)
@@ -99,11 +107,13 @@ player = entity:extend({
       nx+=cos(angle) * speed
       ny+=sin(angle) * speed
       ang = atan2(dx,dy)
+      _ENV:animate("walk")
+    else
+      _ENV:animate("idle")
     end
 
     x = mid(2,nx,894)
     y = mid(2,ny,382)
-
   end
 })
 

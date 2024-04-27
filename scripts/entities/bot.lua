@@ -30,7 +30,7 @@ bot = entity:extend({
   -- private
 
   states = {
-    ["follow"] = function(_ENV)
+    follow = function(_ENV)
       if dist(_ENV,target) > 32 then
         speed = min(.5,speed + .05)
       else
@@ -56,7 +56,7 @@ bot = entity:extend({
       end
     end,
 
-    ["attack"] = function(_ENV)
+    attack = function(_ENV)
       if attack_timer <= 0 then
         target:hit()
         attack_timer = attack_speed
@@ -71,13 +71,13 @@ bot = entity:extend({
       end
     end,
 
-    ["aiming"] = function(_ENV)
+    aiming = function(_ENV)
       -- move towards player
       x = lerp(x, player.x, .1)
       y = lerp(y, player.y, .1)
     end,
 
-    ["throw"] = function(_ENV)
+    throw = function(_ENV)
       -- move towards ground target
       elevation = point(animation_frames,8,animation_frame)
 

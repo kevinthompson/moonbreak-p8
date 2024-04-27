@@ -10,8 +10,26 @@ entity=gameobject:extend({
   flip = false,
 
   -- animation
-  animation_frame = 0,
-  animation_frames = 0,
+  fps = 6,
+  current_animation = nil,
+  animation_timer = 12,
+  frame = 0,
+
+  animate = function(_ENV, name)
+    local animation = animations[name]
+    if (animation != current_animation) then
+      current_animation = animation
+      frame = 1
+      animation_timer = fps
+    else
+      animation_timer -= 1
+      if animation_timer <= 0 then
+        frame = (frame + 1)
+        if (frame > #current_animation) frame = 1
+        animation_timer = fps
+      end
+    end
+  end,
 
   draw_shadow = function(_ENV)
     local shadow_width = 1 / (elevation + 1)
