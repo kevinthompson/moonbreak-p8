@@ -11,9 +11,10 @@ game = scene:extend({
 
     for i=1,10 do
       local b = bot:new({
+        speed = 2,
         target = player,
-        x = player.x,
-        y = player.y
+        x = rnd(128),
+        y = rnd(128)
       })
 
       add(player.bots,b)

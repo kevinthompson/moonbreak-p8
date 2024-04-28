@@ -14,7 +14,7 @@ bot = entity:extend({
 
   init = function(_ENV)
     entity.init(_ENV)
-    target_offset = { x = rnd(3), y = rnd(4) }
+    target_offset = { x = rnd(8), y = rnd(8) }
     time_offset = rnd()
   end,
 
@@ -35,12 +35,17 @@ bot = entity:extend({
     animation_frame = 0
   end,
 
-  -- private
+  -- states
 
   states = {
     follow = function(_ENV)
+      local offset_target = {
+        x = target.x + target_offset.x,
+        y = target.y + target_offset.y
+      }
+
       if dist(_ENV,target) > 32 then
-        speed = min(.5,speed + .05)
+        speed = min(1,speed + .05)
       else
         speed = max(.25,speed - .05)
       end
@@ -48,7 +53,7 @@ bot = entity:extend({
       local px = x
       local py = y
 
-      local a = atan2(target.x-x,target.y-y)
+      local a = atan2(offset_target.x-x,offset_target.y-y)
       local dx = cos(a) * speed
       local dy = sin(a) * speed
 
@@ -81,8 +86,9 @@ bot = entity:extend({
 
     aiming = function(_ENV)
       -- move towards player
-      x = lerp(x, player.x, .1)
-      y = lerp(y, player.y, .1)
+      elevation = lerp(elevation,2,.1)
+      x = lerp(x, player.x - 3, .1)
+      y = lerp(y, player.y + 4, .1)
     end,
 
     throw = function(_ENV)
