@@ -12,6 +12,8 @@ bot = entity:extend({
   ox = 0,
   oy = 0,
 
+  shadow = true,
+
   init = function(_ENV)
     entity.init(_ENV)
     target_offset = { x = rnd(8), y = rnd(8) }

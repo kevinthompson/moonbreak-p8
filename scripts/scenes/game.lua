@@ -9,7 +9,7 @@ game = scene:extend({
 
     g.player = person:new()
 
-    for i=1,10 do
+    for i=1,1 do
       local b = bot:new({
         speed = 2,
         target = player,

@@ -14,6 +14,7 @@ entity=gameobject:extend({
   width = 8,
   height = 8,
   flip = false,
+  shadow = false,
 
   -- animation
   fps = 6,
@@ -57,7 +58,10 @@ entity=gameobject:extend({
   end,
 
   draw_shadow = function(_ENV)
-    local shadow_width = 1 / (elevation + 1)
-    line(x-shadow_width/2,y,x+shadow_width/2,y,1)
+    if shadow then
+      local shadow_scale = 1 / (elevation + 1)
+      local shadow_width = width * shadow_scale
+      line(x+1-shadow_width/2,y+1,x+shadow_width/2,y+1,14)
+    end
   end
 })
