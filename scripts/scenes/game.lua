@@ -1,5 +1,4 @@
-entities = {}
-global_bots = {}
+
 objectives = {}
 targets = {}
 
@@ -7,6 +6,8 @@ game = scene:extend({
   init=function(_ENV)
     time_limit = 601
     time_start = time()
+
+    g.player = hero:new()
 
     create_terminal()
 
@@ -21,29 +22,33 @@ game = scene:extend({
     for i=1,1 do
       create_bot()
     end
+
+
   end,
 
   update=function(_ENV)
-    player:update()
+    for e in all(entity.objects) do
+      e:update()
+    end
+
     update_camera()
   end,
 
   draw=function(_ENV)
+    sort(entity.objects)
     cls(13)
     map()
 
     -- draw shadows
-    for e in all(entities) do
-      e:update()
+    for e in all(entity.objects) do
       e:draw_shadow()
     end
 
     -- draw entities
-    for e in all(entities) do
+    for e in all(entity.objects) do
       e:draw()
     end
 
-    player:draw()
     _ENV:draw_ui()
   end,
 
@@ -86,9 +91,7 @@ function create_bot()
     y = player.y
   })
 
-  add(global_bots,m)
   add(player.bots,m)
-  add(entities,m)
 end
 
 function create_objective()
@@ -99,7 +102,6 @@ function create_objective()
 
   add(targets, o)
   add(objectives, o)
-  add(entities, o)
 end
 
 function create_terminal()
@@ -110,13 +112,12 @@ function create_terminal()
 
   add(targets, t)
   add(terminals, t)
-  add(entities, t)
 end
 
 function create_energy(x,y,a)
-  add(entities, energy:new({
+  energy:new({
     x=x,
     y=y,
     a=a
-  }))
+  })
 end

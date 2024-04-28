@@ -54,3 +54,18 @@ end
 function point(max_x, max_y, x)
   return sin(.5 + (x/max_x) * .5) * max_y
 end
+
+function sort(tbl,key,lo,hi)
+  key,lo,hi=key or "y",lo or 1,hi or #tbl
+  if lo<hi then
+    local p,i,j=tbl[(lo+hi)\2][key],lo-1,hi+1
+    while true do
+      repeat i+=1 until tbl[i][key]>=p
+      repeat j-=1 until tbl[j][key]<=p
+      if (i>=j) break
+      tbl[i],tbl[j]=tbl[j],tbl[i]
+    end
+    sort(tbl,key,lo,j)
+    sort(tbl,key,j+1,hi)
+  end
+ end

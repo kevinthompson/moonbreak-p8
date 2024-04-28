@@ -20,7 +20,7 @@ __lua__
 
 -- entities
 #include scripts/entities/entity.lua
-#include scripts/entities/player.lua
+#include scripts/entities/hero.lua
 #include scripts/entities/bot.lua
 #include scripts/entities/objective.lua
 #include scripts/entities/energy.lua

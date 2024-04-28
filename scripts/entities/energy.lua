@@ -15,7 +15,7 @@ energy = entity:extend({
     y += sin(a) * speed
 
     if ccol(_ENV,{x=tx,y=ty,r=5}) then
-      del(entities,_ENV)
+      _ENV:destroy()
       sfx(1)
       player.energy += 1
     end

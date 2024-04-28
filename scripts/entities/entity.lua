@@ -15,6 +15,16 @@ entity=gameobject:extend({
   animation_timer = 12,
   frame = 0,
 
+  objects = {},
+
+  init = function(_ENV)
+    add(entity.objects,_ENV)
+  end,
+
+  destroy = function(_ENV)
+    del(entity.objects,_ENV)
+  end,
+
   animate = function(_ENV, name)
     local animation = animations[name]
     if (animation != current_animation) then

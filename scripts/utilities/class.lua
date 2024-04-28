@@ -1,16 +1,14 @@
 class=setmetatable({
 	new=function(_ENV,tbl)
 		tbl=tbl or {}
-
-		setmetatable(tbl or {},{
-			__index=_ENV
-		})
-
+		setmetatable(tbl or {},_ENV)
+    tbl:init()
 		return tbl
 	end,
 
 	extend=function(_ENV,tbl)
 		tbl=tbl or {}
+    tbl.__index = tbl
 
 		setmetatable(tbl or {},{
 			__index=_ENV

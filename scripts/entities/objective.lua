@@ -30,9 +30,7 @@ objective = entity:extend({
 
   destroy = function(_ENV)
     if health <= 0 then
-      del(objectives,_ENV)
-      del(entities,_ENV)
-      del(targets,_ENV)
+      entity.destroy(_ENV)
 
       for i=1,energy_count do
         create_energy(x,y,rnd())

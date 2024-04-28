@@ -1,4 +1,4 @@
-player = entity:extend({
+hero = entity:extend({
   x=64,
   y=64,
   speed=0.5,
@@ -116,37 +116,3 @@ player = entity:extend({
     y = mid(2,ny,382)
   end
 })
-
---[[
-  -- prototype input logic
-
-  -- handle calling bots
-  if btnp(4) then
-    for m in all(global_bots) do
-      if m.mode == "attack" then
-        m.mode = "follow"
-        m.target = nil
-        add(bots,m)
-        break
-      end
-    end
-  end
-
-  -- handle attack
-  if target and btnp(5) then
-    if target.type == "objective" then
-      for m in all(bots) do
-        if m.mode == "follow" then
-          m.mode = "attack"
-          m.target = target
-          m.attack_timer = m.attack_speed
-          del(bots,m)
-          break
-        end
-      end
-    elseif target.type == "terminal" and energy > 0 then
-      energy -= 5
-      create_bot()
-    end
-  end
-]]
