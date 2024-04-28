@@ -22,8 +22,6 @@ game = scene:extend({
     for i=1,1 do
       create_bot()
     end
-
-
   end,
 
   update=function(_ENV)

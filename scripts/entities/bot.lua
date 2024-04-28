@@ -54,6 +54,8 @@ bot = entity:extend({
         x = px
         y = py
       end
+
+      elevation = 4.5 + sin(t() * .5)
     end,
 
     attack = function(_ENV)
