@@ -9,7 +9,7 @@ game = scene:extend({
 
     g.player = person:new()
 
-    for i=1,1 do
+    for i=1,10 do
       local b = bot:new({
         speed = 2,
         target = player,
@@ -44,7 +44,7 @@ game = scene:extend({
       e:draw()
     end
 
-    _ENV:draw_ui()
+    --_ENV:draw_ui()
   end,
 
   draw_ui = function(_ENV)
@@ -76,6 +76,6 @@ game = scene:extend({
 
 function update_camera()
   cx = mid(0, player.x - 64, 896)
-  cy = mid(-8, player.y - 71, 384)
+  cy = mid(0, player.y - 71, 384)
   camera(cx,cy)
 end

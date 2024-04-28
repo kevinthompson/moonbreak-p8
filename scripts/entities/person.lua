@@ -4,14 +4,15 @@ person = entity:extend({
   width = 4,
 
   speed=0.5,
-  r=4,
-  ar = 16, -- action radius
   target = nil,
   bots = {},
   energy = 0,
-  state = "idle",
   ang = 0,
+
+  -- features
   dust_timer = 0,
+
+  recall_radius = 0,
 
   animations = {
     idle = {16},
@@ -24,6 +25,15 @@ person = entity:extend({
   end,
 
   draw=function(_ENV)
+    if recall_radius > 3 then
+      c=6
+      step=3/(2*3.14*recall_radius)
+      for a=0+t()*.02,1+t()*.02,step do
+        pset(x+cos(a)*recall_radius,y+sin(a)*recall_radius,c)
+        c=c==6 and 7 or 6
+      end
+    end
+
     spr(current_animation[frame],x-3,y-7,1,2,flip)
 
     if state == "aiming" and target then
@@ -40,14 +50,34 @@ person = entity:extend({
     end
   end,
 
+  handle_recall = function(_ENV)
+    if btn(5) then
+      recall_radius = lerp(recall_radius, 24, .1)
+    else
+      recall_radius = lerp(recall_radius, 0, .25)
+    end
+
+    -- TODO: Iterate over only on-screen bots that are not in the player collection
+    for e in all(entity.objects) do
+      if e.type == bot
+      and ccol({x=x,y=y,r=recall_radius},{x=e.x,y=e.y,r=1})
+      and count(bots,e) <= 0
+      then
+        add(bots,e)
+        e.state = "follow"
+        e.target = _ENV
+      end
+    end
+  end,
+
   states = {
     idle = function(_ENV)
       _ENV:animate("idle")
+      _ENV:handle_recall()
 
       if btn(4) then
         state = "aiming"
-      elseif btn(5) then
-      elseif btn() > 0 then
+      elseif btn() & 15 > 0 then
         state = "walking"
       end
     end,
@@ -96,6 +126,7 @@ person = entity:extend({
 
     walking = function(_ENV)
       _ENV:animate("walk")
+      _ENV:handle_recall()
 
       -- clear aiming state
       target = nil

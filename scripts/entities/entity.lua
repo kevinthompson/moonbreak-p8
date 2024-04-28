@@ -8,6 +8,7 @@ entity=gameobject:extend({
   -- position
   x=0,
 	y=0,
+  r=4,
   elevation = 0,
 
   -- drawing
@@ -23,6 +24,7 @@ entity=gameobject:extend({
   frame = 0,
 
   -- state
+  state = "idle",
   states = {
     idle = _noop
   },
@@ -61,7 +63,7 @@ entity=gameobject:extend({
     if shadow then
       local shadow_scale = 1 / (elevation + 1)
       local shadow_width = width * shadow_scale
-      line(x+1-shadow_width/2,y+1,x+shadow_width/2,y+1,14)
+      line(x-shadow_width/2,y+1,x-1+shadow_width/2,y+1,14)
     end
   end
 })

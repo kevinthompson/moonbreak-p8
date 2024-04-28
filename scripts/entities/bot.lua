@@ -2,7 +2,6 @@ bot = entity:extend({
   width = 5,
   height = 4,
 
-  r = 3,
   speed = .25,
   state = "follow",
   target = player,
