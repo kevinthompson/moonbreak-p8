@@ -1,4 +1,10 @@
 entity=gameobject:extend({
+
+  -- static
+  objects = {},
+
+  --------------------
+
   -- position
   x=0,
 	y=0,
@@ -15,10 +21,19 @@ entity=gameobject:extend({
   animation_timer = 12,
   frame = 0,
 
-  objects = {},
+  -- state
+  states = {
+    idle = _noop
+  },
 
+  -- instance methods
   init = function(_ENV)
     add(entity.objects,_ENV)
+  end,
+
+  update = function(_ENV)
+    local state_func = states[state]
+    if (state_func) states[state](_ENV)
   end,
 
   destroy = function(_ENV)

@@ -12,8 +12,16 @@ bot = entity:extend({
   ox = 0,
   oy = 0,
 
+  init = function(_ENV)
+    entity.init(_ENV)
+    target_offset = { x = rnd(3), y = rnd(4) }
+    time_offset = rnd()
+  end,
+
   update = function(_ENV)
-    states[state](_ENV)
+    -- hover animiation
+    elevation = 4.5 + sin((t() + time_offset) * .5)
+    entity.update(_ENV)
   end,
 
   draw = function(_ENV)
@@ -22,7 +30,7 @@ bot = entity:extend({
 
   throw_at = function(_ENV,t)
     state = "throw"
-    target = t
+    target = { x=t.x, y=t.y }
     animation_frames = 30
     animation_frame = 0
   end,
@@ -54,8 +62,6 @@ bot = entity:extend({
         x = px
         y = py
       end
-
-      elevation = 4.5 + sin(t() * .5)
     end,
 
     attack = function(_ENV)
@@ -86,6 +92,10 @@ bot = entity:extend({
       x = lerp(player.x, target.x, animation_frame / animation_frames)
       y = lerp(player.y, target.y, animation_frame / animation_frames)
       animation_frame = min(animation_frame + 1, animation_frames)
+
+      if animation_frame == animation_frames then
+        state = "idle"
+      end
       -- find target
       -- attack target or return to player
     end

@@ -7,20 +7,16 @@ game = scene:extend({
     time_limit = 601
     time_start = time()
 
-    g.player = hero:new()
+    g.player = person:new()
 
-    create_terminal()
+    for i=1,10 do
+      local b = bot:new({
+        target = player,
+        x = player.x,
+        y = player.y
+      })
 
-    for i=1,3 do
-      create_objective()
-    end
-
-    for i=1,5 do
-      create_energy(player.x,player.y,rnd())
-    end
-
-    for i=1,1 do
-      create_bot()
+      add(player.bots,b)
     end
   end,
 
@@ -79,43 +75,6 @@ game = scene:extend({
 
 function update_camera()
   cx = mid(0, player.x - 64, 896)
-  cy = mid(-16, player.y - 71, 384)
+  cy = mid(-8, player.y - 71, 384)
   camera(cx,cy)
-end
-
-function create_bot()
-  local m = bot:new({
-    x = player.x,
-    y = player.y
-  })
-
-  add(player.bots,m)
-end
-
-function create_objective()
-  local o = objective:new({
-    x=rnd(128),
-    y=rnd(128)
-  })
-
-  add(targets, o)
-  add(objectives, o)
-end
-
-function create_terminal()
-  local t = terminal:new({
-    x=32,
-    y=32
-  })
-
-  add(targets, t)
-  add(terminals, t)
-end
-
-function create_energy(x,y,a)
-  energy:new({
-    x=x,
-    y=y,
-    a=a
-  })
 end

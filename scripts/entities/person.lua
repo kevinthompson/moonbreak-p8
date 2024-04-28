@@ -1,4 +1,4 @@
-hero = entity:extend({
+person = entity:extend({
   x=64,
   y=64,
   speed=0.5,
@@ -16,15 +16,18 @@ hero = entity:extend({
   },
 
   update=function(_ENV)
-    bot = bots[1]
+    current_bot = bots[1]
 
-    if bot and btn(4) then
+    if btn(4) then
       state = "aiming"
     else
       state = "walking"
       target = nil
-      bot.state = "follow"
-      bot.target = _ENV
+
+      if current_bot then
+        current_bot.state = "follow"
+        current_bot.target = _ENV
+      end
     end
 
     if state == "walking" then
@@ -56,10 +59,6 @@ hero = entity:extend({
     -- proposed input
     -- hold Z, left/right to adjust angle, up/down to adjust distance, X to throw
 
-    if bot.state != "throw" then
-      bot.state = "aiming"
-    end
-
     if not target then
       target = {
         ang = ang,
@@ -80,8 +79,15 @@ hero = entity:extend({
     target.y = y + sin(target.ang) * target.dist
 
     -- detect throw input
-    if btnp(5) then
-      bot:throw_at(target)
+    if current_bot then
+      if current_bot.state != "throw" then
+        current_bot.state = "aiming"
+      end
+
+      if btnp(5) then
+        current_bot:throw_at(target)
+        del(bots,current_bot)
+      end
     end
   end,
 
