@@ -85,6 +85,7 @@ person = entity:extend({
     aiming = function(_ENV)
       -- input
       -- hold Z, left/right to adjust angle, up/down to adjust distance, X to throw
+      recall_radius = 0
       current_bot = bots[1]
       _ENV:animate("idle")
 
