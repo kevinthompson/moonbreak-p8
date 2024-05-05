@@ -1,11 +1,7 @@
-
-objectives = {}
-targets = {}
-
 game = scene:extend({
   init=function(_ENV)
-    time_limit = 601
-    time_start = time()
+    -- time_limit = 601
+    -- time_start = time()
 
     g.player = person:new()
 
