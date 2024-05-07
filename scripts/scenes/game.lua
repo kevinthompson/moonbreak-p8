@@ -14,6 +14,16 @@ game = scene:extend({
       })
 
       add(player.bots,b)
+
+      foreground = {}
+      for mx=0,128 do
+        for my=0,64 do
+          local tile = mget(mx,my)
+          if fget(tile,flags.foreground) then
+            add(foreground,{tile,mx*8,my*8})
+          end
+        end
+      end
     end
   end,
 
@@ -38,6 +48,10 @@ game = scene:extend({
     -- draw entities
     for e in all(entity.objects) do
       e:draw()
+    end
+
+    for t in all(foreground) do
+      spr(t[1],t[2],t[3])
     end
 
     --_ENV:draw_ui()

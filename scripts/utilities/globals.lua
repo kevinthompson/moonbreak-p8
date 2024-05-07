@@ -14,7 +14,8 @@ cy = 0
 
 -- sprite flags
 flags = {
-  collision = 0
+  collision = 0,
+  foreground = 7
 }
 
 -- empty function
