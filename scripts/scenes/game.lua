@@ -22,6 +22,8 @@ game = scene:extend({
       x = player.x - 32 + rnd(16),
       y = player.y - 32 + rnd(16)
     }))
+
+    rover:new({ x = 32, y = 56 })
   end,
 
   update=function(_ENV)
