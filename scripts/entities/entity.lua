@@ -70,13 +70,13 @@ entity=gameobject:extend({
   end,
 
   move = function(_ENV,nx,ny)
-    if not _ENV:collide(nx,ny) then
+    if not _ENV:collide(nx,y) then
       x = nx
-      y = ny
-      return true
     end
 
-    return false
+    if not _ENV:collide(x,ny) then
+      y = ny
+    end
   end,
 
   collide = function(_ENV,cx,cy)

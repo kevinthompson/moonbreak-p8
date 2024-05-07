@@ -3,6 +3,7 @@ bot = entity:extend({
   height = 4,
 
   speed = .25,
+
   state = "follow",
   target = player,
   attack_timer = 0,
@@ -21,7 +22,7 @@ bot = entity:extend({
 
   update = function(_ENV)
     -- hover animiation
-    elevation = 4.5 + sin((t() + time_offset) * .5)
+    elevation = 2.5 + sin((t() + time_offset) * .5)
     entity.update(_ENV)
   end,
 
@@ -40,6 +41,8 @@ bot = entity:extend({
 
   states = {
     follow = function(_ENV)
+      map_collision = false
+
       local offset_target = {
         x = target.x + target_offset.x,
         y = target.y + target_offset.y
@@ -92,11 +95,17 @@ bot = entity:extend({
     end,
 
     throw = function(_ENV)
+      map_collision = true
+
       -- move towards ground target
       elevation = point(animation_frames,8,animation_frame)
 
-      x = lerp(player.x, target.x, animation_frame / animation_frames)
-      y = lerp(player.y, target.y, animation_frame / animation_frames)
+      local nx = lerp(player.x, target.x, animation_frame / animation_frames)
+      local ny = lerp(player.y, target.y, animation_frame / animation_frames)
+
+
+      _ENV:move(nx,ny)
+
       animation_frame = min(animation_frame + 1, animation_frames)
 
       if animation_frame == animation_frames then

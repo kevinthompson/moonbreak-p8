@@ -132,6 +132,7 @@ person = entity:extend({
 
     walking = function(_ENV)
       _ENV:handle_recall()
+      _ENV:animate("walk")
 
       -- clear aiming state
       target = nil
@@ -167,22 +168,18 @@ person = entity:extend({
         state = "idle"
       end
 
-      if _ENV:move(nx,ny) then
-        _ENV:animate("walk")
+      _ENV:move(nx,ny)
 
-        dust_timer -= 1
-        if dust_timer <= 0 then
-          particle:new({
-            x = x-2 + rnd(4),
-            y = y-1 + rnd(2),
-            color = rnd({6,7}),
-            radius = rnd(1.5),
-            dy = -.1
-          })
-          dust_timer = 4+rnd(8)
-        end
-      else
-        _ENV:animate("idle")
+      dust_timer -= 1
+      if dust_timer <= 0 then
+        particle:new({
+          x = x-2 + rnd(4),
+          y = y-1 + rnd(2),
+          color = rnd({6,7}),
+          radius = rnd(1.5),
+          dy = -.1
+        })
+        dust_timer = 4+rnd(8)
       end
 
       if btn(4) then
