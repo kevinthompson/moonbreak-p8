@@ -2,6 +2,8 @@ bot = entity:extend({
   width = 5,
   height = 4,
 
+  map_collision = true,
+
   speed = .25,
 
   state = "follow",
@@ -41,8 +43,6 @@ bot = entity:extend({
 
   states = {
     follow = function(_ENV)
-      map_collision = false
-
       local offset_target = {
         x = target.x + target_offset.x,
         y = target.y + target_offset.y
@@ -95,8 +95,6 @@ bot = entity:extend({
     end,
 
     throw = function(_ENV)
-      map_collision = true
-
       -- move towards ground target
       elevation = point(animation_frames,8,animation_frame)
 
