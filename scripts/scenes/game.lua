@@ -16,16 +16,12 @@ game = scene:extend({
       end
     end
 
-    for i=1,10 do
-      local b = bot:new({
-        speed = 2,
-        target = player,
-        x = rnd(128),
-        y = rnd(128)
-      })
-
-      add(player.bots,b)
-    end
+    add(player.bots,bot:new({
+      speed = 2,
+      target = player,
+      x = player.x - 32 + rnd(16),
+      y = player.y - 32 + rnd(16)
+    }))
   end,
 
   update=function(_ENV)
