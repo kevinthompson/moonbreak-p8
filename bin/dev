@@ -1,0 +1,1 @@
+nohup /Applications/PICO-8.app/Contents/MacOS/pico8 -root_path . >/dev/null 2>&1 &
