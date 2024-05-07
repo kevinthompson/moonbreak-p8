@@ -5,6 +5,17 @@ game = scene:extend({
 
     g.player = person:new()
 
+    -- foreground tiles
+    foreground = {}
+    for mx=0,128 do
+      for my=0,64 do
+        local tile = mget(mx,my)
+        if fget(tile,flags.foreground) then
+          add(foreground,{tile,mx*8,my*8})
+        end
+      end
+    end
+
     for i=1,10 do
       local b = bot:new({
         speed = 2,
@@ -14,16 +25,6 @@ game = scene:extend({
       })
 
       add(player.bots,b)
-
-      foreground = {}
-      for mx=0,128 do
-        for my=0,64 do
-          local tile = mget(mx,my)
-          if fget(tile,flags.foreground) then
-            add(foreground,{tile,mx*8,my*8})
-          end
-        end
-      end
     end
   end,
 

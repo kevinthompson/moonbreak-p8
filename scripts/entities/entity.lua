@@ -123,9 +123,13 @@ entity=gameobject:extend({
 
   draw_shadow = function(_ENV)
     if shadow then
-      local shadow_scale = 1 / (elevation + 1)
-      local shadow_width = width * shadow_scale
-      line(x-shadow_width/2,y+1,x-1+shadow_width/2,y+1,14)
+      local tile = mget(x\8,y\8)
+      if not fget(tile, flags.foreground)
+      or sget((tile % 16) * 8, (tile \ 16) * 8) == 0 then
+        local shadow_scale = 1 / (elevation + 1)
+        local shadow_width = width * shadow_scale
+        line(x-shadow_width/2,y+1,x-1+shadow_width/2,y+1,14)
+      end
     end
   end
 })
