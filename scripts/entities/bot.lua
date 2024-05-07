@@ -61,8 +61,7 @@ bot = entity:extend({
       if (dx < 0) flip = true
       if (dx > 0) flip = false
 
-      x = x + dx
-      y = y + dy
+      _ENV:move(x+dx,y+dy)
 
       if ccol(target,_ENV) then
         x = px

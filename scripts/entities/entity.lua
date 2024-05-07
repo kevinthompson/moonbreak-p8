@@ -8,8 +8,14 @@ entity=gameobject:extend({
   -- position
   x=0,
 	y=0,
+  w=8,
+  h=8,
   r=4,
   elevation = 0,
+
+  -- collision
+  map_collision = false,
+  hitbox = {0,0,0,0},
 
   -- drawing
   width = 8,
@@ -28,6 +34,10 @@ entity=gameobject:extend({
   states = {
     idle = _noop
   },
+
+  -- events
+  on_map_collide = _noop,
+  on_entity_collide = _noop,
 
   -- instance methods
   init = function(_ENV)
@@ -58,6 +68,58 @@ entity=gameobject:extend({
       end
     end
   end,
+
+  move = function(_ENV,nx,ny)
+    if not _ENV:collide(nx,ny) then
+      x = nx
+      y = ny
+      return true
+    end
+
+    return false
+  end,
+
+  collide = function(_ENV,cx,cy)
+    cx = cx or x
+    cy = cy or y
+
+    local result = false
+
+    -- map collision
+    if map_collision and _ENV:map_collide(cx,cy) then
+      _ENV:on_map_collide()
+      result = true
+    end
+
+    -- entity collision
+    if on_entity_collide != _noop then
+			-- for e in all(entities) do
+			-- 	if collide({ x=nx,y=ny,w=w,h=h },e) then
+			-- 		on_entity_collide(_ENV,e)
+			-- 	end
+			-- end
+		end
+
+    return result
+  end,
+
+	-- movement
+	map_collide = function(_ENV, cx, cy)
+    local flag = flags.collision
+    local x1,x2,y1,y2 = cx+hitbox[1],cx+hitbox[2],cy+hitbox[3],cy+hitbox[4]
+    local points = {
+      {x1,y1},
+      {x2,y1},
+      {x1,y2},
+      {x2,y2},
+    }
+
+    for point in all(points) do
+      if fget(mget(point[1]\8,point[2]\8),flag) then
+        return true
+      end
+    end
+	end,
 
   draw_shadow = function(_ENV)
     if shadow then

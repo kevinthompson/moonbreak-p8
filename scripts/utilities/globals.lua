@@ -12,5 +12,10 @@ pal({129,2,3,4,5,6,7,8,9,137,11,12,13,133,15,0},1)
 cx = 0
 cy = 0
 
+-- sprite flags
+flags = {
+  collision = 0
+}
+
 -- empty function
 _noop = function()end

@@ -2,6 +2,11 @@ person = entity:extend({
   x=64,
   y=64,
   width = 4,
+  height = 2,
+
+  hitbox = {-1,3,-1,1},
+
+  map_collision = true,
 
   speed=0.5,
   target = nil,
@@ -126,7 +131,6 @@ person = entity:extend({
     end,
 
     walking = function(_ENV)
-      _ENV:animate("walk")
       _ENV:handle_recall()
 
       -- clear aiming state
@@ -163,20 +167,23 @@ person = entity:extend({
         state = "idle"
       end
 
-      dust_timer -= 1
-      if dust_timer <= 0 then
-        particle:new({
-          x = x-2 + rnd(4),
-          y = y-1 + rnd(2),
-          color = rnd({6,7}),
-          radius = rnd(1.5),
-          dy = -.1
-        })
-        dust_timer = 4+rnd(8)
-      end
+      if _ENV:move(nx,ny) then
+        _ENV:animate("walk")
 
-      x = mid(2,nx,894)
-      y = mid(2,ny,382)
+        dust_timer -= 1
+        if dust_timer <= 0 then
+          particle:new({
+            x = x-2 + rnd(4),
+            y = y-1 + rnd(2),
+            color = rnd({6,7}),
+            radius = rnd(1.5),
+            dy = -.1
+          })
+          dust_timer = 4+rnd(8)
+        end
+      else
+        _ENV:animate("idle")
+      end
 
       if btn(4) then
         state = "aiming"
