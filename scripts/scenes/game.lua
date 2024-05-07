@@ -23,7 +23,8 @@ game = scene:extend({
       y = player.y - 32 + rnd(16)
     }))
 
-    rover:new({ x = 32, y = 56 })
+    rover:new({ x = 32, y = 55 })
+    pod:new({ x = 108, y = 63, door = true })
   end,
 
   update=function(_ENV)
