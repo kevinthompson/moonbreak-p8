@@ -16,12 +16,14 @@ game = scene:extend({
       end
     end
 
-    add(player.bots,bot:new({
-      speed = 2,
-      target = player,
-      x = player.x - 32 + rnd(16),
-      y = player.y - 32 + rnd(16)
-    }))
+    for i=1,10 do
+      add(player.bots,bot:new({
+        speed = 2,
+        target = player,
+        x = player.x - 32 + rnd(16),
+        y = player.y - 32 + rnd(16)
+      }))
+    end
 
     rover:new({ x = 32, y = 55 })
     pod:new({ x = 108, y = 63, door = true })

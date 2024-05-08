@@ -57,7 +57,7 @@ person = entity:extend({
 
   handle_recall = function(_ENV)
     if btn(5) then
-      recall_radius = lerp(recall_radius, 24, .1)
+      recall_radius = lerp(recall_radius, 16, .1)
     else
       recall_radius = lerp(recall_radius, 0, .25)
     end
