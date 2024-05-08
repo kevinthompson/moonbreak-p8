@@ -61,20 +61,12 @@ bot = entity:extend({
       end
     end,
 
-    aiming = function(_ENV)
-      -- move towards player
-      elevation = lerp(elevation,2,.1)
-      x = lerp(x, player.x - 3, .1)
-      y = lerp(y, player.y + 4, .1)
-    end,
-
     throw = function(_ENV)
       -- move towards ground target
       elevation = point(animation_frames,8,animation_frame)
 
       local nx = lerp(player.x, target.x, animation_frame / animation_frames)
       local ny = lerp(player.y, target.y, animation_frame / animation_frames)
-
 
       _ENV:move(nx,ny)
 
