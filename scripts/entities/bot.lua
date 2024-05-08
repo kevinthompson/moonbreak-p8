@@ -3,6 +3,7 @@ bot = entity:extend({
   height = 4,
 
   map_collision = true,
+  follow_distance = 8,
 
   speed = .25,
 

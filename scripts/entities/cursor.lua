@@ -45,6 +45,21 @@ cursor = entity:new({
         c=c==6 and 7 or 6
       end
     end
+
+    if btn(5) then
+      -- draw arc to target position
+      local d = dist(_ENV, player)
+      local a = atan2(player.x - x, player.y - y)
+      local px = cos(a)
+      local py = sin(a)
+
+      pset(x,y,1)
+
+      for step=4,d-1,2 do
+        local h = point(d,8,step)
+        pset(x+px*step,y-h+py*step,step%4==0 and 7 or 6)
+      end
+    end
   end,
 
   handle_recall = function(_ENV)
