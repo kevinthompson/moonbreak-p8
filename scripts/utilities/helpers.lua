@@ -68,4 +68,11 @@ function sort(tbl,key,lo,hi)
     sort(tbl,key,lo,j)
     sort(tbl,key,j+1,hi)
   end
- end
+end
+
+-- button released
+function btnr(b)
+	local bit=shl(1,b)
+	return band(bit,pbtn)==bit
+	and btn()==band(bnot(bit),btn())
+end
