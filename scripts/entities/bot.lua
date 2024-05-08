@@ -7,7 +7,6 @@ bot = entity:extend({
   speed = .25,
 
   state = "follow",
-  target = player,
   attack_timer = 0,
   attack_speed = 60,
   elevation = 4,
@@ -33,6 +32,7 @@ bot = entity:extend({
   end,
 
   throw_at = function(_ENV,t)
+    del(player.bots,_ENV)
     state = "throw"
     target = { x=t.x, y=t.y }
     animation_frames = 30
@@ -43,33 +43,7 @@ bot = entity:extend({
 
   states = {
     follow = function(_ENV)
-      local offset_target = {
-        x = target.x + target_offset.x,
-        y = target.y + target_offset.y
-      }
-
-      if dist(_ENV,target) > 32 then
-        speed = min(1,speed + .05)
-      else
-        speed = max(.25,speed - .05)
-      end
-
-      local px = x
-      local py = y
-
-      local a = atan2(offset_target.x-x,offset_target.y-y)
-      local dx = cos(a) * speed
-      local dy = sin(a) * speed
-
-      if (dx < 0) flip = true
-      if (dx > 0) flip = false
-
-      _ENV:move(x+dx,y+dy)
-
-      if ccol(target,_ENV) then
-        x = px
-        y = py
-      end
+      _ENV:follow(player)
     end,
 
     attack = function(_ENV)

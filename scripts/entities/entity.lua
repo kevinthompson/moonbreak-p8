@@ -12,6 +12,10 @@ entity=gameobject:extend({
   h=8,
   r=4,
   elevation = 0,
+  speed = 1,
+
+  -- follow
+  follow_distance = 16,
 
   -- collision
   map_collision = false,
@@ -70,6 +74,9 @@ entity=gameobject:extend({
   end,
 
   move = function(_ENV,nx,ny)
+    local px = x
+    local py = y
+
     if not _ENV:collide(nx,y) then
       x = nx
     end
@@ -77,6 +84,8 @@ entity=gameobject:extend({
     if not _ENV:collide(x,ny) then
       y = ny
     end
+
+    return px != nx or py != ny
   end,
 
   collide = function(_ENV,cx,cy)
@@ -131,5 +140,25 @@ entity=gameobject:extend({
         line(x-shadow_width/2,y+1,x-1+shadow_width/2,y+1,14)
       end
     end
+  end,
+
+  follow = function(_ENV, target)
+    if (dist(_ENV, target) <= follow_distance) return
+
+    -- previous position
+    local px = x
+    local py = y
+
+    -- movement
+    local a = atan2(target.x - x, target.y - y)
+    local vx = cos(a) * speed
+    local vy = sin(a) * speed
+
+    -- flip sprite
+    if (vx < 0) flip = true
+    if (vx > 0) flip = false
+
+    -- move
+    return _ENV:move(x+vx, y+vy)
   end
 })

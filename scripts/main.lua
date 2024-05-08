@@ -1,5 +1,4 @@
 function _init()
-  log("Initializing...", true)
   scene:load(game)
 end
 

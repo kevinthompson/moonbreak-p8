@@ -1,10 +1,5 @@
 game = scene:extend({
   init=function(_ENV)
-    -- time_limit = 601
-    -- time_start = time()
-
-    g.player = person:new()
-
     -- foreground tiles
     foreground = {}
     for mx=0,128 do
@@ -16,6 +11,7 @@ game = scene:extend({
       end
     end
 
+    -- testing bots
     for i=1,10 do
       add(player.bots,bot:new({
         speed = 2,
@@ -25,6 +21,7 @@ game = scene:extend({
       }))
     end
 
+    -- interactive elements
     rover:new({ x = 32, y = 55 })
     pod:new({ x = 108, y = 63, door = true })
   end,

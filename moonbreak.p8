@@ -20,7 +20,7 @@ __lua__
 
 -- entities
 #include scripts/entities/entity.lua
-#include scripts/entities/person.lua
+#include scripts/entities/player.lua
 #include scripts/entities/bot.lua
 #include scripts/entities/objective.lua
 #include scripts/entities/energy.lua
@@ -28,6 +28,7 @@ __lua__
 #include scripts/entities/particle.lua
 #include scripts/entities/rover.lua
 #include scripts/entities/pod.lua
+#include scripts/entities/cursor.lua
 
 -- main
 #include scripts/main.lua

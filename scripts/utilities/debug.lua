@@ -10,14 +10,31 @@ function tostr(any, prefix)
   if type(any) == "table" then
     local str="{"
     local add_comma=false
+    local use_keys=false
+
+    for k,_ in pairs(any) do
+      if type(k) == "string" then
+        use_keys = true
+        break
+      end
+    end
 
     for k,v in pairs(any) do
       str=str..(add_comma and "," or "")
-      str=str.."\n  "..prefix..k.." = "..tostr(v, "  ")
+
+      if use_keys then
+        str=str.."\n  "..prefix..k.." = "
+      end
+
+      str=str..tostr(v, "  ")
       add_comma=true
     end
 
-    return str.."\n"..prefix.."}"
+    if use_keys then
+      str=str.."\n"..prefix
+    end
+
+    return str.."}"
   else
     return _tostr(any)
   end
