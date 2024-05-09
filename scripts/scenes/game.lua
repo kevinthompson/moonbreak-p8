@@ -5,6 +5,16 @@ game = scene:extend({
     for mx=0,128 do
       for my=0,64 do
         local tile = mget(mx,my)
+
+        if tile == 19 then
+          objective:new({
+            x = mx * 8,
+            y = my * 8
+          })
+
+          mset(mx,my,0)
+        end
+
         if fget(tile,flags.foreground) then
           add(foreground,{tile,mx*8,my*8})
         end
@@ -22,7 +32,7 @@ game = scene:extend({
     end
 
     -- interactive elements
-    rover:new({ x = 32, y = 55 })
+    -- rover:new({ x = 32, y = 55 })
     pod:new({ x = 108, y = 63, door = true })
   end,
 

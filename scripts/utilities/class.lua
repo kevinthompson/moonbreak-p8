@@ -1,7 +1,7 @@
 class=setmetatable({
 	new=function(_ENV,tbl)
 		tbl=tbl or {}
-		setmetatable(tbl or {},_ENV)
+		setmetatable(tbl,_ENV)
     tbl.type = _ENV
     tbl:init()
 		return tbl

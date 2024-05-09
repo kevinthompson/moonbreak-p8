@@ -1,6 +1,5 @@
 terminal = entity:extend({
   r = 4,
-  type = "terminal",
   sounds = {2,3,4,5,6},
 
   draw = function(_ENV)

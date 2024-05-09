@@ -3,9 +3,6 @@ objective = entity:extend({
   y = 64,
   r = 4,
 
-  name = "none",
-  type = "objective",
-
   health = 5,
   energy_count = 5,
   bots_required = 1,
@@ -18,7 +15,7 @@ objective = entity:extend({
 
   draw = function(_ENV)
     if (flash_timer > 0) pal({7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7},0)
-    circfill(x,y,r,4)
+    spr(19,x,y)
     if (flash_timer > 0) pal(0)
   end,
 
@@ -32,8 +29,12 @@ objective = entity:extend({
     if health <= 0 then
       entity.destroy(_ENV)
 
-      for i=1,energy_count do
-        create_energy(x,y,rnd())
+      for i=1, energy_count do
+        energy:new({
+          x = x,
+          y = y,
+          a = rnd()
+        })
       end
     end
   end

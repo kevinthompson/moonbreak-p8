@@ -8,8 +8,11 @@ bot = entity:extend({
   speed = .25,
 
   state = "follow",
+
+  target_radius = 8,
   attack_timer = 0,
   attack_speed = 60,
+
   elevation = 4,
   ox = 0,
   oy = 0,
@@ -18,7 +21,6 @@ bot = entity:extend({
 
   init = function(_ENV)
     entity.init(_ENV)
-    target_offset = { x = rnd(8), y = rnd(8) }
     time_offset = rnd()
   end,
 
@@ -66,10 +68,26 @@ bot = entity:extend({
       animation_frame = min(animation_frame + 1, animation_frames)
 
       if animation_frame == animation_frames then
-        state = "idle"
+        state = "targeting"
       end
+    end,
+
+    targeting = function(_ENV)
       -- find target
-      -- attack target or return to player
+      for e in all(entity.objects) do
+
+        -- TODO: on screen check
+        -- TODO: check collision layers
+        -- TODO: move to entity class
+        if e.type == objective
+        and ccol({ x=x, y=y, r=target_radius }, e) then
+          target = e
+          state = "attack"
+        end
+      end
+
+      -- carry or attack target
+      -- else go idle
     end,
 
     attack = function(_ENV)
