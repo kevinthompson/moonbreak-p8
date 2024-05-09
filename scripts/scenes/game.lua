@@ -1,5 +1,8 @@
 game = scene:extend({
   init=function(_ENV)
+    time_start = time()
+    time_limit = 601
+
     -- foreground tiles
     foreground = {}
     for mx=0,128 do
@@ -63,7 +66,7 @@ game = scene:extend({
       spr(t[1],t[2],t[3])
     end
 
-    --_ENV:draw_ui()
+    _ENV:draw_ui()
   end,
 
   draw_ui = function(_ENV)
