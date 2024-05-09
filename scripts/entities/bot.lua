@@ -47,19 +47,11 @@ bot = entity:extend({
       _ENV:follow(player)
     end,
 
-    attack = function(_ENV)
-      if attack_timer <= 0 then
-        target:hit()
-        attack_timer = attack_speed
-      else
-        attack_timer -= 1
-      end
-
-      if target.health <= 0 then
-        target = nil
-        state = "follow"
-        add(player.bots,_ENV)
-      end
+    aiming = function(_ENV)
+      -- move towards player
+      elevation = lerp(elevation,2,.1)
+      x = lerp(x, player.x - 3, .1)
+      y = lerp(y, player.y + 4, .1)
     end,
 
     throw = function(_ENV)
@@ -78,6 +70,21 @@ bot = entity:extend({
       end
       -- find target
       -- attack target or return to player
+    end,
+
+    attack = function(_ENV)
+      if attack_timer <= 0 then
+        target:hit()
+        attack_timer = attack_speed
+      else
+        attack_timer -= 1
+      end
+
+      if target.health <= 0 then
+        target = nil
+        state = "follow"
+        add(player.bots,_ENV)
+      end
     end
   }
 })
