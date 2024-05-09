@@ -11,12 +11,9 @@ bot = entity:extend({
 
   target_radius = 8,
   attack_timer = 0,
-  attack_speed = 60,
+  attack_frames = 45,
 
   elevation = 4,
-  ox = 0,
-  oy = 0,
-
   shadow = true,
 
   init = function(_ENV)
@@ -31,7 +28,17 @@ bot = entity:extend({
   end,
 
   draw = function(_ENV)
-    sspr(40,0,5,4,x - width/2, y - height - elevation)
+    if state == "attack" then
+      local angle = atan2(target.x - x, target.y - y)
+      local distance = dist(_ENV, target)
+      local percent = sin(.5 + (attack_timer / attack_frames) * .5)
+      elevation = 4 - percent * 4
+
+      ox = cos(angle) * distance * percent
+      oy = sin(angle) * distance * percent
+    end
+
+    sspr(40,0,5,4,x - width/2 + ox, y - height - elevation + oy)
   end,
 
   throw_at = function(_ENV,t)
@@ -91,17 +98,21 @@ bot = entity:extend({
     end,
 
     attack = function(_ENV)
-      if attack_timer <= 0 then
+      _ENV:follow(target)
+
+      attack_timer -= 1
+
+      if attack_timer == attack_frames \ 2 then
         target:hit()
-        attack_timer = attack_speed
-      else
-        attack_timer -= 1
+      end
+
+      if attack_timer <= 0 then
+        attack_timer = attack_frames
       end
 
       if target.health <= 0 then
         target = nil
-        state = "follow"
-        add(player.bots,_ENV)
+        state = "idle"
       end
     end
   }

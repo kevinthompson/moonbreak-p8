@@ -15,7 +15,7 @@ objective = entity:extend({
 
   draw = function(_ENV)
     if (flash_timer > 0) pal({7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7},0)
-    spr(19,x,y)
+    spr(19,x - w/2, y - w/2)
     if (flash_timer > 0) pal(0)
   end,
 

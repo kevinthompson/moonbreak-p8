@@ -8,6 +8,8 @@ entity=gameobject:extend({
   -- position
   x=0,
 	y=0,
+  ox = 0,
+  oy = 0,
   w=8,
   h=8,
   r=4,
@@ -137,7 +139,7 @@ entity=gameobject:extend({
       or sget((tile % 16) * 8, (tile \ 16) * 8) == 0 then
         local shadow_scale = 1 / (elevation + 1)
         local shadow_width = width * shadow_scale
-        line(x-shadow_width/2,y+1,x-1+shadow_width/2,y+1,14)
+        line(x-shadow_width/2 + ox,y+1 + oy,x-1+shadow_width/2 + ox,y+1 + oy,14)
       end
     end
   end,
