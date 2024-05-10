@@ -63,6 +63,8 @@ cursor = entity:new({
   end,
 
   handle_recall = function(_ENV)
+    if (btn(5)) return
+
     if btn(4) then
       recall_radius = lerp(recall_radius, 16, .1)
 
