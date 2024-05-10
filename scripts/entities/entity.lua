@@ -19,6 +19,7 @@ entity=gameobject:extend({
 
   -- follow
   follow_distance = 16,
+  max_follow_distance = 24,
 
   -- collision
   map_collision = false,
@@ -88,6 +89,10 @@ entity=gameobject:extend({
       y = ny
     end
 
+    -- flip sprite
+    if (nx > px) flip = false
+    if (nx < px) flip = true
+
     return px != nx or py != ny
   end,
 
@@ -146,6 +151,29 @@ entity=gameobject:extend({
   end,
 
   follow = function(_ENV, target)
+    local target_distance = dist(_ENV, target)
+
+    -- previous position
+    local px = x
+    local py = y
+
+    if target_distance > max_follow_distance then
+      target = _ENV:get_path_target(target)
+    else
+      path = {}
+      if (target_distance <= follow_distance) return false
+    end
+
+    -- movement
+    local a = atan2(target.x - x, target.y - y)
+    local vx = cos(a) * speed
+    local vy = sin(a) * speed
+
+    -- move
+    return _ENV:move(x+vx, y+vy)
+  end,
+
+  get_path_target = function(_ENV, target)
     if dist(_ENV,target) <= follow_distance then
       path = {}
       return
@@ -159,16 +187,12 @@ entity=gameobject:extend({
     if #path > 0 then
       local px = 4 + path[1].x * 8
       local py = 4 + path[1].y * 8
-      local a = atan2(px-x, py-y)
-
-      x = x + cos(a) * speed
-      y = y + sin(a) * speed
 
       if dist(_ENV, {x=px,y=py}) < 1 then
         deli(path,1)
       end
 
-      return true
+      return { x = px, y = py }
     end
   end
 })

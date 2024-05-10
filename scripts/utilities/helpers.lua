@@ -83,10 +83,13 @@ function astar(start, goal)
 
   local open_list = {start_node}
   local closed_list = {}
+  local max_iterations = 1000
+  local iteration = 1
 
   -- loop until we find the end
-  while #open_list > 0 do
+  while #open_list > 0 and iteration < max_iterations do
     sort(open_list,"f")
+    iteration += 1
 
     local current_node = open_list[1]
     local current_index = 1

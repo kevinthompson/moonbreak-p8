@@ -76,7 +76,7 @@ bot = entity:extend({
 
       if animation_frame == animation_frames then
         path = astar({ x\8, y\8 }, {8,8})
-        state = "idle"
+        state = "targeting"
       end
     end,
 
