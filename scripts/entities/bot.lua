@@ -65,7 +65,7 @@ bot = entity:extend({
 
     throw = function(_ENV)
       -- move towards ground target
-      elevation = point(animation_frames,8,animation_frame)
+      elevation = arc(animation_frames,8,animation_frame)
 
       local nx = lerp(player.x, target.x, animation_frame / animation_frames)
       local ny = lerp(player.y, target.y, animation_frame / animation_frames)
@@ -75,7 +75,27 @@ bot = entity:extend({
       animation_frame = min(animation_frame + 1, animation_frames)
 
       if animation_frame == animation_frames then
-        state = "targeting"
+        path = astar({ x\8, y\8 }, {8,8})
+        state = "path"
+      end
+    end,
+
+    path = function(_ENV)
+      local px = 4 + path[1].x * 8
+      local py = 4 + path[1].y * 8
+      local a = atan2(px-x, py-y)
+
+      x = x + cos(a) * speed
+      y = y + sin(a) * speed
+
+      -- _ENV:move(x + cos(a) * speed, y + sin(a) * speed)
+
+      if dist(_ENV, {x=px,y=py}) < 1 then
+        deli(path,1)
+      end
+
+      if #path == 0 then
+        state = "idle"
       end
     end,
 

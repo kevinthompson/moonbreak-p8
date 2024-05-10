@@ -56,7 +56,7 @@ cursor = entity:new({
       pset(x,y,1)
 
       for step=4,d-1,2 do
-        local h = point(d,8,step)
+        local h = arc(d,8,step)
         pset(x+px*step,y-h+py*step,step%4==0 and 7 or 6)
       end
     end

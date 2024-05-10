@@ -116,7 +116,7 @@ entity=gameobject:extend({
 
 	-- movement
 	map_collide = function(_ENV, cx, cy)
-    local flag = flags.collision
+    local flag = flags.solid
     local x1,x2,y1,y2 = cx+hitbox[1],cx+hitbox[2],cy+hitbox[3],cy+hitbox[4]
     local points = {
       {x1,y1},

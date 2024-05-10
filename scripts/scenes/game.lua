@@ -3,10 +3,9 @@ game = scene:extend({
     time_start = time()
     time_limit = 601
 
-    -- foreground tiles
-    foreground = {}
-    for mx=0,128 do
-      for my=0,64 do
+    -- spawn entities tiles
+    for mx=0,127 do
+      for my=0,63 do
         local tile = mget(mx,my)
 
         if tile == 19 then
@@ -17,17 +16,12 @@ game = scene:extend({
 
           mset(mx,my,0)
         end
-
-        if fget(tile,flags.foreground) then
-          add(foreground,{tile,mx*8,my*8})
-        end
       end
     end
 
     -- testing bots
     for i=1,10 do
       add(player.bots,bot:new({
-        speed = 2,
         target = player,
         x = player.x - 32 + rnd(16),
         y = player.y - 32 + rnd(16)
