@@ -70,11 +70,30 @@ function sort(tbl,key,lo,hi)
   end
 end
 
+-- button methods
+-- ====================
+pbtn = 0
+bfr = {}
+
 -- button released
 function btnr(b)
-	local bit=shl(1,b)
-	return band(bit,pbtn)==bit
-	and btn()==band(bnot(bit),btn())
+  local bit=shl(1,b)
+  return band(bit,pbtn)==bit and btn()==band(bnot(bit),btn())
+end
+
+-- return button frame count
+function btnf(b)
+  return bfr[b+1] or 0
+end
+
+-- increment button frames
+function bframes()
+  for b=0,5 do bfr[b+1] = btn(b) and bfr[b+1]+1 or 0 end
+end
+
+function handle_input()
+  bframes()
+  pbtn=btn()
 end
 
 function astar(start, goal)

@@ -31,6 +31,11 @@ cursor = entity:new({
 
     _ENV:move(nx,ny)
     _ENV:handle_recall()
+
+    if btnr(5) and btnf(5) < 10 and #player.bots > 0 then
+      local bot = player.bots[1]
+      bot:throw_at(cursor)
+    end
   end,
 
   draw = function(_ENV)
@@ -45,27 +50,10 @@ cursor = entity:new({
         c=c==6 and 7 or 6
       end
     end
-
-    if btn(5) then
-      -- draw arc to target position
-      local d = dist(_ENV, player)
-      local a = atan2(player.x - x, player.y - y)
-      local px = cos(a)
-      local py = sin(a)
-
-      pset(x,y,1)
-
-      for step=4,d-1,2 do
-        local h = arc(d,8,step)
-        pset(x+px*step,y-h+py*step,step%4==0 and 7 or 6)
-      end
-    end
   end,
 
   handle_recall = function(_ENV)
-    if (btn(5)) return
-
-    if btn(4) then
+    if btnf(5) > 10 then
       recall_radius = lerp(recall_radius, 16, .1)
 
       -- TODO: Iterate over only on-screen bots that are not in the player collection

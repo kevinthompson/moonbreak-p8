@@ -36,11 +36,6 @@ player = entity:new({
     else
       state = "idle"
     end
-
-    if btnr(5) and #bots > 0 then
-      local bot = bots[1]
-      bot:throw_at(cursor)
-    end
   end,
 
   draw=function(_ENV)

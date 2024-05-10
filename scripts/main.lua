@@ -5,7 +5,7 @@ end
 function _update60()
   async:update()
   scene.current:update()
-  pbtn=btn()
+  handle_input()
 end
 
 function _draw()
