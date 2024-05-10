@@ -60,7 +60,7 @@ game = scene:extend({
       spr(t[1],t[2],t[3])
     end
 
-    _ENV:draw_ui()
+    -- _ENV:draw_ui()
   end,
 
   draw_ui = function(_ENV)
