@@ -10,8 +10,8 @@ game = scene:extend({
 
         if tile == 19 then
           objective:new({
-            x = mx * 8,
-            y = my * 8
+            x = 4 + mx * 8,
+            y = 4 + my * 8
           })
 
           mset(mx,my,0)
