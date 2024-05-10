@@ -15,6 +15,7 @@ entity=gameobject:extend({
   r=4,
   elevation = 0,
   speed = 1,
+  path = {},
 
   -- follow
   follow_distance = 16,
@@ -145,22 +146,49 @@ entity=gameobject:extend({
   end,
 
   follow = function(_ENV, target)
-    if (dist(_ENV, target) <= follow_distance) return
+    if dist(_ENV,target) <= follow_distance then
+      path = {}
+      return
+    end
 
-    -- previous position
-    local px = x
-    local py = y
+    if #path == 0  then
+      path = astar({x\8,y\8}, {target.x\8, target.y\8})
+      deli(path,1)
+    end
 
-    -- movement
-    local a = atan2(target.x - x, target.y - y)
-    local vx = cos(a) * speed
-    local vy = sin(a) * speed
+    if #path > 0 then
+      local px = 4 + path[1].x * 8
+      local py = 4 + path[1].y * 8
+      local a = atan2(px-x, py-y)
 
-    -- flip sprite
-    if (vx < 0) flip = true
-    if (vx > 0) flip = false
+      x = x + cos(a) * speed
+      y = y + sin(a) * speed
 
-    -- move
-    return _ENV:move(x+vx, y+vy)
+      if dist(_ENV, {x=px,y=py}) < 1 then
+        deli(path,1)
+      end
+
+      return true
+    end
   end
+
+  -- follow = function(_ENV, target)
+  --   if (dist(_ENV, target) <= follow_distance) return
+
+  --   -- previous position
+  --   local px = x
+  --   local py = y
+
+  --   -- movement
+  --   local a = atan2(target.x - x, target.y - y)
+  --   local vx = cos(a) * speed
+  --   local vy = sin(a) * speed
+
+  --   -- flip sprite
+  --   if (vx < 0) flip = true
+  --   if (vx > 0) flip = false
+
+  --   -- move
+  --   return _ENV:move(x+vx, y+vy)
+  -- end
 })

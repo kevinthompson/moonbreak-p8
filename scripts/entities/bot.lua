@@ -5,7 +5,7 @@ bot = entity:extend({
   map_collision = true,
   follow_distance = 8,
 
-  speed = .25,
+  speed = .50,
 
   state = "follow",
 
@@ -76,25 +76,6 @@ bot = entity:extend({
 
       if animation_frame == animation_frames then
         path = astar({ x\8, y\8 }, {8,8})
-        state = "path"
-      end
-    end,
-
-    path = function(_ENV)
-      local px = 4 + path[1].x * 8
-      local py = 4 + path[1].y * 8
-      local a = atan2(px-x, py-y)
-
-      x = x + cos(a) * speed
-      y = y + sin(a) * speed
-
-      -- _ENV:move(x + cos(a) * speed, y + sin(a) * speed)
-
-      if dist(_ENV, {x=px,y=py}) < 1 then
-        deli(path,1)
-      end
-
-      if #path == 0 then
         state = "idle"
       end
     end,

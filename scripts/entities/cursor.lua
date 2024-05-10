@@ -2,7 +2,7 @@ cursor = entity:new({
   x = 66,
   y = 76,
   map_collision = true,
-  speed = 0.75,
+  speed = 1,
   recall_radius = 0,
 
   update = function(_ENV)
