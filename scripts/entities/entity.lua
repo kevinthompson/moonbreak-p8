@@ -171,24 +171,4 @@ entity=gameobject:extend({
       return true
     end
   end
-
-  -- follow = function(_ENV, target)
-  --   if (dist(_ENV, target) <= follow_distance) return
-
-  --   -- previous position
-  --   local px = x
-  --   local py = y
-
-  --   -- movement
-  --   local a = atan2(target.x - x, target.y - y)
-  --   local vx = cos(a) * speed
-  --   local vy = sin(a) * speed
-
-  --   -- flip sprite
-  --   if (vx < 0) flip = true
-  --   if (vx > 0) flip = false
-
-  --   -- move
-  --   return _ENV:move(x+vx, y+vy)
-  -- end
 })
