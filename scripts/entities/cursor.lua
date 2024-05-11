@@ -39,14 +39,15 @@ cursor = entity:new({
   end,
 
   draw = function(_ENV)
-    circ(x,y,1,7)
-    circ(x,y,3,9)
+    pset(x,y,7)
+    spr(14,x-3,y-2)
 
     if recall_radius > 3 then
-      c=6
-      step=3/(2*3.14*recall_radius)
-      for a=0+t()*.02,1+t()*.02,step do
-        pset(x+cos(a)*recall_radius,y+sin(a)*recall_radius,c)
+      local c=6
+      local step=3/(2*3.14*recall_radius)
+      local to = t() * .05
+      for a=0+to,1+to,step do
+        pset(x+cos(a)*recall_radius,y+sin(a)*recall_radius * .6,c)
         c=c==6 and 7 or 6
       end
     end

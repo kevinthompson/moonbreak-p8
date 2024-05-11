@@ -30,7 +30,7 @@ game = scene:extend({
 
     -- interactive elements
     -- rover:new({ x = 32, y = 55 })
-    pod:new({ x = 108, y = 63, door = true })
+    machine:new({ x = 40, y = 96 })
   end,
 
   update=function(_ENV)
