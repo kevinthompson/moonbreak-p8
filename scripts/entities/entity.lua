@@ -10,15 +10,13 @@ entity=gameobject:extend({
 	y=0,
   ox = 0,
   oy = 0,
-  w=8,
-  h=8,
   r=4,
   elevation = 0,
   speed = 1,
   path = {},
 
   -- follow
-  follow_distance = 16,
+  follow_distance = 0,
   max_follow_distance = 24,
 
   -- collision
@@ -36,6 +34,7 @@ entity=gameobject:extend({
   current_animation = nil,
   animation_timer = 12,
   frame = 0,
+  flash_timer = 0,
 
   -- state
   state = "idle",
@@ -44,6 +43,8 @@ entity=gameobject:extend({
   },
 
   -- events
+  on_path_end = _noop,
+  on_follow_stop = _noop,
   on_map_collide = _noop,
   on_entity_collide = _noop,
 
@@ -53,6 +54,7 @@ entity=gameobject:extend({
   end,
 
   update = function(_ENV)
+    flash_timer = max(0,flash_timer - 1)
     local state_func = states[state]
     if (state_func) states[state](_ENV)
   end,
@@ -77,7 +79,7 @@ entity=gameobject:extend({
     end
   end,
 
-  move = function(_ENV,nx,ny)
+  move = function(_ENV, nx, ny)
     local px = x
     local py = y
 
@@ -94,6 +96,20 @@ entity=gameobject:extend({
     if (nx < px) flip = true
 
     return px != nx or py != ny
+  end,
+
+  move_toward = function(_ENV, target)
+    local dx = target.x - x
+    local dy = target.y - y
+
+    local a = atan2(dx, dy)
+    local ax = cos(a)
+    local ay = sin(a)
+
+    local vx = sgn(ax) * min(abs(cos(a) * speed), abs(dx))
+    local vy = sgn(ay) * min(abs(sin(a) * speed), abs(dy))
+
+    return _ENV:move(x+vx, y+vy)
   end,
 
   collide = function(_ENV,cx,cy)
@@ -141,55 +157,40 @@ entity=gameobject:extend({
   draw_shadow = function(_ENV)
     if shadow then
       local tile = mget(x\8,y\8)
-      local shadow_scale = 1 / (elevation + 1)
+      local shadow_scale = 1 / (elevation*.5 + 1)
       local shadow_width = width * shadow_scale
       line(x-shadow_width/2 + ox,y + oy,x-1+shadow_width/2 + ox,y + oy,14)
     end
   end,
 
-  follow = function(_ENV, target)
-    local target_distance = dist(_ENV, target)
+  follow = function(_ENV, new_target)
+    target = new_target
+    if (not target) return
 
-    -- previous position
-    local px = x
-    local py = y
-
-    if target_distance > max_follow_distance then
-      target = _ENV:get_path_target(target)
-    else
-      path = {}
-      if (target_distance <= follow_distance) return false
+    if (dist(_ENV, target) <= follow_distance) then
+      _ENV:on_follow_stop()
+      return false
     end
 
-    -- movement
-    local a = atan2(target.x - x, target.y - y)
-    local vx = cos(a) * speed
-    local vy = sin(a) * speed
-
-    -- move
-    return _ENV:move(x+vx, y+vy)
+    if (#path > 0) return _ENV:follow_path()
+    return _ENV:move_toward(target)
   end,
 
-  get_path_target = function(_ENV, target)
-    if dist(_ENV,target) <= follow_distance then
-      path = {}
-      return
-    end
+  follow_path = function(_ENV)
+    if (#path == 0) return
 
-    if #path == 0  then
-      path = astar({x\8,y\8}, {target.x\8, target.y\8})
+    local px = 4 + path[1].x * 8
+    local py = 4 + path[1].y * 8
+
+    _ENV:move_toward({x=px,y=py})
+
+    if dist(_ENV, {x=px,y=py}) < 1 then
       deli(path,1)
+      if (#path == 0) _ENV:on_path_end()
     end
+  end,
 
-    if #path > 0 then
-      local px = 4 + path[1].x * 8
-      local py = 4 + path[1].y * 8
-
-      if dist(_ENV, {x=px,y=py}) < 1 then
-        deli(path,1)
-      end
-
-      return { x = px, y = py }
-    end
+  find_path = function(_ENV, target)
+    return astar({x\8,y\8}, {target.x\8, target.y\8})
   end
 })

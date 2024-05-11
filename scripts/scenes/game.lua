@@ -30,7 +30,9 @@ game = scene:extend({
 
     -- interactive elements
     -- rover:new({ x = 32, y = 55 })
-    machine:new({ x = 40, y = 96 })
+    g.machines = {
+      machine:new({ x = 40, y = 96 })
+    }
   end,
 
   update=function(_ENV)
@@ -53,7 +55,9 @@ game = scene:extend({
 
     -- draw entities
     for e in all(entity.objects) do
+      if (e.flash_timer > 0) pal({7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7},0)
       e:draw()
+      if (e.flash_timer > 0) pal(0)
     end
 
     for t in all(foreground) do

@@ -41,12 +41,21 @@ bot = entity:extend({
     sspr(40,0,5,4,x - width/2 + ox, y - height - elevation + oy)
   end,
 
-  throw_at = function(_ENV,t)
+  throw_at = function(_ENV, t)
     del(player.bots,_ENV)
     state = "throw"
     target = { x=t.x, y=t.y }
     animation_frames = 30
     animation_frame = 0
+  end,
+
+  carry = function(_ENV, new_target)
+    target = new_target
+    target.state = "carry"
+    state = "carry"
+
+    del(player.bots, _ENV)
+    add(target.bots, _ENV)
   end,
 
   -- states
@@ -75,7 +84,6 @@ bot = entity:extend({
       animation_frame = min(animation_frame + 1, animation_frames)
 
       if animation_frame == animation_frames then
-        path = astar({ x\8, y\8 }, {8,8})
         state = "targeting"
       end
     end,
@@ -89,8 +97,7 @@ bot = entity:extend({
         -- TODO: move to entity class
         if e.type == objective
         and ccol({ x=x, y=y, r=target_radius }, e) then
-          target = e
-          state = "attack"
+          _ENV:carry(e)
         end
       end
 
@@ -98,7 +105,11 @@ bot = entity:extend({
       -- else go idle
     end,
 
-    attack = function(_ENV)
+    carry = function(_ENV, new_target)
+      _ENV:follow(target)
+    end,
+
+    attack = function(_ENV, target)
       _ENV:follow(target)
 
       attack_timer -= 1
