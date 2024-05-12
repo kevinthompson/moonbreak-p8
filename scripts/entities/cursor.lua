@@ -1,6 +1,8 @@
 cursor = entity:new({
   x = 66,
   y = 76,
+  width = 1,
+  height = 1,
   map_collision = true,
   speed = .8,
   recall_radius = 0,

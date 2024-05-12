@@ -4,6 +4,7 @@ objective = entity:extend({
   r = 4,
   bots = {},
 
+  solid = true,
   health = 5,
   energy_count = 5,
   bots_required = 3,

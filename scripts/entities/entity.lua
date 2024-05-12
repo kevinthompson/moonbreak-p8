@@ -125,13 +125,13 @@ entity=gameobject:extend({
     end
 
     -- entity collision
-    if on_entity_collide != _noop then
-			-- for e in all(entities) do
-			-- 	if collide({ x=nx,y=ny,w=w,h=h },e) then
-			-- 		on_entity_collide(_ENV,e)
-			-- 	end
-			-- end
-		end
+    for e in all(entity.objects) do
+      if e != _ENV
+      and aabb({ x=cx,y=cy,width=width,height=height },e) then
+        on_entity_collide(_ENV,e)
+        if (e.solid) result = true
+      end
+    end
 
     return result
   end,
