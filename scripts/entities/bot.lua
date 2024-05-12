@@ -38,7 +38,7 @@ bot = entity:extend({
       oy = sin(angle) * distance * percent
     end
 
-    sspr(40,0,5,4,x - width/2 + ox, y - height - elevation + oy)
+    sspr(40,0,5,4,x - width/2 + ox, y - height - elevation + oy, 5,4,rnd() > 0.5)
   end,
 
   throw_at = function(_ENV, t)
