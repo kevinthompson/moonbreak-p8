@@ -60,10 +60,6 @@ game = scene:extend({
       if (e.flash_timer > 0) pal(0)
     end
 
-    for t in all(foreground) do
-      spr(t[1],t[2],t[3])
-    end
-
     -- _ENV:draw_ui()
   end,
 
