@@ -15,6 +15,7 @@ objective = entity:extend({
     for b in all(bots) do
       b.target = player
       b.state = "follow"
+      add(player.bots, b)
     end
     bots = {}
   end,
@@ -81,8 +82,9 @@ objective = entity:extend({
       -- position bots
       local astep = 1/#bots
       for i=1,#bots do
+        local starta = #bots == 2 and 0 or .25
         local bot = bots[i]
-        local a = i * astep
+        local a = starta + i * astep
         bot.x = lerp(bot.x, x + cos(a) * 5, .2)
         bot.y = lerp(bot.y, y + sin(a) * 5, .2)
       end

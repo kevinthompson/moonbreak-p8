@@ -21,6 +21,7 @@ entity=gameobject:extend({
 
   -- collision
   map_collision = false,
+  entity_collision = false,
   hitbox = {0,0,0,0}, -- offsets: left, right, up, down from origin
 
   -- drawing
@@ -127,10 +128,12 @@ entity=gameobject:extend({
     end
 
     -- entity collision
-    for e in all(entity.objects) do
-      if e != _ENV
-      and _ENV:entity_collide(cx,cy,e) then
-        return _ENV:on_entity_collide(e)
+    if entity_collision then
+      for e in all(entity.objects) do
+        if e != _ENV
+        and _ENV:entity_collide(cx,cy,e) then
+          return _ENV:on_entity_collide(e)
+        end
       end
     end
 

@@ -3,10 +3,10 @@ bot = entity:extend({
   height = 4,
 
   map_collision = true,
+
   follow_distance = 8,
 
   speed = .40,
-
   state = "follow",
 
   target_radius = 8,
@@ -15,16 +15,16 @@ bot = entity:extend({
 
   elevation = 4,
   shadow = true,
+  ox = 0,
+  oy = 0,
 
   init = function(_ENV)
     entity.init(_ENV)
     time_offset = rnd()
-  end,
-
-  update = function(_ENV)
-    -- hover animiation
-    elevation = 2.5 + sin((t() + time_offset) * .5)
-    entity.update(_ENV)
+    hover_distance = rnd(3)
+    hover_direction = rnd({-1,1})
+    hover_speed = .3 + rnd() * .2
+    follow_distance = 6 + rnd(3)
   end,
 
   draw = function(_ENV)
@@ -58,11 +58,23 @@ bot = entity:extend({
     add(target.bots, _ENV)
   end,
 
+  hover = function(_ENV)
+    local period = (t() + time_offset) * hover_speed
+    elevation = 2.5 + sin(period)
+    ox = cos(period * hover_direction) * hover_distance
+    oy = sin(period * hover_direction) * hover_distance
+  end,
+
   -- states
 
   states = {
+    idle = function(_ENV)
+      _ENV:hover()
+    end,
+
     follow = function(_ENV)
       _ENV:follow(player)
+      _ENV:hover()
     end,
 
     aiming = function(_ENV)
@@ -73,8 +85,11 @@ bot = entity:extend({
     end,
 
     throw = function(_ENV)
+      ox = 0
+      oy = 0
+
       -- move towards ground target
-      elevation = arc(animation_frames,8,animation_frame)
+      elevation = 2.5 + arc(animation_frames,8,animation_frame)
 
       local nx = lerp(player.x, target.x, animation_frame / animation_frames)
       local ny = lerp(player.y, target.y, animation_frame / animation_frames)
@@ -89,6 +104,8 @@ bot = entity:extend({
     end,
 
     targeting = function(_ENV)
+      target = nil
+
       -- find target
       for e in all(entity.objects) do
 
@@ -101,8 +118,9 @@ bot = entity:extend({
         end
       end
 
-      -- carry or attack target
-      -- else go idle
+      if not target then
+        state = "idle"
+      end
     end,
 
     carry = function(_ENV, new_target)

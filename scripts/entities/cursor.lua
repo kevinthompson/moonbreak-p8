@@ -69,7 +69,7 @@ cursor = entity:new({
         and ccol({x=x,y=y,r=recall_radius},{x=e.x,y=e.y,r=1})
         and count(player.bots,e) <= 0
         then
-          del(e.target.bots, e)
+          if (e.targte) del(e.target.bots, e)
           add(player.bots,e)
           e.state = "follow"
           e.target = player

@@ -46,12 +46,13 @@ game = scene:extend({
   draw=function(_ENV)
     sort(entity.objects)
     cls(13)
-    map()
 
     -- draw shadows
     for e in all(entity.objects) do
       e:draw_shadow()
     end
+
+    map()
 
     -- draw entities
     for e in all(entity.objects) do
