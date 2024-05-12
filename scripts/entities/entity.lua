@@ -167,12 +167,18 @@ entity=gameobject:extend({
     target = new_target
     if (not target) return
 
+    if not _ENV:can_see(target) then
+      path = #path > 0 and path or _ENV:find_path(target)
+      if (#path > 0) return _ENV:follow_path()
+    else
+      path = {}
+    end
+
     if (dist(_ENV, target) <= follow_distance) then
       _ENV:on_follow_stop()
       return false
     end
 
-    if (#path > 0) return _ENV:follow_path()
     return _ENV:move_toward(target)
   end,
 
@@ -182,15 +188,38 @@ entity=gameobject:extend({
     local px = 4 + path[1].x * 8
     local py = 4 + path[1].y * 8
 
-    _ENV:move_toward({x=px,y=py})
+    local ret = _ENV:move_toward({x=px,y=py})
 
     if dist(_ENV, {x=px,y=py}) < 1 then
       deli(path,1)
       if (#path == 0) _ENV:on_path_end()
     end
+
+    return ret
   end,
 
   find_path = function(_ENV, target)
-    return astar({x\8,y\8}, {target.x\8, target.y\8})
-  end
+    local full_path = astar({x\8,y\8}, {target.x\8, target.y\8})
+    deli(full_path,1)
+    return full_path
+  end,
+
+  can_see = function(_ENV, other, distance)
+    local d = distance or 128
+    local x1,y1,x2,y2 = x,y,other.x,other.y
+    local dx,dy=x2-x1,y2-y1
+    local adx,ady=abs(dx),abs(dy)
+    if (adx>d or ady>d) return --too far on any axis
+    if ((dx/d)*(dx/d)+(dy/d)*(dy/d)>1) return --fails mot's "within dist"
+    if (adx>ady) then
+     for i=0,dx,sgn(dx) do
+      if (fget(mget((x1+i)/8, (y1+i*dy/dx)/8),0)) return
+     end
+    else
+     for i=0,dy,sgn(dy) do
+      if (fget(mget((x1+i*dx/dy)/8, (y1+i)/8),0)) return
+     end
+    end
+    return true
+   end
 })

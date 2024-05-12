@@ -4,9 +4,6 @@ player = entity:new({
   width = 4,
   height = 2,
   follow_distance = 24,
-
-  hitbox = {-1,3,-1,1},
-
   map_collision = true,
 
   speed=0.5,
