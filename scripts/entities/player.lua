@@ -7,10 +7,8 @@ player = entity:new({
   map_collision = true,
 
   speed=0.5,
-  target = nil,
   bots = {},
   energy = 0,
-  ang = 0,
 
   -- features
   dust_timer = 0,

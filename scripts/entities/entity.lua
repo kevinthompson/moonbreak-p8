@@ -21,7 +21,7 @@ entity=gameobject:extend({
 
   -- collision
   map_collision = false,
-  hitbox = {0,0,0,0},
+  hitbox = {0,0,0,0}, -- offsets: left, right, up, down from origin
 
   -- drawing
   width = 8,
@@ -46,7 +46,9 @@ entity=gameobject:extend({
   on_path_end = _noop,
   on_follow_stop = _noop,
   on_map_collide = _noop,
-  on_entity_collide = _noop,
+  on_entity_collide = function(_ENV, other)
+    return other.solid
+  end,
 
   -- instance methods
   init = function(_ENV)
@@ -127,9 +129,8 @@ entity=gameobject:extend({
     -- entity collision
     for e in all(entity.objects) do
       if e != _ENV
-      and aabb({ x=cx,y=cy,width=width,height=height },e) then
-        on_entity_collide(_ENV,e)
-        if (e.solid) result = true
+      and _ENV:entity_collide(cx,cy,e) then
+        return _ENV:on_entity_collide(e)
       end
     end
 
@@ -154,6 +155,10 @@ entity=gameobject:extend({
     end
 	end,
 
+  entity_collide = function(_ENV, cx, cy, other)
+    return aabb(_ENV:get_hitbox(cx,cy),other:get_hitbox())
+  end,
+
   draw_shadow = function(_ENV)
     if shadow then
       local tile = mget(x\8,y\8)
@@ -161,6 +166,13 @@ entity=gameobject:extend({
       local shadow_width = width * shadow_scale
       line(x-shadow_width/2 + ox,y + oy,x-1+shadow_width/2 + ox,y + oy,14)
     end
+  end,
+
+  get_hitbox = function(_ENV,hx,hy)
+    hx = hx or x
+    hy = hy or y
+    local x1,x2,y1,y2 = hx+hitbox[1],hx+hitbox[2],hy+hitbox[3],hy+hitbox[4]
+    return {x=x1,y=y1,width=x2-x1,height=y2-y1}
   end,
 
   follow = function(_ENV, new_target)

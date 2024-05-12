@@ -1,13 +1,14 @@
 objective = entity:extend({
   x = 64,
   y = 64,
-  r = 4,
   bots = {},
 
   solid = true,
   health = 5,
   energy_count = 5,
   bots_required = 3,
+
+  hitbox = {-4,4,-4,1},
 
   on_follow_stop = function(_ENV)
     state = "idle"
@@ -51,11 +52,14 @@ objective = entity:extend({
 
   states = {
     idle = function(_ENV)
+      solid = true
       shadow = false
       elevation = 0
     end,
 
     carry = function(_ENV)
+      solid = false
+
       if (#bots == 0) then
         state = "idle"
         return
