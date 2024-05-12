@@ -29,7 +29,10 @@ cursor = entity:new({
       ny += sin(angle) * speed
     end
 
-    _ENV:move(nx,ny)
+    if dist({ x = nx, y = ny }, player) <= 32 then
+      _ENV:move(nx,ny)
+    end
+
     _ENV:handle_recall()
 
     if btnr(5) and btnf(5) < 10 and #player.bots > 0 then
