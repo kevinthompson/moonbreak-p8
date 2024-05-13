@@ -64,14 +64,14 @@ objective = entity:extend({
     end,
 
     carry = function(_ENV)
-      solid = false
-
       if (#bots == 0) then
         state = "idle"
         return
       end
 
       if #bots >= bots_required then
+        solid = false
+
         if not target then
           target = machines[1]
           path = _ENV:find_path(target)
@@ -82,6 +82,8 @@ objective = entity:extend({
         elevation = 2
 
         _ENV:follow(target)
+      else
+        solid = true
       end
 
       -- position bots

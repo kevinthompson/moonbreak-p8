@@ -2,12 +2,12 @@ bot = entity:extend({
   width = 5,
   height = 4,
 
-  follow_distance = 8,
+  follow_distance = 12,
 
   speed = .40,
   state = "follow",
 
-  target_radius = 8,
+  target_radius = 12,
   attack_timer = 0,
   attack_frames = 45,
 
@@ -103,6 +103,8 @@ bot = entity:extend({
 
     targeting = function(_ENV)
       target = nil
+      local new_target = nil
+      local new_target_dist = target_radius + 1
 
       -- find target
       for e in all(entity.objects) do
@@ -111,11 +113,17 @@ bot = entity:extend({
         -- TODO: check collision layers
         -- TODO: move to entity class
         if e.type == objective
-        and ccol({ x=x, y=y, r=target_radius }, e) then
-          _ENV:carry(e)
-          break
+        and ccol({ x=x, y=y, r=target_radius }, e)
+        then
+          local entity_dist = dist(_ENV, e)
+          if entity_dist < new_target_dist then
+            new_target_dist = entity_dist
+            new_target = e
+          end
         end
       end
+
+      if (new_target) _ENV:carry(new_target)
 
       if not target then
         state = "idle"
