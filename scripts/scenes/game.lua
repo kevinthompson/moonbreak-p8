@@ -1,5 +1,7 @@
 game = scene:extend({
   init=function(_ENV)
+    autotile(0,0,128,64,93,tile_rules)
+
     time_start = time()
     time_limit = 601
 
