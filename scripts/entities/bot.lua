@@ -2,8 +2,6 @@ bot = entity:extend({
   width = 5,
   height = 4,
 
-  map_collision = true,
-
   follow_distance = 8,
 
   speed = .40,
@@ -115,6 +113,7 @@ bot = entity:extend({
         if e.type == objective
         and ccol({ x=x, y=y, r=target_radius }, e) then
           _ENV:carry(e)
+          break
         end
       end
 

@@ -54,6 +54,7 @@ entity=gameobject:extend({
   -- instance methods
   init = function(_ENV)
     add(entity.objects,_ENV)
+    path = {}
   end,
 
   update = function(_ENV)

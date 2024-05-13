@@ -102,7 +102,7 @@ function astar(start, goal)
 
   local open_list = {start_node}
   local closed_list = {}
-  local max_iterations = 1000
+  local max_iterations = 128
   local iteration = 1
 
   -- loop until we find the end
@@ -202,7 +202,14 @@ node = class:extend({
 })
 
 adjacent_positions = {
-  {0,-1},{0,1},{-1,0},
-  {1,0}, {-1,-1}, {-1,1},
-  {1,-1}, {1,1}
+  {0,-1},
+  {0,1},
+  {-1,0},
+  {1,0},
+  --[[ disable corner pathing
+    {-1,-1},
+    {-1,1},
+    {1,-1},
+    {1,1}
+  ]]
 }

@@ -8,7 +8,7 @@ objective = entity:extend({
   energy_count = 5,
   bots_required = 3,
 
-  hitbox = {-4,4,-4,1},
+  hitbox = {-4,4,-7,1},
 
   on_follow_stop = function(_ENV)
     state = "idle"
@@ -17,6 +17,11 @@ objective = entity:extend({
       b.state = "follow"
       add(player.bots, b)
     end
+    bots = {}
+  end,
+
+  init = function(_ENV)
+    entity.init(_ENV)
     bots = {}
   end,
 
@@ -88,9 +93,6 @@ objective = entity:extend({
         bot.x = lerp(bot.x, x + cos(a) * 5, .2)
         bot.y = lerp(bot.y, y + sin(a) * 5, .2)
       end
-
-      -- bots are recalled or reached target
-      if (#bots == 0) state = "idle"
     end
   }
 })

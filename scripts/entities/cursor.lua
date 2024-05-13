@@ -4,6 +4,7 @@ cursor = entity:new({
   width = 1,
   height = 1,
   map_collision = true,
+  entity_collision = true,
   speed = .8,
   recall_radius = 0,
 
@@ -69,7 +70,7 @@ cursor = entity:new({
         and ccol({x=x,y=y,r=recall_radius},{x=e.x,y=e.y,r=1})
         and count(player.bots,e) <= 0
         then
-          if (e.targte) del(e.target.bots, e)
+          if (e.target) del(e.target.bots, e)
           add(player.bots,e)
           e.state = "follow"
           e.target = player

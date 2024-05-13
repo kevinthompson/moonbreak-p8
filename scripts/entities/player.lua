@@ -5,6 +5,7 @@ player = entity:new({
   height = 2,
   follow_distance = 24,
   map_collision = true,
+  entity_collision = true,
 
   speed=0.5,
   bots = {},
