@@ -60,7 +60,7 @@ objective = entity:extend({
     idle = function(_ENV)
       solid = true
       shadow = false
-      elevation = 0
+      elevation = lerp(elevation, 0, .8)
     end,
 
     carry = function(_ENV)
@@ -79,7 +79,7 @@ objective = entity:extend({
 
         speed = .25 * #bots / bots_required
         shadow = true
-        elevation = 2
+        elevation = lerp(elevation, 2, .8)
 
         _ENV:follow(target)
       else
