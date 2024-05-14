@@ -28,16 +28,6 @@ bot = entity:extend({
   end,
 
   draw = function(_ENV)
-    if state == "attack" then
-      local angle = atan2(target.x - x, target.y - y)
-      local distance = dist(_ENV, target)
-      local percent = sin(.5 + (attack_timer / attack_frames) * .5)
-      elevation = 4 - percent * 4
-
-      ox = cos(angle) * distance * percent
-      oy = sin(angle) * distance * percent
-    end
-
     sspr(40,0,5,4,x - width/2 + ox, y - height - elevation + oy, 5,4,rnd() > 0.5)
   end,
 
@@ -53,6 +43,7 @@ bot = entity:extend({
   attack = function(_ENV, new_target)
     target = new_target
     state = "attack"
+    attack_timer = attack_frames
 
     del(player.bots, _ENV)
     add(target.bots, _ENV)
@@ -70,8 +61,8 @@ bot = entity:extend({
   hover = function(_ENV)
     local period = (t() + time_offset) * hover_speed
     elevation = 2.5 + sin(period)
-    ox = cos(period * hover_direction) * hover_distance
-    oy = sin(period * hover_direction) * hover_distance
+    ox = lerp(ox, cos(period * hover_direction) * hover_distance, .1)
+    oy = lerp(oy, sin(period * hover_direction) * hover_distance, .1)
   end,
 
   -- states
@@ -86,17 +77,7 @@ bot = entity:extend({
       _ENV:hover()
     end,
 
-    aiming = function(_ENV)
-      -- move towards player
-      elevation = lerp(elevation,2,.1)
-      x = lerp(x, player.x - 3, .1)
-      y = lerp(y, player.y + 4, .1)
-    end,
-
     throw = function(_ENV)
-      ox = 0
-      oy = 0
-
       -- move towards ground target
       elevation = 2.5 + arc(animation_frames,8,animation_frame)
 
@@ -148,6 +129,12 @@ bot = entity:extend({
     end,
 
     attack = function(_ENV)
+      if not target or target.health <= 0 then
+        target = nil
+        state = "idle"
+        return
+      end
+
       _ENV:follow(target)
 
       attack_timer -= 1
@@ -160,10 +147,13 @@ bot = entity:extend({
         attack_timer = attack_frames
       end
 
-      if target.health <= 0 then
-        target = nil
-        state = "idle"
-      end
+      local angle = atan2(target.x - x, target.y - y)
+      local distance = dist(_ENV, target)
+      local percent = sin(.5 + (attack_timer / attack_frames) * .5)
+      elevation = 4 - percent * 4
+
+      ox = cos(angle) * distance * percent
+      oy = sin(angle) * distance * percent
     end
   }
 })

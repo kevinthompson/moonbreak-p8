@@ -1,5 +1,4 @@
 supply = entity:extend({
-  bots = {},
   width = 7,
   height = 7,
 
@@ -17,11 +16,6 @@ supply = entity:extend({
     end
     bots = {}
     target:collect_supply(_ENV)
-  end,
-
-  init = function(_ENV)
-    entity.init(_ENV)
-    bots = {}
   end,
 
   update = function(_ENV)

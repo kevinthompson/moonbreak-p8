@@ -27,7 +27,13 @@ end
 
 -- circle collision
 function ccol(c1,c2)
-  return dist(c1,c2) < c1.r + c2.r
+  local radsum = c1.r + c2.r
+  if (c1.x-c2.x > radsum)
+  or (c1.y-c2.y > radsum) then
+    return false
+  end
+
+  return dist(c1,c2) < radsum
 end
 
 function dist(c1,c2)

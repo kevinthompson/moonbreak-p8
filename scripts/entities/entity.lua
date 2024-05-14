@@ -55,6 +55,7 @@ entity=gameobject:extend({
   -- instance methods
   init = function(_ENV)
     add(entity.objects,_ENV)
+    bots = {}
     path = {}
   end,
 
