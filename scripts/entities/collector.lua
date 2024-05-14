@@ -1,9 +1,25 @@
 collector = entity:extend({
-  update = function(_ENV)
+  layer = 0,
 
+  init = function(_ENV)
+    entity.init(_ENV)
+    spawner_instance = spawner:new({
+      x = x + 24,
+      y = y + 4
+    })
   end,
 
   draw = function(_ENV)
-    ? "c", x, y
+    for wx=x+4,spawner.x do
+      pset(wx,y+1 + sin(wx/8), 1)
+    end
+    spr(11,x-8,y-1)
+    spr(11,x,y-1,1,1,true)
+  end,
+
+  collect_supply = function(_ENV, supply_instance)
+    -- TODO collect animation
+    supply_instance:destroy()
+    spawner_instance:spawn_bot()
   end
 })

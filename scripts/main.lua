@@ -1,5 +1,5 @@
 function _init()
-  scene:load(splash)
+  scene:load(game)
 end
 
 function _update60()

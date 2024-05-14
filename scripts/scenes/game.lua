@@ -1,5 +1,6 @@
 game = scene:extend({
   init=function(_ENV)
+    reset_palette()
     autotile(0,0,128,64,93,tile_rules)
 
     time_start = time()
@@ -36,8 +37,8 @@ game = scene:extend({
 
     -- interactive elements
     rover:new({ x = 32, y = 55 })
-    g.machines = {
-      machine:new({ x = 40, y = 96 })
+    g.collectors = {
+      collector:new({ x = 40, y = 96 })
     }
   end,
 

@@ -16,6 +16,7 @@ supply = entity:extend({
       add(player.bots, b)
     end
     bots = {}
+    target:collect_supply(_ENV)
   end,
 
   init = function(_ENV)
@@ -47,7 +48,7 @@ supply = entity:extend({
         solid = false
 
         if not target then
-          target = machines[1]
+          target = collectors[1]
           path = _ENV:find_path(target)
         end
 
