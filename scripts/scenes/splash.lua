@@ -45,7 +45,15 @@ splash = scene:extend({
       wait(30)
 
       pal()
-      scene:load(game)
+      scene:load(title)
     end)
+  end,
+
+  update = function(_ENV)
+    if btnp(5) then
+      async:reset()
+      scene:load(title)
+      sfx(-1)
+    end
   end,
 })

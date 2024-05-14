@@ -1,4 +1,6 @@
 machine = entity:extend({
+  layer = 0,
+
   draw = function(_ENV)
     for wx=x+4,x+20 do
       pset(wx,y+1 + sin(wx/8), 1)

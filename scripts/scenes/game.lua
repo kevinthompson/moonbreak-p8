@@ -10,8 +10,12 @@ game = scene:extend({
       for my=0,63 do
         local tile = mget(mx,my)
 
-        if tile == 19 then
-          objective:new({
+        local tiles = {}
+        tiles[19] = supply
+        tiles[67] = obstacle
+
+        if tiles[tile] then
+          tiles[tile]:new({
             x = 4 + mx * 8,
             y = 7 + my * 8
           })
@@ -22,7 +26,7 @@ game = scene:extend({
     end
 
     -- testing bots
-    for i=1,10 do
+    for i=1,1 do
       add(player.bots,bot:new({
         target = player,
         x = player.x - 32 + rnd(16),
@@ -31,7 +35,7 @@ game = scene:extend({
     end
 
     -- interactive elements
-    -- rover:new({ x = 32, y = 55 })
+    rover:new({ x = 32, y = 55 })
     g.machines = {
       machine:new({ x = 40, y = 96 })
     }
@@ -46,7 +50,9 @@ game = scene:extend({
   end,
 
   draw=function(_ENV)
-    sort(entity.objects)
+    sort(entity.objects, "y")
+    sort(entity.objects, "layer")
+
     cls(13)
 
     -- draw shadows
@@ -85,11 +91,6 @@ game = scene:extend({
     spr(2,cx+4,cy+mcy)
     spr(0,cx+12,cy+mcy+1)
     print(#player.bots,cx+20,cy+mcy+2,7)
-
-    -- show energy count
-    spr(4,cx+104,cy+mcy+1)
-    spr(0,cx+112,cy+mcy+1)
-    print(player.energy,cx+120,cy+mcy+2,7)
   end
 })
 

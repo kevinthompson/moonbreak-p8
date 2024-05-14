@@ -9,7 +9,6 @@ player = entity:new({
 
   speed=0.5,
   bots = {},
-  energy = 0,
 
   -- features
   dust_timer = 0,

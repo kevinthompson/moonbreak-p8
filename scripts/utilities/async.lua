@@ -1,5 +1,9 @@
-async = class:extend({
+async = class:new({
   coroutines = {},
+
+  reset = function(_ENV)
+    coroutines = {}
+  end,
 
   call = function(_ENV,func)
     add(coroutines,cocreate(func))

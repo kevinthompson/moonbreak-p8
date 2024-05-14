@@ -1,14 +1,12 @@
-objective = entity:extend({
-  x = 64,
-  y = 64,
+supply = entity:extend({
   bots = {},
+  width = 7,
+  height = 7,
 
   solid = true,
-  health = 5,
-  energy_count = 5,
-  bots_required = 3,
-
-  hitbox = {-4,4,-7,1},
+  shadow = true,
+  bots_required = 1,
+  hitbox = {-3,3,-5,1},
 
   on_follow_stop = function(_ENV)
     state = "idle"
@@ -27,39 +25,15 @@ objective = entity:extend({
 
   update = function(_ENV)
     entity.update(_ENV)
-    if health <= 0 then
-      _ENV:destroy()
-    end
   end,
 
   draw = function(_ENV)
-    spr(19,x - width/2, y - 7 - elevation)
-  end,
-
-  hit = function(_ENV)
-    sfx(0)
-    health -= 1
-    flash_timer = 5
-  end,
-
-  destroy = function(_ENV)
-    if health <= 0 then
-      entity.destroy(_ENV)
-
-      for i=1, energy_count do
-        energy:new({
-          x = x,
-          y = y,
-          a = rnd()
-        })
-      end
-    end
+    spr(19,x - width/2, y - 6 - elevation)
   end,
 
   states = {
     idle = function(_ENV)
       solid = true
-      shadow = false
       elevation = lerp(elevation, 0, .8)
     end,
 

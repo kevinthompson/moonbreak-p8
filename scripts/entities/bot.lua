@@ -1,4 +1,6 @@
 bot = entity:extend({
+  layer = 2,
+
   width = 5,
   height = 4,
 
@@ -45,6 +47,14 @@ bot = entity:extend({
     target = { x=t.x, y=t.y }
     animation_frames = 30
     animation_frame = 0
+  end,
+
+  attack = function(_ENV, new_target)
+    target = new_target
+    state = "attack"
+
+    del(player.bots, _ENV)
+    add(target.bots, _ENV)
   end,
 
   carry = function(_ENV, new_target)
@@ -108,11 +118,7 @@ bot = entity:extend({
 
       -- find target
       for e in all(entity.objects) do
-
-        -- TODO: on screen check
-        -- TODO: check collision layers
-        -- TODO: move to entity class
-        if e.type == objective
+        if count({supply, obstacle, enemy}, e.type) > 0
         and ccol({ x=x, y=y, r=target_radius }, e)
         then
           local entity_dist = dist(_ENV, e)
@@ -123,18 +129,24 @@ bot = entity:extend({
         end
       end
 
-      if (new_target) _ENV:carry(new_target)
+      if (new_target) then
+        if new_target.type == supply then
+          _ENV:carry(new_target)
+        elseif new_target.type == obstacle then
+          _ENV:attack(new_target)
+        end
+      end
 
       if not target then
         state = "idle"
       end
     end,
 
-    carry = function(_ENV, new_target)
+    carry = function(_ENV)
       _ENV:follow(target)
     end,
 
-    attack = function(_ENV, target)
+    attack = function(_ENV)
       _ENV:follow(target)
 
       attack_timer -= 1

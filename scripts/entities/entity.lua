@@ -14,6 +14,7 @@ entity=gameobject:extend({
   elevation = 0,
   speed = 1,
   path = {},
+  layer = 1,
 
   -- follow
   follow_distance = 0,
@@ -168,7 +169,7 @@ entity=gameobject:extend({
       local tile = mget(x\8,y\8)
       local shadow_scale = 1 / (elevation*.5 + 1)
       local shadow_width = width * shadow_scale
-      line(x-shadow_width/2 + ox,y + oy,x-1+shadow_width/2 + ox,y + oy,14)
+      line(x-shadow_width/2 + ox,y + 1 + oy,x-1+shadow_width/2 + ox,y + 1 + oy,14)
     end
   end,
 

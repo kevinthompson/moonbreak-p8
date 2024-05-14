@@ -11,6 +11,12 @@ function prints(str,x,y,clr)
 	print(str,x,y,clr)
 end
 
+function tprint(func)
+  poke(0x5f58,0x81)
+  func()
+  poke(0x5f58,0x01)
+end
+
 -- left pad
 function pad(str,len,char)
 	str=tostr(str)
