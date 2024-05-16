@@ -7,6 +7,11 @@ particle = entity:extend({
   dx = 0,
   dy = 0,
 
+  init = function(_ENV)
+    entity.init(_ENV)
+    max_frames = frames
+  end,
+
   update = function(_ENV)
     frames -= 1
     if (frames <= 0) _ENV:destroy()
@@ -16,6 +21,14 @@ particle = entity:extend({
 
   draw = function(_ENV)
     -- TODO: figure out why color is referencing global
-    circfill(x,y,radius,_ENV.color)
+    local c = _ENV.color
+
+    if type(c) == "table" then
+      local percent = (max_frames - frames)/max_frames
+      local i = 1 + round(percent * (#c - 1))
+      c = c[i]
+    end
+
+    circfill(x,y,radius,c)
   end
 })

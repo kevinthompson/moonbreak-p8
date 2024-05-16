@@ -6,6 +6,7 @@ supply = entity:extend({
   shadow = true,
   bots_required = 1,
   hitbox = {-3,3,-5,1},
+  yclip = 0,
 
   on_follow_stop = function(_ENV)
     state = "idle"
@@ -23,7 +24,7 @@ supply = entity:extend({
   end,
 
   draw = function(_ENV)
-    spr(19,x - width/2, y - 6 - elevation)
+    sspr(24,8,7,7 - yclip,x - width/2, y - 6 - elevation + yclip)
   end,
 
   states = {
