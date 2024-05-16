@@ -51,9 +51,7 @@ game = scene:extend({
   end,
 
   draw=function(_ENV)
-    sort(entity.objects, "y")
-    sort(entity.objects, "layer")
-
+    sort(entity.objects, "sort_value")
     cls(13)
 
     -- draw shadows
