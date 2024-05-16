@@ -55,12 +55,13 @@ entity=gameobject:extend({
   -- instance methods
   init = function(_ENV)
     add(entity.objects,_ENV)
-    sort_value = layer * 1000 + y
+    _ENV:set_sort_value()
     bots = {}
     path = {}
   end,
 
   update = function(_ENV)
+    _ENV:set_sort_value()
     flash_timer = max(0,flash_timer - 1)
     local state_func = states[state]
     if (state_func) states[state](_ENV)
@@ -245,5 +246,9 @@ entity=gameobject:extend({
      end
     end
     return true
+   end,
+
+   set_sort_value = function(_ENV)
+    sort_value = layer * 1000 + y
    end
 })
