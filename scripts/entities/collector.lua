@@ -10,7 +10,7 @@ collector = entity:extend({
   end,
 
   draw = function(_ENV)
-    for wx=x+4,spawner.x do
+    for wx=x+4,spawner_instance.x do
       pset(wx,y+1 + sin(wx/8), 1)
     end
     spr(11,x-8,y-1)
