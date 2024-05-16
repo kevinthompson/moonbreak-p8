@@ -130,6 +130,7 @@ bot = entity:extend({
 
     attack = function(_ENV)
       if not target or target.health <= 0 then
+        add(player.bots, _ENV)
         target = player
         state = "follow"
         return
