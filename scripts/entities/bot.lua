@@ -100,7 +100,7 @@ bot = entity:extend({
 
       -- find target
       for e in all(entity.objects) do
-        if count({supply, obstacle, enemy}, e.type) > 0
+        if count({supply, obstacle, enemy}, e.class) > 0
         and ccol({ x=x, y=y, r=target_radius }, e)
         then
           local entity_dist = dist(_ENV, e)
@@ -112,9 +112,9 @@ bot = entity:extend({
       end
 
       if (new_target) then
-        if new_target.type == supply then
+        if new_target.class == supply then
           _ENV:carry(new_target)
-        elseif new_target.type == obstacle then
+        elseif new_target.class == obstacle then
           _ENV:attack(new_target)
         end
       end

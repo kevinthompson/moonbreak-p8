@@ -65,7 +65,7 @@ cursor = entity:new({
 
       -- TODO: Iterate over only on-screen bots that are not in the player collection
       for e in all(entity.objects) do
-        if e.type == bot
+        if e.class == bot
         and e.target != player
         and ccol({x=x,y=y,r=recall_radius},{x=e.x,y=e.y,r=1})
         and count(player.bots,e) <= 0
