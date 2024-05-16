@@ -18,6 +18,8 @@ bot = entity:extend({
   ox = 0,
   oy = 0,
 
+  alert = false,
+
   init = function(_ENV)
     entity.init(_ENV)
     time_offset = rnd()
@@ -29,6 +31,13 @@ bot = entity:extend({
 
   draw = function(_ENV)
     sspr(40,0,5,4,x - width/2 + ox, y - height - elevation + oy, 5,4,rnd() > 0.5)
+
+    if alert then
+      local ax = x + ox
+      local ay = y + oy - elevation - height - 2
+      pset(ax,ay,2)
+      line(ax, ay - 1, ax, ay - 2, 8)
+    end
   end,
 
   throw_at = function(_ENV, t)
@@ -63,6 +72,20 @@ bot = entity:extend({
     elevation = 2.5 + sin(period)
     ox = lerp(ox, cos(period * hover_direction) * hover_distance, .1)
     oy = lerp(oy, sin(period * hover_direction) * hover_distance, .1)
+  end,
+
+  recall = function(_ENV)
+    sfx(1)
+    if (target) del(target.bots, _ENV)
+    add(player.bots, _ENV)
+    state = "follow"
+    target = player
+
+    async:call(function()
+      alert = true
+      wait(30)
+      alert = false
+    end)
   end,
 
   -- states

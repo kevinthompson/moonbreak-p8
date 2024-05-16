@@ -63,17 +63,13 @@ cursor = entity:new({
     if btnf(5) > 10 then
       recall_radius = lerp(recall_radius, 16, .1)
 
-      -- TODO: Iterate over only on-screen bots that are not in the player collection
       for e in all(entity.objects) do
         if e.class == bot
         and e.target != player
         and ccol({x=x,y=y,r=recall_radius},{x=e.x,y=e.y,r=1})
         and count(player.bots,e) <= 0
         then
-          if (e.target) del(e.target.bots, e)
-          add(player.bots,e)
-          e.state = "follow"
-          e.target = player
+          e:recall()
         end
       end
     else
