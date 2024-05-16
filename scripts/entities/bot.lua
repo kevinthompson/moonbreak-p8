@@ -70,6 +70,8 @@ bot = entity:extend({
   end,
 
   recall = function(_ENV)
+    ox = 0
+    oy = 0
     sfx(1)
     if (target) del(target.bots, _ENV)
     add(player.bots, _ENV)
