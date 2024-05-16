@@ -13,11 +13,12 @@ class=setmetatable({
   new=function(_ENV,tbl)
     tbl=tbl or {}
     setmetatable(tbl,_ENV)
-    tbl.type = _ENV
+    tbl.class = _ENV
     tbl:init()
     return tbl
   end,
 
   init = _noop
 },{__index=_ENV})
+
 class.__index = class
