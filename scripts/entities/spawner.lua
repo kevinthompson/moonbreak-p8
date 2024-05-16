@@ -3,9 +3,6 @@ spawner = entity:extend({
 
   update = function(_ENV)
     entity.update(_ENV)
-    if btnp(4) then
-      _ENV:spawn_bot()
-    end
   end,
 
   draw = function(_ENV)
