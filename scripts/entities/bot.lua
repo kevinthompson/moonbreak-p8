@@ -18,7 +18,7 @@ bot = entity:extend({
   ox = 0,
   oy = 0,
 
-  alert = false,
+  alert = 0,
 
   init = function(_ENV)
     entity.init(_ENV)
@@ -30,14 +30,9 @@ bot = entity:extend({
   end,
 
   draw = function(_ENV)
+    local alert_height = alert / 100 * 3
     sspr(40,0,5,4,x - width/2 + ox, y - height - elevation + oy, 5,4,rnd() > 0.5)
-
-    if alert then
-      local ax = x + ox
-      local ay = y + oy - elevation - height - 2
-      pset(ax,ay,2)
-      line(ax, ay - 1, ax, ay - 2, 8)
-    end
+    sspr(47,0,1,3,x + ox,y + oy - elevation - height - alert_height,1,alert_height)
   end,
 
   throw_at = function(_ENV, t)
@@ -82,9 +77,15 @@ bot = entity:extend({
     target = player
 
     async:call(function()
-      alert = true
-      wait(30)
-      alert = false
+      for i = 1,9 do
+        alert = i/9 * 100
+        yield()
+      end
+      wait(60)
+      for i = 9,0,-1 do
+        alert = i/9 * 100
+        yield()
+      end
     end)
   end,
 
