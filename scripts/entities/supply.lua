@@ -4,8 +4,9 @@ supply = entity:extend({
 
   shadow = true,
   bots_required = 1,
-  hitbox = {-3,3,-5,1},
+  hitbox = {-4,3,-6,1},
   yclip = 0,
+  max_bots = 6,
 
   on_follow_stop = function(_ENV)
     state = "idle"
@@ -43,7 +44,7 @@ supply = entity:extend({
           path = _ENV:find_path(target)
         end
 
-        speed = .25 * #bots / bots_required
+        speed = .1 * #bots / bots_required
         shadow = true
         elevation = lerp(elevation, 2, .8)
 
@@ -58,6 +59,7 @@ supply = entity:extend({
         local a = starta + i * astep
         bot.x = lerp(bot.x, x + cos(a) * 5, .2)
         bot.y = lerp(bot.y, y + sin(a) * 5, .2)
+        bot.elevation = lerp(bot.elevation, 5, .2)
       end
     end
   }

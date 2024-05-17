@@ -1,7 +1,5 @@
 collector = entity:extend({
-  layer = 0,
-  solid = true,
-  hitbox = {-8, 7, -1, 5},
+  hitbox = {-8, 7, 0, 5},
 
   init = function(_ENV)
     entity.init(_ENV)

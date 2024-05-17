@@ -36,7 +36,7 @@ game = scene:extend({
     end
 
     -- interactive elements
-    rover:new({ x = 32, y = 55 })
+    rover:new({ x = 28, y = 55 })
     g.collectors = {
       collector:new({ x = 40, y = 96 })
     }
@@ -66,10 +66,6 @@ game = scene:extend({
       if (e.flash_timer > 0) pal({7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7},0)
       e:draw()
       if (e.flash_timer > 0) pal(0)
-
-      if debug then
-        -- e:draw_hitbox()
-      end
     end
   end,
 

@@ -1,5 +1,3 @@
-debug = true
-
 function log(any, overwrite)
   printh(tostr(any), logfile or "log", overwrite)
 end
@@ -42,9 +40,22 @@ function tostr(any, prefix)
   end
 end
 
-entity.draw_hitbox = function(_ENV)
-  local hb = _ENV:get_hitbox()
-  local wo = hb.width > 0 and -1 or 0
-  local ho = hb.height > 0 and -1 or 0
-  rect(hb.x, hb.y, hb.x + hb.width + wo, hb.y + hb.height + ho, 11)
+function enable_debug()
+  entity.draw_hitbox = function(_ENV)
+    local hb = _ENV:get_hitbox()
+    local wo = hb.width > 0 and -1 or 0
+    local ho = hb.height > 0 and -1 or 0
+    rect(hb.x, hb.y, hb.x + hb.width + wo, hb.y + hb.height + ho, 11)
+  end
+
+  _game_draw = game.draw
+  game.draw = function(_ENV)
+    _game_draw(_ENV)
+
+    if debug then
+      for e in all(entity.objects) do
+        e:draw_hitbox()
+      end
+    end
+  end
 end

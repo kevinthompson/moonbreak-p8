@@ -50,10 +50,13 @@ entity=gameobject:extend({
   on_map_collide = _noop,
   on_entity_collide = _noop,
 
+  max_bots = 0,
+
   -- instance methods
   init = function(_ENV)
     add(entity.objects,_ENV)
     _ENV:set_sort_value()
+    _ENV:set_map_tiles(1)
     bots = {}
     path = {}
   end,
@@ -66,6 +69,7 @@ entity=gameobject:extend({
   end,
 
   destroy = function(_ENV)
+    _ENV:set_map_tiles(0)
     del(entity.objects,_ENV)
   end,
 
@@ -247,7 +251,18 @@ entity=gameobject:extend({
     return true
    end,
 
-   set_sort_value = function(_ENV)
+  set_sort_value = function(_ENV)
     sort_value = layer * 1000 + y
-   end
+  end,
+
+  set_map_tiles = function(_ENV, sprite)
+    if solid then
+      local hb = _ENV:get_hitbox()
+      for x = hb.x,hb.x + hb.width - 1 do
+        for y = hb.y,hb.y + hb.height - 1 do
+          mset(x\8,y\8,sprite)
+        end
+      end
+    end
+  end
 })

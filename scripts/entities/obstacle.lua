@@ -2,7 +2,7 @@ obstacle = entity:extend({
   sprite = 67,
   health = 5,
   solid = true,
-  hitbox = {-4,4,-7,1},
+  hitbox = {-4,3,-7,1},
 
   hit = function(_ENV)
     sfx(0)

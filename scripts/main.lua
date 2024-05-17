@@ -1,3 +1,5 @@
+if (debug) enable_debug()
+
 function _init()
   scene:load(game)
 end

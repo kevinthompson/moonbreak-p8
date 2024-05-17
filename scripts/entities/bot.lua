@@ -128,6 +128,7 @@ bot = entity:extend({
       -- find target
       for e in all(entity.objects) do
         if count({supply, obstacle, enemy}, e.class) > 0
+        and (e.max_bots == 0 or #e.bots < e.max_bots)
         and ccol({ x=x, y=y, r=target_radius }, e)
         then
           local entity_dist = dist(_ENV, e)
