@@ -85,7 +85,7 @@ end
 -- button methods
 -- ====================
 pbtn = 0
-bfr = {}
+bfr = {0,0,0,0,0,0}
 
 -- button released
 function btnr(b)
@@ -100,7 +100,9 @@ end
 
 -- increment button frames
 function bframes()
-  for b=0,5 do bfr[b+1] = btn(b) and bfr[b+1]+1 or 0 end
+  for b=0,5 do
+    bfr[b+1] = btn(b) and bfr[b+1]+1 or 0
+  end
 end
 
 function handle_input()
