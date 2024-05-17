@@ -1,7 +1,8 @@
 game = scene:extend({
   init=function(_ENV)
     reset_palette()
-    autotile(0,0,128,64,93,tile_rules)
+    autotile(0,0,128,64,93,tile_rules[1])
+    autotile(0,0,128,64,90,tile_rules[2])
 
     time_start = time()
     time_limit = 601
