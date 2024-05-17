@@ -100,6 +100,13 @@ bot = entity:extend({
     end,
 
     follow = function(_ENV)
+      if (dist(_ENV, player) > 64) then
+        del(player.bots, _ENV)
+        target = nil
+        state = "idle"
+        return
+      end
+
       _ENV:follow(player)
       _ENV:hover()
     end,
