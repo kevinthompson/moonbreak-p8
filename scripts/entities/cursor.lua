@@ -61,15 +61,18 @@ cursor = entity:new({
 
   handle_recall = function(_ENV)
     if btnf(5) > 10 then
+      if (btnf(5) == 15) sfx(3)
       recall_radius = lerp(recall_radius, 16, .1)
 
-      for e in all(entity.objects) do
-        if e.class == bot
-        and e.target != player
-        and ccol({x=x,y=y,r=recall_radius},{x=e.x,y=e.y,r=1})
-        and count(player.bots,e) <= 0
-        then
-          e:recall()
+      if recall_radius >= 8 then
+        for e in all(entity.objects) do
+          if e.class == bot
+          and e.target != player
+          and ccol({x=x,y=y,r=recall_radius},{x=e.x,y=e.y,r=1})
+          and count(player.bots,e) <= 0
+          then
+            e:recall()
+          end
         end
       end
     else

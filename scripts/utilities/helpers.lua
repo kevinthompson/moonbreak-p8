@@ -225,8 +225,3 @@ adjacent_positions = {
     {1,1}
   ]]
 }
-
-function round(value)
-  if (value < 0.5) return flr(value)
-  return ceil(value)
-end

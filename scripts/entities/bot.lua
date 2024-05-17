@@ -42,6 +42,9 @@ bot = entity:extend({
     target = { x=t.x, y=t.y }
     animation_frames = 30
     animation_frame = 0
+    sfx(2)
+    ox = 0
+    oy = 0
   end,
 
   attack = function(_ENV, new_target)
@@ -70,8 +73,6 @@ bot = entity:extend({
   end,
 
   recall = function(_ENV)
-    ox = 0
-    oy = 0
     sfx(1)
     if (target) del(target.bots, _ENV)
     add(player.bots, _ENV)

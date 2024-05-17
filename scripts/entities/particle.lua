@@ -24,8 +24,9 @@ particle = entity:extend({
     local c = _ENV.color
 
     if type(c) == "table" then
-      local percent = (max_frames - frames)/max_frames
-      local i = 1 + round(percent * (#c - 1))
+      local frames_per_color = max_frames / #c
+      local remaining_frames = max_frames - frames
+      local i = 1 + remaining_frames \ frames_per_color
       c = c[i]
     end
 

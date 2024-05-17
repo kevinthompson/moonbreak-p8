@@ -2,7 +2,6 @@ supply = entity:extend({
   width = 7,
   height = 7,
 
-  solid = true,
   shadow = true,
   bots_required = 1,
   hitbox = {-3,3,-5,1},
@@ -29,7 +28,6 @@ supply = entity:extend({
 
   states = {
     idle = function(_ENV)
-      solid = true
       elevation = lerp(elevation, 0, .8)
     end,
 
@@ -40,8 +38,6 @@ supply = entity:extend({
       end
 
       if #bots >= bots_required then
-        solid = false
-
         if not target then
           target = collectors[1]
           path = _ENV:find_path(target)
@@ -52,8 +48,6 @@ supply = entity:extend({
         elevation = lerp(elevation, 2, .8)
 
         _ENV:follow(target)
-      else
-        solid = true
       end
 
       -- position bots

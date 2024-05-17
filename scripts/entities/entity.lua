@@ -48,9 +48,7 @@ entity=gameobject:extend({
   on_path_end = _noop,
   on_follow_stop = _noop,
   on_map_collide = _noop,
-  on_entity_collide = function(_ENV, other)
-    return other.solid
-  end,
+  on_entity_collide = _noop,
 
   -- instance methods
   init = function(_ENV)
@@ -129,7 +127,7 @@ entity=gameobject:extend({
     -- map collision
     if map_collision and _ENV:map_collide(cx,cy) then
       _ENV:on_map_collide()
-      result = true
+      return true
     end
 
     -- entity collision
@@ -137,7 +135,8 @@ entity=gameobject:extend({
       for e in all(entity.objects) do
         if e != _ENV
         and _ENV:entity_collide(cx,cy,e) then
-          return _ENV:on_entity_collide(e)
+          _ENV:on_entity_collide(e)
+          result = result or e.solid
         end
       end
     end
