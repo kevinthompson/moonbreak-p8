@@ -6,6 +6,7 @@ player = entity:new({
   follow_distance = 24,
   map_collision = true,
   entity_collision = true,
+  outside = true,
 
   speed=0.5,
 
@@ -33,7 +34,9 @@ player = entity:new({
   end,
 
   draw=function(_ENV)
-    spr(current_animation[frame],x-3,y-7,1,2,flip)
+    local sprite = sprite or current_animation[frame]
+    spr(sprite,x-3,y-7,1,1,flip)
+    if (outside) sspr(24,4,4,3,x-1,y - (sprite == 18 and 5 or 6),4,3,flip)
   end,
 
   states = {
