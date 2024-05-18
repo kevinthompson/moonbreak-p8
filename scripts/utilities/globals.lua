@@ -19,10 +19,6 @@ reset_palette = function()
   pal({129,2,3,4,5,6,7,8,9,137,11,12,13,133,15,0},1)
 end
 
--- camera setup
-cx = 0
-cy = 0
-
 -- sprite flags
 flags = {
   solid = 0

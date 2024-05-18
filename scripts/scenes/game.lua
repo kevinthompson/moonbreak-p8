@@ -47,14 +47,6 @@ game = scene:extend({
     for e in all(entity.objects) do
       e:update()
     end
-
-    local ctx = mid(0, player.x - 64, 896)
-    local cty = mid(0, player.y - 71, 384)
-
-    cx = lerp(cx, ctx, .1)
-    cy = lerp(cy, cty, .1)
-
-    camera(cx,cy)
   end,
 
   draw=function(_ENV)
@@ -74,26 +66,5 @@ game = scene:extend({
       e:draw()
       if (e.flash_timer > 0) pal(0)
     end
-  end,
-
-  draw_ui = function(_ENV)
-    -- draw ui background
-    rectfill(cx,cy,cx+128,cy+10,0)
-    rectfill(cx+45,cy,cx+80,cy+13,0)
-
-    -- print time
-    local time_left = (time_limit - time() - time_start) \ 1
-    local m = pad(time_left \ 60,2,"0")
-    local s = pad(time_left % 60,2,"0")
-
-    poke(0x5f58,0x81)
-    printc(m .. ":" .. s,4,7,6)
-    poke(0x5f58,0x80)
-
-    -- show bot count
-    local mcy=2
-    spr(2,cx+4,cy+mcy)
-    spr(0,cx+12,cy+mcy+1)
-    print(#player.bots,cx+20,cy+mcy+2,7)
   end
 })
