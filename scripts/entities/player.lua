@@ -1,9 +1,9 @@
 player = entity:new({
   x=64,
   y=64,
+  angle = 0,
   width = 4,
   height = 2,
-  follow_distance = 24,
   map_collision = true,
   entity_collision = true,
   outside = true,
@@ -26,7 +26,42 @@ player = entity:new({
   update = function(_ENV)
     entity.update(_ENV)
 
-    if _ENV:follow(cursor) then
+    -- position
+    local nx = x
+    local ny = y
+
+    -- handle movement
+    local dx=0
+    local dy=0
+
+    if (btn(0)) dx-=1
+    if (btn(1)) dx+=1
+    if (btn(2)) dy-=1
+    if (btn(3)) dy+=1
+
+    if (dx < 0) flip = true
+    if (dx > 0) flip = false
+
+    -- normalize movement speed
+    if dx!=0 or dy != 0 then
+      angle = atan2(dx,dy)
+      nx += cos(angle) * speed
+      ny += sin(angle) * speed
+
+      local cdist = mid(0, dist(cursor, _ENV), 24)
+      local mult = 1 + ((24 - cdist) / 24 * 2)
+      local cx = cursor.x + dx * mult
+      local cy = cursor.y + dy * mult
+
+      if dist({ x = cx, y = cy }, _ENV) >= 24 then
+        cx = lerp(cursor.x, x + cos(angle) * 24, .05)
+        cy = lerp(cursor.y, y + sin(angle) * 24, .05)
+      end
+
+      cursor:move(cx, cy)
+    end
+
+    if _ENV:move(nx,ny) then
       state = "walking"
     else
       state = "idle"

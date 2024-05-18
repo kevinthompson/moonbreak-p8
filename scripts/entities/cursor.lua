@@ -3,40 +3,15 @@ cursor = entity:new({
   y = 76,
   width = 1,
   height = 1,
-  map_collision = true,
-  entity_collision = true,
   speed = .8,
   recall_radius = 0,
 
   update = function(_ENV)
-    -- position
-    local nx = x
-    local ny = y
-
-    -- handle movement
-    local dx=0
-    local dy=0
-
-    if (btn(0)) dx-=1
-    if (btn(1)) dx+=1
-    if (btn(2)) dy-=1
-    if (btn(3)) dy+=1
-
-    if (dx < 0) flip = true
-    if (dx > 0) flip = false
-
-    -- normalize movement speed
-    if dx!=0 or dy != 0 then
-      local angle = atan2(dx,dy)
-      nx += cos(angle) * speed
-      ny += sin(angle) * speed
-    end
-
-    if dist({ x = nx, y = ny }, player) <= 32 then
-      _ENV:move(nx,ny)
-    end
-
+    entity.update(_ENV)
     _ENV:handle_recall()
+
+    -- x = lerp(x,player.x + cos(player.angle) * 24,.1)
+    -- y = lerp(y,player.y + sin(player.angle) * 24,.1)
 
     if btnr(5) and btnf(5) < 10 and #player.bots > 0 then
       local bot = player.bots[1]
@@ -46,7 +21,6 @@ cursor = entity:new({
         wait(5)
         player.sprite = nil
       end)
-
     end
   end,
 
