@@ -49,7 +49,7 @@ player = entity:new({
       ny += sin(angle) * speed
 
       local cdist = mid(0, dist(cursor, _ENV), 24)
-      local mult = 1 + ((24 - cdist) / 24 * 2)
+      local mult = 1 + ((24 - cdist) / 24 * 1.5)
       local cx = cursor.x + dx * mult
       local cy = cursor.y + dy * mult
 
