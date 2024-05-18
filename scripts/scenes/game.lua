@@ -48,7 +48,13 @@ game = scene:extend({
       e:update()
     end
 
-    update_camera()
+    local ctx = mid(0, player.x - 64, 896)
+    local cty = mid(0, player.y - 71, 384)
+
+    cx = lerp(cx, ctx, .1)
+    cy = lerp(cy, cty, .1)
+
+    camera(cx,cy)
   end,
 
   draw=function(_ENV)
@@ -91,9 +97,3 @@ game = scene:extend({
     print(#player.bots,cx+20,cy+mcy+2,7)
   end
 })
-
-function update_camera()
-  cx = mid(0, player.x - 64, 896)
-  cy = mid(0, player.y - 71, 384)
-  camera(cx,cy)
-end
