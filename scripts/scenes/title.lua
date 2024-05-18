@@ -11,7 +11,7 @@ title = scene:extend({
 
   update = function(_ENV)
     if btnp(5) then
-      scene:load(game)
+      scene:load(instructions)
     end
   end,
 

@@ -20,6 +20,7 @@ __lua__
 #include scripts/scenes/splash.lua
 #include scripts/scenes/title.lua
 #include scripts/scenes/game.lua
+#include scripts/scenes/instructions.lua
 
 -- entities
 #include scripts/entities/entity.lua
