@@ -68,6 +68,15 @@ entity=gameobject:extend({
     if (state_func) states[state](_ENV)
   end,
 
+  draw = function(_ENV)
+    local x,y = x - width/2, y - height + 1
+    if sprite then
+      spr(sprite,x,y,width/8,height/8,flip)
+    else
+      rect(x,y,x+width-1,y+height-1,8)
+    end
+  end,
+
   destroy = function(_ENV)
     _ENV:set_map_tiles(0)
     del(entity.objects,_ENV)
