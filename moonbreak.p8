@@ -37,6 +37,8 @@ __lua__
 #include scripts/entities/collector.lua
 #include scripts/entities/spawner.lua
 #include scripts/entities/camera.lua
+#include scripts/entities/part.lua
+#include scripts/entities/ship.lua
 
 -- main
 #include scripts/main.lua

@@ -1,0 +1,3 @@
+ship = entity:new({
+
+})
