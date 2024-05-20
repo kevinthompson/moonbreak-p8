@@ -5,6 +5,7 @@ cursor = entity:new({
   height = 1,
   speed = .8,
   recall_radius = 0,
+  layer = -1,
 
   update = function(_ENV)
     entity.update(_ENV)
@@ -13,7 +14,7 @@ cursor = entity:new({
     -- x = lerp(x,player.x + cos(player.angle) * 24,.1)
     -- y = lerp(y,player.y + sin(player.angle) * 24,.1)
 
-    if btnr(5) and btnf(5) < 10 and #player.bots > 0 then
+    if btnr(5) and btnf(5) < 15 and #player.bots > 0 then
       local bot = player.bots[1]
       bot:throw_at(cursor)
       async:call(function()
@@ -40,8 +41,8 @@ cursor = entity:new({
   end,
 
   handle_recall = function(_ENV)
-    if btnf(5) > 10 then
-      if (btnf(5) == 15) sfx(3)
+    if btnf(5) > 15 then
+      if (btnf(5) == 20) sfx(3)
       recall_radius = lerp(recall_radius, 16, .1)
 
       if recall_radius >= 8 then
