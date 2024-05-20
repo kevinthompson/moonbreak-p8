@@ -36,7 +36,7 @@ bot = entity:extend({
     sspr(40,0,5,4,bx, by, 5,4,rnd() > 0.5)
     sspr(47,0,1,3,bx + 2,by - 1 - alert_height,1,alert_height)
 
-    local c = 12
+    local c = 3
     if (state == "idle") c = 6
     if (state == "follow") c = 9
     pset(bx + 2, by + 2,c)
