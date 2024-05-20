@@ -57,9 +57,9 @@ supply = entity:extend({
         local starta = #bots == 2 and 0 or .25
         local bot = bots[i]
         local a = starta + i * astep
-        bot.x = lerp(bot.x, x + cos(a) * 5, .2)
-        bot.y = lerp(bot.y, y + sin(a) * 5, .2)
-        bot.elevation = lerp(bot.elevation, 5, .2)
+        bot.x = lerp(bot.x, x + cos(a) * 5, .1)
+        bot.y = lerp(bot.y, y + sin(a) * 5, .1)
+        bot.elevation = lerp(bot.elevation, 5, .1)
       end
     end
   }
