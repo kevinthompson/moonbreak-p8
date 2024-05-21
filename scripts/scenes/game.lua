@@ -15,6 +15,7 @@ game = scene:extend({
         local tiles = {}
         tiles[19] = supply
         tiles[67] = obstacle
+        tiles[6] = part
 
         if tiles[tile] then
           tiles[tile]:new({
