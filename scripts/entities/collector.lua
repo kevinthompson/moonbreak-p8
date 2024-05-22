@@ -1,20 +1,20 @@
 collector = entity:extend({
-  hitbox = {-8, 7, 0, 5},
+  layer = -1,
 
   init = function(_ENV)
     entity.init(_ENV)
     spawner_instance = spawner:new({
-      x = x + 24,
-      y = y + 4
+      x = x + 20,
+      y = y
     })
   end,
 
   draw = function(_ENV)
     for wx=x+4,spawner_instance.x do
-      pset(wx,y+1 + sin(wx/8), 1)
+      pset(wx,y-3 + sin(wx/8), 1)
     end
-    spr(11,x-8,y-1)
-    spr(11,x,y-1,1,1,true)
+    spr(11,x-8,y-5)
+    spr(11,x,y-5,1,1,true)
   end,
 
   collect_supply = function(_ENV, supply_instance)

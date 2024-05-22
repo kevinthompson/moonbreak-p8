@@ -7,6 +7,7 @@ title = scene:extend({
       pset(rnd(128),rnd(96),rnd({5,6,7}))
     end
 
+    music(0, 1000)
   end,
 
   update = function(_ENV)

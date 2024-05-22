@@ -17,6 +17,8 @@ game = scene:extend({
         tiles[67] = obstacle
         tiles[6] = part
         tiles[16] = person
+        tiles[112] = pod
+        tiles[114] = collector
 
         if tiles[tile] then
           local obj = tiles[tile]:new({

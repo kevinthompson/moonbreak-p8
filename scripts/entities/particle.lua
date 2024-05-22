@@ -4,6 +4,7 @@ particle = entity:extend({
   radius = 1,
   color = 7,
   shadow = false,
+  layer = -2,
   dx = 0,
   dy = 0,
 
