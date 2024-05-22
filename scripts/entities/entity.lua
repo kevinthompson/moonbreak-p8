@@ -72,8 +72,6 @@ entity=gameobject:extend({
     local x,y = x - width/2, y - height + 1
     if sprite then
       spr(sprite,x,y,width/8,height/8,flip)
-    else
-      rect(x,y,x+width-1,y+height-1,8)
     end
   end,
 
