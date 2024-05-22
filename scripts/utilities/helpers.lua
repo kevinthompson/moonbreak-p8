@@ -27,23 +27,16 @@ end
 
 -- circle collision
 function ccol(c1,c2)
-  local radsum = c1.r + c2.r
-  if (c1.x-c2.x > radsum)
-  or (c1.y-c2.y > radsum) then
-    return false
-  end
-
-  return dist(c1,c2) < radsum
+  return dist(c1,c2) < c1.r + c2.r
 end
 
 function dist(c1,c2)
-  --[[
-  Numbers larger than 32767.99999 will overflow
-  and cause invalid distance values
-  ]]
-  local dx = c2.x - c1.x
-  local dy = c2.y - c1.y
-  return sqrt(dx * dx + dy * dy)
+  local dx = abs(c2.x - c1.x)
+  local dy = abs(c2.y - c1.y)
+  if dy < dx then
+    dx,dy=dy,dx
+  end
+  return dy/sin(atan2(dx,dy))
 end
 
 function aabb(rect1,rect2)

@@ -240,7 +240,7 @@ entity=gameobject:extend({
   end,
 
   can_see = function(_ENV, other, distance)
-    local d = distance or 128
+    local d = distance or 512
     local x1,y1,x2,y2 = x,y,other.x,other.y
     local dx,dy=x2-x1,y2-y1
     local adx,ady=abs(dx),abs(dy)
