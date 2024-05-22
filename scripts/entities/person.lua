@@ -1,4 +1,4 @@
-player = entity:new({
+person = entity:extend({
   x=64,
   y=64,
   angle = 0,
@@ -20,6 +20,8 @@ player = entity:new({
 
   init = function(_ENV)
     entity.init(_ENV)
+    cursor.x = x + 24
+    cursor.y = y
     _ENV:animate("idle")
   end,
 

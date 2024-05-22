@@ -16,12 +16,17 @@ game = scene:extend({
         tiles[19] = supply
         tiles[67] = obstacle
         tiles[6] = part
+        tiles[16] = person
 
         if tiles[tile] then
-          tiles[tile]:new({
+          local obj = tiles[tile]:new({
             x = 4 + mx * 8,
             y = 7 + my * 8
           })
+
+          if tile == 16 then
+            _g.player = obj
+          end
 
           mset(mx,my,0)
         end
@@ -39,7 +44,7 @@ game = scene:extend({
 
     -- interactive elements
     rover:new({ x = 28, y = 55 })
-    g.collectors = {
+    _g.collectors = {
       collector:new({ x = 40, y = 96 })
     }
   end,

@@ -1,5 +1,5 @@
 -- store global environment
-g = _ENV
+_g = _ENV
 
 -- debug
 debug = false
