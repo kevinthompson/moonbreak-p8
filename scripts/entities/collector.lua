@@ -7,14 +7,16 @@ collector = entity:extend({
       x = x + 20,
       y = y
     })
+
+    y = y - 4
   end,
 
   draw = function(_ENV)
     for wx=x+4,spawner_instance.x do
-      pset(wx,y-3 + sin(wx/8), 1)
+      pset(wx,y+1 + sin(wx/8), 1)
     end
-    spr(11,x-8,y-5)
-    spr(11,x,y-5,1,1,true)
+    spr(11,x-8,y-1)
+    spr(11,x,y-1,1,1,true)
   end,
 
   collect_supply = function(_ENV, supply_instance)

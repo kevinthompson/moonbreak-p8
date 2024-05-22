@@ -11,8 +11,12 @@ pod = entity:extend({
     circfill(x,y-12,12,7)
 
     if door then
-      spr(22,x-4,y-6)
-      spr(38,x-4,y)
+      spr(22,x-4,y-9)
+      spr(38,x-4,y-1)
     end
   end
+})
+
+pod_with_door = pod:extend({
+  door = true
 })

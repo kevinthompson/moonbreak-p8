@@ -7,7 +7,7 @@ entity=gameobject:extend({
 
   -- position
   x=0,
-	y=0,
+  y=0,
   ox = 0,
   oy = 0,
   r=4,
@@ -52,9 +52,20 @@ entity=gameobject:extend({
 
   max_bots = 0,
 
+  extend = function(_ENV,tbl)
+    tbl = class.extend(_ENV, tbl)
+    tbl.objects = {}
+    return tbl
+  end,
+
   -- instance methods
   init = function(_ENV)
     add(entity.objects,_ENV)
+
+    if objects != entity.objects then
+      add(objects,_ENV)
+    end
+
     _ENV:set_sort_value()
     _ENV:set_map_tiles(1)
     bots = {}
@@ -78,6 +89,9 @@ entity=gameobject:extend({
   destroy = function(_ENV)
     _ENV:set_map_tiles(0)
     del(entity.objects,_ENV)
+    if objects != entity.objects then
+      del(objects,_ENV)
+    end
   end,
 
   animate = function(_ENV, name)
@@ -155,8 +169,8 @@ entity=gameobject:extend({
     return result
   end,
 
-	-- movement
-	map_collide = function(_ENV, cx, cy)
+  -- movement
+  map_collide = function(_ENV, cx, cy)
     local flag = flags.solid
     local x1,x2,y1,y2 = cx+hitbox[1],cx+hitbox[2],cy+hitbox[3],cy+hitbox[4]
     local points = {
@@ -171,7 +185,7 @@ entity=gameobject:extend({
         return true
       end
     end
-	end,
+  end,
 
   entity_collide = function(_ENV, cx, cy, other)
     return aabb(_ENV:get_hitbox(cx,cy),other:get_hitbox())
@@ -202,7 +216,7 @@ entity=gameobject:extend({
     target = new_target
     if (not target) return
 
-    if not _ENV:can_see(target) then
+    if map_collide and not _ENV:can_see(target) then
       path = #path > 0 and path or _ENV:find_path(target)
       if (#path > 0) return _ENV:follow_path()
     else

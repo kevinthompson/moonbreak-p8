@@ -7,21 +7,32 @@ game = scene:extend({
     time_start = time()
     time_limit = 601
 
+    local object_tiles = {
+      [19] = supply,
+      [67] = obstacle,
+      [6] = part,
+      [16] = person,
+      [112] = pod_with_door,
+      [115] = pod,
+      [114] = collector,
+      [116] = ship
+    }
+
+    local decor_tiles = {
+      [0]  = {64},
+      [93] = {110},
+    }
+
     -- spawn entities tiles
     for mx=0,127 do
       for my=0,63 do
         local tile = mget(mx,my)
+        local tile_class = object_tiles[tile]
 
-        local tiles = {}
-        tiles[19] = supply
-        tiles[67] = obstacle
-        tiles[6] = part
-        tiles[16] = person
-        tiles[112] = pod
-        tiles[114] = collector
+        if tile_class then
+          mset(mx,my,0)
 
-        if tiles[tile] then
-          local obj = tiles[tile]:new({
+          local obj = tile_class:new({
             x = 4 + mx * 8,
             y = 7 + my * 8
           })
@@ -29,8 +40,17 @@ game = scene:extend({
           if tile == 16 then
             _g.player = obj
           end
+        end
+      end
+    end
 
-          mset(mx,my,0)
+    for mx=0,127 do
+      for my=0,63 do
+        local tile = mget(mx,my)
+        local tile_set = decor_tiles[tile]
+
+        if tile_set and rnd() > .98 then
+          mset(mx,my,rnd(tile_set))
         end
       end
     end
@@ -39,16 +59,10 @@ game = scene:extend({
     for i=1,1 do
       add(player.bots,bot:new({
         target = player,
-        x = player.x - 32 + rnd(16),
-        y = player.y - 32 + rnd(16)
+        x = player.x - 16 + rnd(16),
+        y = player.y - 16 + rnd(16)
       }))
     end
-
-    -- interactive elements
-    rover:new({ x = 28, y = 55 })
-    _g.collectors = {
-      collector:new({ x = 40, y = 96 })
-    }
   end,
 
   update=function(_ENV)

@@ -1,10 +1,9 @@
 bot = entity:extend({
-  layer = 2,
-
   width = 5,
   height = 4,
 
   follow_distance = 12,
+  map_collide = false,
 
   speed = .40,
   state = "follow",
@@ -36,9 +35,7 @@ bot = entity:extend({
     sspr(40,0,5,4,bx, by, 5,4,rnd() > 0.5)
     sspr(47,0,1,3,bx + 2,by - 1 - alert_height,1,alert_height)
 
-    local c = 3
-    if (state == "idle") c = 6
-    if (state == "follow") c = 9
+    local c = state == "idle" and 6 or 9
     pset(bx + 2, by + 2,c)
   end,
 

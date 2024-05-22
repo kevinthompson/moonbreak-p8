@@ -1,6 +1,6 @@
 supply = entity:extend({
   width = 7,
-  height = 7,
+  height = 8,
 
   shadow = true,
   bots_required = 1,
@@ -24,7 +24,7 @@ supply = entity:extend({
   end,
 
   draw = function(_ENV)
-    sspr(24,8,7,7 - yclip,x - width/2, y - 6 - elevation + yclip)
+    sspr(24,8,width,height - yclip,x - width/2, y - height + 1 - elevation + yclip)
   end,
 
   states = {
@@ -40,12 +40,12 @@ supply = entity:extend({
 
       if #bots >= bots_required then
         if not target then
-          target = collectors[1]
+          -- TODO find closest collector
+          target = collector.objects[1]
           path = _ENV:find_path(target)
         end
 
         speed = .1 * #bots / bots_required
-        shadow = true
         elevation = lerp(elevation, 2, .8)
 
         _ENV:follow(target)
