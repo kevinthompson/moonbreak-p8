@@ -64,9 +64,15 @@ person = entity:extend({
     end
 
     if _ENV:move(nx,ny) then
-      state = "walking"
+      if state == "idle" then
+        state = "walking"
+        sfx(4,3)
+      end
     else
-      state = "idle"
+      if state == "walking" then
+        state = "idle"
+        sfx(-1,3)
+      end
     end
   end,
 
