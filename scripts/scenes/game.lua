@@ -10,7 +10,9 @@ game = scene:extend({
     local object_tiles = {
       [19] = supply,
       [67] = obstacle,
-      [6] = part,
+      [37] = cockpit,
+      [54] = life_support,
+      [55] = booster,
       [16] = person,
       [112] = pod_with_door,
       [115] = pod,
@@ -70,6 +72,10 @@ game = scene:extend({
     for e in all(entity.objects) do
       e:update()
     end
+
+    -- update camera position
+    camera.x = mid(64, player.x, 896)
+    camera.y = mid(64, player.y, 384)
   end,
 
   draw=function(_ENV)

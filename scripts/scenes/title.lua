@@ -6,8 +6,6 @@ title = scene:extend({
     for i = 1,30 do
       pset(rnd(128),rnd(96),rnd({5,6,7}))
     end
-
-    music(0, 1000)
   end,
 
   update = function(_ENV)
@@ -21,8 +19,7 @@ title = scene:extend({
     ovalfill(24,22,104,52,1)
 
     tprint(function()
-      printc("moonbreak",34,0,8)
-      printc("moonbreak",32,7,8)
+      printsc("moonbreak",34,7,8)
     end)
 
     printc("-JAM EDITION-",46,6)

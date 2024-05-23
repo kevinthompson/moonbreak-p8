@@ -21,7 +21,8 @@ end
 
 -- sprite flags
 flags = {
-  solid = 0
+  solid = 0,
+  block_path = 1,
 }
 
 -- empty function

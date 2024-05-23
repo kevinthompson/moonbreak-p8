@@ -83,12 +83,15 @@ bot = entity:extend({
     state = "follow"
     target = player
 
+    -- bot exclaimation animation
     async:call(function()
       for i = 1,9 do
         alert = i/9 * 100
         yield()
       end
+
       wait(60)
+
       for i = 9,0,-1 do
         alert = i/9 * 100
         yield()
@@ -138,7 +141,7 @@ bot = entity:extend({
 
       -- find target
       for e in all(entity.objects) do
-        if count({supply, obstacle, enemy}, e.class) > 0
+        if e.can_carry or e.can_attack
         and (e.max_bots == 0 or #e.bots < e.max_bots)
         and ccol({ x=x, y=y, r=target_radius }, e)
         then
@@ -151,7 +154,7 @@ bot = entity:extend({
       end
 
       if (new_target) then
-        if new_target.class == supply then
+        if new_target.class.can_carry then
           _ENV:carry(new_target)
         elseif new_target.class == obstacle then
           _ENV:attack(new_target)

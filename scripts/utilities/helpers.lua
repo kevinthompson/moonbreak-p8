@@ -1,8 +1,14 @@
 -- print centered
+function printsc(str,y,clr,w)
+  printc(str,y+2,0,w)
+  printc(str,y,clr,w)
+end
+
+-- print centered
 function printc(str,y,clr,w)
   w=w or 4
 	local x=64-(#str*w)/2
-	print(str,camera.x+x,camera.y+y,clr)
+	print(str,x,y,clr)
 end
 
 -- print shadow
@@ -163,7 +169,7 @@ function astar(start, goal)
       end
 
       -- skip solid tiles
-      if fget(mget(adjacent_node.x, adjacent_node.y), flags.solid) then
+      if fget(mget(adjacent_node.x, adjacent_node.y), flags.block_path) then
         goto continue
       end
 
@@ -213,10 +219,10 @@ adjacent_positions = {
   {0,1},
   {-1,0},
   {1,0},
-  --[[ disable corner pathing
+  -- disable corner pathing
     {-1,-1},
     {-1,1},
     {1,-1},
     {1,1}
-  ]]
+  --]]
 }

@@ -1,7 +1,8 @@
 if (debug) enable_debug()
 
 function _init()
-  scene:load(game)
+  log("initializing...", true)
+  scene:load(title)
 end
 
 function _update60()

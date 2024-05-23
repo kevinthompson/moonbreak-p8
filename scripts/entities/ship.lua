@@ -2,17 +2,41 @@ ship = entity:extend({
   solid = true,
   hitbox = {-12,12,-7,1},
   parts = {},
+  has_cockpit = false,
+  has_booster = false,
 
   init = function(_ENV)
     entity.init(_ENV)
     parts = {}
+    part_positions = {
+      cockpit = {
+        x = x + 16,
+        y = y - 2
+      },
+      life_support = {
+        x = x,
+        y = y - 2
+      },
+      booster = {
+        x = x - 16,
+        y = y - 2
+      },
+    }
+  end,
+
+  update = function(_ENV)
+    if #parts >= 3 then
+      scene:load(ending)
+    end
   end,
 
   draw = function(_ENV)
     spr(69,x-14,y-6)
     spr(69,x+5,y-6,1,1,true)
     spr(33,x-20,y-17,4,1)
-    spr(49,x-20,y-9,5,1)
+    if (not has_booster) spr(49,x-20,y-9)
+    spr(50,x-12,y-9,3,1)
+    if (not has_cockpit) spr(53,x+12,y-9)
   end,
 
   draw_shadow = function(_ENV)
@@ -24,13 +48,18 @@ ship = entity:extend({
       _ENV:set_map_tiles(0)
       add(parts,part)
 
-      if count(parts,cockpit) > 0 then
-        hitbox[2] = 19
+      for p in all(parts) do
+        if p.class == cockpit then
+          has_cockpit = true
+          hitbox[2] = 19
+        end
+
+        if p.class == booster then
+          hitbox[1] = -20
+          has_booster = true
+        end
       end
 
-      if count(parts,booster) > 0 then
-        hitbox[1] = -20
-      end
       _ENV:set_map_tiles(1)
     end
   end
