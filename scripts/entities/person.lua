@@ -74,6 +74,8 @@ person = entity:extend({
         sfx(-1,3)
       end
     end
+
+    camera(mid(64, x - 64, 896),mid(64, y - 64, 384))
   end,
 
   draw=function(_ENV)

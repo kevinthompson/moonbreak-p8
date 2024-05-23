@@ -62,9 +62,6 @@ game = scene:extend({
       x = player.x - 16 + rnd(16),
       y = player.y - 16 + rnd(16)
     }))
-
-    camx = player.x - 64
-    camy = player.y - 64
   end,
 
   update=function(_ENV)
@@ -72,11 +69,6 @@ game = scene:extend({
     for e in all(entity.objects) do
       e:update()
     end
-
-    -- update camera position
-    camx = lerp(camx, mid(64, player.x - 64, 896), .1)
-    camy = lerp(camy, mid(64, player.y - 64, 384), .1)
-    camera(camx,camy)
 
     local game_ship = ship.objects[1]
     if #game_ship.parts >= 3 then
