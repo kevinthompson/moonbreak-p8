@@ -1,4 +1,4 @@
-async = class:new({
+async = class:extend({
   coroutines = {},
 
   reset = function(_ENV)
