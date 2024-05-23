@@ -1,6 +1,5 @@
 title = scene:extend({
   init = function(_ENV)
-    reset_palette()
     cls(1)
 
     for i = 1,30 do

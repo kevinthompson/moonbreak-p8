@@ -3,6 +3,7 @@ obstacle = entity:extend({
   health = 5,
   solid = true,
   hitbox = {-4,3,-7,1},
+  can_attack = true,
 
   hit = function(_ENV)
     sfx(0)

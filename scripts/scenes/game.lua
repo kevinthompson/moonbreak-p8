@@ -1,6 +1,5 @@
 game = scene:extend({
   init=function(_ENV)
-    reset_palette()
     autotile(0,0,128,64,93,tile_rules[1])
     autotile(0,0,128,64,90,tile_rules[2])
 
@@ -58,13 +57,14 @@ game = scene:extend({
     end
 
     -- testing bots
-    for i=1,1 do
-      add(player.bots,bot:new({
-        target = player,
-        x = player.x - 16 + rnd(16),
-        y = player.y - 16 + rnd(16)
-      }))
-    end
+    add(player.bots,bot:new({
+      target = player,
+      x = player.x - 16 + rnd(16),
+      y = player.y - 16 + rnd(16)
+    }))
+
+    camx = player.x - 64
+    camy = player.y - 64
   end,
 
   update=function(_ENV)
@@ -74,8 +74,14 @@ game = scene:extend({
     end
 
     -- update camera position
-    camera.x = mid(64, player.x, 896)
-    camera.y = mid(64, player.y, 384)
+    camx = lerp(camx, mid(64, player.x - 64, 896), .1)
+    camy = lerp(camy, mid(64, player.y - 64, 384), .1)
+    camera(camx,camy)
+
+    local game_ship = ship.objects[1]
+    if #game_ship.parts >= 3 then
+      scene:load(ending)
+    end
   end,
 
   draw=function(_ENV)

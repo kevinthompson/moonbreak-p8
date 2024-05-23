@@ -1,4 +1,4 @@
--- print centered
+-- print centered with shadow
 function printsc(str,y,clr,w)
   printc(str,y+2,0,w)
   printc(str,y,clr,w)

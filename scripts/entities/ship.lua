@@ -24,12 +24,6 @@ ship = entity:extend({
     }
   end,
 
-  update = function(_ENV)
-    if #parts >= 3 then
-      scene:load(ending)
-    end
-  end,
-
   draw = function(_ENV)
     spr(69,x-14,y-6)
     spr(69,x+5,y-6,1,1,true)
