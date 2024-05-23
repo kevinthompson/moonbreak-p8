@@ -18,8 +18,4 @@ obstacle = entity:extend({
       _ENV:destroy()
     end
   end,
-
-  draw = function(_ENV)
-    spr(sprite, x - 4, y - 7)
-  end
 })
