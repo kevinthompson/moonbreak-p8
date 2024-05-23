@@ -257,6 +257,14 @@ entity=gameobject:extend({
       deli(full_path,1)
       path = full_path
       finding_path = false
+      if #path == 0 then
+        state = "idle"
+        for b in all(bots) do
+          b.state = "idle"
+        end
+        bots = {}
+        sfx(5)
+      end
     end)
   end,
 

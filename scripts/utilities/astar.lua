@@ -37,7 +37,7 @@ function astar(start, goal)
       -- skip if...
       -- node is blocking path
       local tile = mget(adjacent_node.x, adjacent_node.y)
-      if fget(tile, flags.solid)
+      if fget(tile, flags.block_path)
 
       -- or node is out of bounds
       or adjacent_node.x > 127
