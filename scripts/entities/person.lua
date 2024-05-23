@@ -75,7 +75,7 @@ person = entity:extend({
       end
     end
 
-    camera(mid(64, x - 64, 896),mid(64, y - 64, 384))
+    camera(mid(0, x - 64, 896),mid(0, y - 64, 384))
   end,
 
   draw=function(_ENV)

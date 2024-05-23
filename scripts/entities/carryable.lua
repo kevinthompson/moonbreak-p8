@@ -17,6 +17,7 @@ carryable = entity:extend({
 
   states = {
     idle = function(_ENV)
+      path = {}
       elevation = lerp(elevation, 0, .8)
     end,
 

@@ -214,11 +214,14 @@ entity=gameobject:extend({
 
   follow = function(_ENV, new_target)
     target = new_target
-    if (not target) return
+    if (finding_path or not target) return
 
     if map_collide and not _ENV:can_see(target) then
-      path = #path > 0 and path or _ENV:find_path(target)
-      if (#path > 0) return _ENV:follow_path()
+      if #path == 0 then
+        _ENV:find_path(target)
+      else
+        return _ENV:follow_path()
+      end
     else
       path = {}
     end
@@ -248,9 +251,13 @@ entity=gameobject:extend({
   end,
 
   find_path = function(_ENV, target)
-    local full_path = astar({x\8,y\8}, {target.x\8, target.y\8})
-    deli(full_path,1)
-    return full_path
+    finding_path = true
+    async:call(function()
+      local full_path = astar({x\8,y\8}, {target.x\8, target.y\8})
+      deli(full_path,1)
+      path = full_path
+      finding_path = false
+    end)
   end,
 
   can_see = function(_ENV, other, distance)
