@@ -103,7 +103,7 @@ adjacent_positions = {
   {0,1},
   {-1,0},
   {1,0},
-  -- [[ disable corner pathing
+  --[[ disable corner pathing
   {-1,-1},
   {-1,1},
   {1,-1},

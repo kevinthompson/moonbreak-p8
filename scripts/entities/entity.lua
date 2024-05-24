@@ -193,13 +193,19 @@ entity=gameobject:extend({
 
   draw_shadow = function(_ENV)
     if shadow then
+      local tile = mget(x\8,y\8)
+      local sy = y
+
+      if (fget(tile,2)) return
+      if (fget(tile,3)) sy -= 2
+
       local shadow_scale = 1 / (elevation*.5 + 1)
       local shadow_width = width * shadow_scale
       line(
         x - shadow_width/2 + ox,
-        y + 1 + oy,
+        sy + 1 + oy,
         x-1+shadow_width/2 + ox,
-        y + 1 + oy,
+        sy + 1 + oy,
         14
       )
     end

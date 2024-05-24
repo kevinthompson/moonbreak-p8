@@ -57,11 +57,13 @@ game = scene:extend({
     end
 
     -- testing bots
-    add(player.bots,bot:new({
-      target = player,
-      x = player.x - 16 + rnd(16),
-      y = player.y - 16 + rnd(16)
-    }))
+    -- for i = 1,3 do
+      add(player.bots,bot:new({
+        target = player,
+        x = player.x - 16 + rnd(16),
+        y = player.y - 16 + rnd(16)
+      }))
+    -- end
   end,
 
   update=function(_ENV)
@@ -79,12 +81,12 @@ game = scene:extend({
   draw=function(_ENV)
     cls(13)
 
+    map()
+
     -- draw shadows
     for e in all(entity.objects) do
       e:draw_shadow()
     end
-
-    map()
 
     -- draw entities
     for e in all(entity.objects) do

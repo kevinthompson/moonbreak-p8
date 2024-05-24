@@ -17,5 +17,19 @@ obstacle = entity:extend({
     if health <= 0 then
       _ENV:destroy()
     end
+
+
+    if #bots > 0 then
+      -- position bots
+      local astep = 1/#bots
+      for i=1,#bots do
+        local starta = -.05
+        local bot = bots[i]
+        local a = starta + i * astep * -.4
+        bot.x = lerp(bot.x, x + cos(a) * 5, .1)
+        bot.y = lerp(bot.y, y + sin(a) * 5, .1)
+        bot.elevation = lerp(bot.elevation, 5, .1)
+      end
+    end
   end,
 })

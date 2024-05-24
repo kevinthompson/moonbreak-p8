@@ -29,9 +29,10 @@ bot = entity:extend({
   end,
 
   draw = function(_ENV)
+    local e = elevation
     local alert_height = alert / 100 * 3
     local bx = x - width/2 + ox
-    local by = y - height - elevation + oy
+    local by = y - height - e + oy
     sspr(40,0,5,4,bx, by, 5,4,rnd() > 0.5)
     sspr(47,0,1,3,bx + 2,by - 1 - alert_height,1,alert_height)
 
