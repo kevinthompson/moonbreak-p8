@@ -7,8 +7,8 @@ end
 -- print centered
 function printc(str,y,clr,w)
   w=w or 4
-	local x=64-(#str*w)/2
-	print(str,x,y,clr)
+	local x=peek2(0x5f28) + 64 - (#str*w)/2
+	print(str,x,peek2(0x5f2a) + y,clr)
 end
 
 -- print shadow

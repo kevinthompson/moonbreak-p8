@@ -23,6 +23,8 @@ end
 flags = {
   solid = 0,
   block_path = 1,
+  pit = 2,
+  raised = 3
 }
 
 -- empty function

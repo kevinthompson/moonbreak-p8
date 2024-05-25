@@ -50,7 +50,7 @@ entity=gameobject:extend({
   on_map_collide = _noop,
   on_entity_collide = _noop,
 
-  max_bots = 0,
+  max_bots = 6,
 
   extend = function(_ENV,tbl)
     tbl = class.extend(_ENV, tbl)
@@ -80,7 +80,7 @@ entity=gameobject:extend({
   end,
 
   draw = function(_ENV)
-    local x,y = x - width/2, y - height + 1
+    local x,y = x - width/2, y - height + 1 - elevation
     if sprite then
       spr(sprite,x,y,width/8,height/8,flip)
     end
@@ -196,8 +196,8 @@ entity=gameobject:extend({
       local tile = mget(x\8,y\8)
       local sy = y
 
-      if (fget(tile,2)) return
-      if (fget(tile,3)) sy -= 2
+      if (fget(tile,flags.pit)) return
+      if (fget(tile,flags.raised)) sy -= 2
 
       local shadow_scale = 1 / (elevation*.5 + 1)
       local shadow_width = width * shadow_scale

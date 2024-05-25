@@ -1,4 +1,4 @@
-cursor = entity:new({
+cursor = entity:extend({
   x = 66,
   y = 76,
   width = 1,
@@ -6,17 +6,18 @@ cursor = entity:new({
   speed = .8,
   recall_radius = 0,
   layer = -1,
+  enabled = true,
 
   update = function(_ENV)
     entity.update(_ENV)
-    _ENV:handle_recall()
 
-    -- x = lerp(x,player.x + cos(player.angle) * 24,.1)
-    -- y = lerp(y,player.y + sin(player.angle) * 24,.1)
+    if (not enabled) return
+
+    _ENV:handle_recall()
 
     if btnr(5) and btnf(5) < 15 and #player.bots > 0 then
       local bot = player.bots[1]
-      bot:throw_at(cursor)
+      bot:throw_at(_ENV)
       async:call(function()
         player.sprite = 32
         wait(5)
@@ -26,6 +27,8 @@ cursor = entity:new({
   end,
 
   draw = function(_ENV)
+    if (not enabled) return
+
     pset(x,y,7)
     spr(14,x-3,y-2)
 

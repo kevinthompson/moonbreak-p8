@@ -8,7 +8,7 @@ bot = entity:extend({
   speed = .40,
   state = "follow",
 
-  target_radius = 12,
+  target_radius = 8,
   attack_timer = 0,
   attack_frames = 45,
 
@@ -100,6 +100,21 @@ bot = entity:extend({
     end)
   end,
 
+  set_target = function(_ENV, new_target)
+    if new_target != target then
+      if target then
+        del(target.bots, _ENV)
+      end
+
+      target = new_target
+
+      if new_target then
+        state = "follow"
+        add(new_target.bots, _ENV)
+      end
+    end
+  end,
+
   -- states
 
   states = {
@@ -142,8 +157,8 @@ bot = entity:extend({
 
       -- find target
       for e in all(entity.objects) do
-        if e.can_carry or e.can_attack
-        and (e.max_bots == 0 or #e.bots < e.max_bots)
+        if (e.can_carry or e.can_attack)
+        and #e.bots < e.max_bots
         and ccol({ x=x, y=y, r=target_radius }, e)
         then
           local entity_dist = dist(_ENV, e)
@@ -172,13 +187,6 @@ bot = entity:extend({
     end,
 
     attack = function(_ENV)
-      if not target or target.health <= 0 then
-        add(player.bots, _ENV)
-        target = player
-        state = "follow"
-        return
-      end
-
       _ENV:follow(target)
 
       attack_timer -= 1

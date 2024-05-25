@@ -5,9 +5,6 @@ spawner = entity:extend({
 
   update = function(_ENV)
     entity.update(_ENV)
-    if btnp(4) then
-      _ENV:spawn_bot()
-    end
   end,
 
   draw = function(_ENV)
@@ -28,17 +25,15 @@ spawner = entity:extend({
       wait(6)
       open_percent = 100
 
-      for i = 1,2 do
-        local new_bot = bot:new({
-          x = x + 1,
-          y = y - 12
-        })
+      local new_bot = bot:new({
+        x = x + 1,
+        y = y - 12
+      })
 
-        new_bot:throw_at({
-          x = x + 12 * rnd({-1,1}),
-          y = y - 16 + rnd(32)
-        })
-      end
+      new_bot:throw_at({
+        x = x + 12 * rnd({-1,1}),
+        y = y - 16 + rnd(32)
+      })
 
       wait(30)
 

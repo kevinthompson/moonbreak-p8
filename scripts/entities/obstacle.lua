@@ -32,4 +32,12 @@ obstacle = entity:extend({
       end
     end
   end,
+
+  destroy = function(_ENV)
+    entity.destroy(_ENV)
+
+    for b in all(bots) do
+      b:set_target(player)
+    end
+  end
 })

@@ -16,7 +16,11 @@ game = scene:extend({
       [112] = pod_with_door,
       [115] = pod,
       [114] = collector,
-      [116] = ship
+      [116] = ship,
+      [117] = rover,
+      [118] = crashed_rover,
+      [26] = eggplant,
+      [113] = building,
     }
 
     local decor_tiles = {
@@ -56,14 +60,11 @@ game = scene:extend({
       end
     end
 
-    -- testing bots
-    -- for i = 1,3 do
-      add(player.bots,bot:new({
-        target = player,
-        x = player.x - 16 + rnd(16),
-        y = player.y - 16 + rnd(16)
-      }))
-    -- end
+    add(player.bots,bot:new({
+      target = player,
+      x = player.x - 16 + rnd(16),
+      y = player.y - 16 + rnd(16)
+    }))
   end,
 
   update=function(_ENV)
@@ -72,15 +73,34 @@ game = scene:extend({
       e:update()
     end
 
-    local game_ship = ship.objects[1]
-    if #game_ship.parts >= 3 then
-      scene:load(ending)
+    -- TODO REMOVE THIS
+    if btnp(4) then
+      add(player.bots,bot:new({
+        target = player,
+        x = player.x - 16 + rnd(16),
+        y = player.y - 16 + rnd(16)
+      }))
+    end
+
+    local ship_instance = ship.objects[1]
+    local cursor_instance = cursor.objects[1]
+
+    if ship_instance
+    and ship_instance:complete()
+    and ccol(ship_instance,player) then
+      if (cursor_instance) cursor_instance.enabled = false
+      if btnp(5) then
+        -- remove player control
+        -- play animation
+        scene:load(ending)
+      end
+    else
+      if (cursor_instance) cursor_instance.enabled = true
     end
   end,
 
   draw=function(_ENV)
     cls(13)
-
     map()
 
     -- draw shadows
@@ -93,6 +113,20 @@ game = scene:extend({
       if (e.flash_timer > 0) pal({7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7},0)
       e:draw()
       if (e.flash_timer > 0) pal(0)
+    end
+
+    local ship_instance = ship.objects[1]
+    if ship_instance
+    and ship_instance:complete()
+    and ccol(ship_instance,player) then
+      local cam_x = peek2(0x5f28)
+      local cam_y = peek2(0x5f2a)
+      local bx = cam_x + 32
+      local by = cam_y + 104
+      circfill(bx, by+2, 4, 1)
+      rectfill(bx, by - 2, bx + 64, by + 6, 1)
+      circfill(bx + 66, by + 2, 4, 1)
+      printc("press ❎ to leave", 104, 7)
     end
   end
 })

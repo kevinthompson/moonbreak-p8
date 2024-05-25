@@ -1,6 +1,5 @@
 ending = scene:extend({
   init = function(_ENV)
-    camera()
     async:call(function(_ENV)
       -- ending animation
     end)
@@ -13,6 +12,7 @@ ending = scene:extend({
   end,
 
   draw = function(_ENV)
+    camera()
     cls(1)
 
     tprint(function()

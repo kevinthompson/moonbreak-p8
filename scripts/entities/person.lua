@@ -5,7 +5,6 @@ person = entity:extend({
   width = 4,
   height = 2,
   map_collision = true,
-  entity_collision = true,
   outside = true,
 
   speed=0.5,
@@ -20,8 +19,10 @@ person = entity:extend({
 
   init = function(_ENV)
     entity.init(_ENV)
-    cursor.x = x + 24
-    cursor.y = y
+    cursor = cursor:new({
+      x = x + 24,
+      y = y
+    })
     _ENV:animate("idle")
   end,
 

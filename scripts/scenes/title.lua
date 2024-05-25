@@ -1,6 +1,11 @@
 title = scene:extend({
   init = function(_ENV)
     cls(1)
+    reload(0x1000, 0x1000, 0x2000)
+
+    for e in all(entity.objects) do
+      e:destroy()
+    end
 
     for i = 1,30 do
       pset(rnd(128),rnd(96),rnd({5,6,7}))
