@@ -1,8 +1,10 @@
 ending = scene:extend({
   init = function(_ENV)
-    async:call(function(_ENV)
-      -- ending animation
-    end)
+    cls(1)
+
+    for i = 1,30 do
+      pset(rnd(128),rnd(96),rnd({5,6,7}))
+    end
   end,
 
   update = function(_ENV)
@@ -13,12 +15,13 @@ ending = scene:extend({
 
   draw = function(_ENV)
     camera()
-    cls(1)
+    circfill(64,176,96,13)
+    ovalfill(24,22,104,52,1)
 
     tprint(function()
       printsc("you win!",34,7,8)
     end)
 
-    printc("press ❎ to start over",96,7)
+    printc("press ❎ to start over",104,7)
   end
 })

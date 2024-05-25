@@ -20,19 +20,19 @@ instructions = scene:extend({
     line(32,20,96,20,5)
 
 
-    ? "\f7* \f6use arrow keys to walk", 16, 28
+    ? "\f7- \f6use arrow keys to walk", 16, 28
     ? "  and aim", 16, 34
 
-    ? "\f7* \f6send a bot to collect", 16, 44
-    ? "  supplies by tapping \f7❎", 16, 50
+    ? "\f7- \f6tap ❎ to throw bots", 16, 44
+    ? "  at supplies an obstacles", 16, 50
 
-    ? "\f7* \f6recall your bot", 16, 60
+    ? "\f7- \f6recall your bots", 16, 60
     ? "  by holding \f7❎", 16, 66
 
-    ? "\f7* \f6collecting supplies", 16, 76
+    ? "\f7- \f6collecting supplies", 16, 76
     ? "  creates more bots", 16, 82
 
-    ? "\f7* \f6use bots to collect", 16, 92
+    ? "\f7- \f6use bots to collect", 16, 92
     ? "  ship parts and leave", 16, 98
 
     if controls_enabled then

@@ -73,15 +73,6 @@ game = scene:extend({
       e:update()
     end
 
-    -- TODO REMOVE THIS
-    if btnp(4) then
-      add(player.bots,bot:new({
-        target = player,
-        x = player.x - 16 + rnd(16),
-        y = player.y - 16 + rnd(16)
-      }))
-    end
-
     local ship_instance = ship.objects[1]
     local cursor_instance = cursor.objects[1]
 

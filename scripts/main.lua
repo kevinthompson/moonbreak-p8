@@ -1,11 +1,8 @@
 if (debug) enable_debug()
 
-cam_x = 0
-cam_y = 0
-
 function _init()
   log("initializing...", true)
-  scene:load(game)
+  scene:load(splash)
 end
 
 function _update60()
