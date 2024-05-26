@@ -49,9 +49,8 @@ cursor = entity:extend({
       recall_radius = lerp(recall_radius, 16, .1)
 
       if recall_radius >= 8 then
-        for e in all(entity.objects) do
-          if e.class == bot
-          and e.target != player
+        for e in all(bot.objects) do
+          if e.target != player
           and ccol({x=x,y=y,r=recall_radius},{x=e.x,y=e.y,r=1})
           and count(player.bots,e) <= 0
           then

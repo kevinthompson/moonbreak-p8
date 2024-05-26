@@ -25,8 +25,6 @@ supply = carryable:extend({
       end
     end
 
-    log({new_target.x\8, new_target.y\8})
-
     return new_target
   end
 })

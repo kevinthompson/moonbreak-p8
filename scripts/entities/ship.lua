@@ -4,6 +4,8 @@ ship = entity:extend({
   has_booster = false,
   has_life_support = false,
   r = 24,
+  width = 40,
+  height = 16,
 
   init = function(_ENV)
     entity.init(_ENV)

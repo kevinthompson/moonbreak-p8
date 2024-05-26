@@ -68,7 +68,6 @@ game = scene:extend({
   end,
 
   update=function(_ENV)
-    sort(entity.objects, "sort_value")
     for e in all(entity.objects) do
       e:update()
     end
@@ -91,16 +90,36 @@ game = scene:extend({
   end,
 
   draw=function(_ENV)
+    local cam_x = peek2(0x5f28)
+    local cam_y = peek2(0x5f2a)
+
     cls(13)
     map()
 
     -- draw shadows
-    for e in all(entity.objects) do
-      e:draw_shadow()
+    for e in all(entity.visible) do
+      local _ENV = e
+      if shadow then
+        local tile = mget(x\8,y\8)
+        local sy = y
+
+        if (fget(tile,flags.pit)) return
+        if (fget(tile,flags.raised)) sy -= 2
+
+        local shadow_scale = 1 / (elevation*.5 + 1)
+        local shadow_width = width * shadow_scale
+        line(
+          x - shadow_width/2 + ox,
+          sy + 1 + oy,
+          x-1+shadow_width/2 + ox,
+          sy + 1 + oy,
+          14
+        )
+      end
     end
 
     -- draw entities
-    for e in all(entity.objects) do
+    for e in all(entity.visible) do
       if (e.flash_timer > 0) pal({7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7},0)
       e:draw()
       if (e.flash_timer > 0) pal(0)
@@ -110,8 +129,6 @@ game = scene:extend({
     if ship_instance
     and ship_instance:complete()
     and ccol(ship_instance,player) then
-      local cam_x = peek2(0x5f28)
-      local cam_y = peek2(0x5f2a)
       local bx = cam_x + 32
       local by = cam_y + 104
       circfill(bx, by+2, 4, 1)

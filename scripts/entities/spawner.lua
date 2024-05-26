@@ -2,6 +2,8 @@ spawner = entity:extend({
   open_percent = 0,
   solid = true,
   hitbox = {-7,8,-7,1},
+  width = 16,
+  height = 16,
 
   update = function(_ENV)
     entity.update(_ENV)
