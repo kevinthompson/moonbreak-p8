@@ -1,4 +1,5 @@
 entity=gameobject:extend({
+  label = "entity",
 
   -- static
   objects = {},
@@ -80,9 +81,8 @@ entity=gameobject:extend({
   end,
 
   draw = function(_ENV)
-    local x,y = x - width/2, y - height + 1 - elevation
     if sprite then
-      spr(sprite,x,y,width/8,height/8,flip)
+      spr(sprite,x - width/2,y - height + 1 - elevation,width/8,height/8,flip)
     end
   end,
 

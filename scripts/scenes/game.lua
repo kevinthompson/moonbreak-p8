@@ -1,10 +1,8 @@
 game = scene:extend({
   init=function(_ENV)
+    reload(0x1000, 0x1000, 0x2000)
     autotile(0,0,128,64,93,tile_rules[1])
     autotile(0,0,128,64,90,tile_rules[2])
-
-    time_start = time()
-    time_limit = 601
 
     local object_tiles = {
       [19] = supply,
@@ -59,12 +57,6 @@ game = scene:extend({
         end
       end
     end
-
-    add(player.bots,bot:new({
-      target = player,
-      x = player.x - 16 + rnd(16),
-      y = player.y - 16 + rnd(16)
-    }))
   end,
 
   update=function(_ENV)
@@ -90,9 +82,6 @@ game = scene:extend({
   end,
 
   draw=function(_ENV)
-    local cam_x = peek2(0x5f28)
-    local cam_y = peek2(0x5f2a)
-
     cls(13)
     map()
 
@@ -129,8 +118,8 @@ game = scene:extend({
     if ship_instance
     and ship_instance:complete()
     and ccol(ship_instance,player) then
-      local bx = cam_x + 32
-      local by = cam_y + 104
+      local bx = peek2(0x5f28) + 32
+      local by = peek2(0x5f2a) + 104
       circfill(bx, by+2, 4, 1)
       rectfill(bx, by - 2, bx + 64, by + 6, 1)
       circfill(bx + 66, by + 2, 4, 1)

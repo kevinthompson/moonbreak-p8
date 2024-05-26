@@ -1,4 +1,5 @@
 collector = entity:extend({
+  label = "collector",
   layer = -1,
 
   init = function(_ENV)

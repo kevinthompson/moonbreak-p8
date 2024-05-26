@@ -28,13 +28,13 @@ __lua__
 
 ---- parent classes
 #include scripts/entities/entity.lua
+#include scripts/entities/targetable.lua
 #include scripts/entities/carryable.lua
 
 ---- instances
 #include scripts/entities/person.lua
 #include scripts/entities/bot.lua
 #include scripts/entities/supply.lua
-#include scripts/entities/terminal.lua
 #include scripts/entities/particle.lua
 #include scripts/entities/rover.lua
 #include scripts/entities/pod.lua

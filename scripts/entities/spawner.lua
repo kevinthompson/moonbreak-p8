@@ -1,4 +1,6 @@
 spawner = entity:extend({
+  label = "spawner",
+
   open_percent = 0,
   solid = true,
   hitbox = {-7,8,-7,1},

@@ -1,4 +1,5 @@
 supply = carryable:extend({
+  label = "supply",
   width = 7,
   height = 8,
   hitbox = {-4,3,-6,1},

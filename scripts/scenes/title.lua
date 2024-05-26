@@ -1,7 +1,6 @@
 title = scene:extend({
   init = function(_ENV)
     cls(1)
-    reload(0x1000, 0x1000, 0x2000)
 
     for e in all(entity.objects) do
       e:destroy()

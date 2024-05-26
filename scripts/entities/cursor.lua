@@ -1,4 +1,6 @@
 cursor = entity:extend({
+  label = "cursor",
+
   x = 66,
   y = 76,
   width = 1,

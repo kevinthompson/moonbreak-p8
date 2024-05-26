@@ -1,4 +1,6 @@
 rover = entity:extend({
+  label = "rover",
+
   solid = true,
   hitbox = {-11,12,-7,0},
   width = 24,

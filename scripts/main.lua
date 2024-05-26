@@ -6,9 +6,10 @@ function _init()
 end
 
 function _update60()
-  -- set visible
+  -- clear visible entities
   entity.visible = {}
 
+  -- build table of visible entities
   for e in all(entity.objects) do
     local sprite = { x = e.x - e.width / 2, y = e.y - e.height + 1, width = e.width, height = e.height }
     local view = { x = peek2(0x5f28), y = peek2(0x5f2a), width = 128, height = 128 }
@@ -20,7 +21,7 @@ function _update60()
 
   async:update()
   scene.current:update()
-  handle_input()
+  apply_button_extensions()
 end
 
 function _draw()

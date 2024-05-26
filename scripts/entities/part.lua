@@ -1,4 +1,6 @@
 part = carryable:extend({
+  label = "part",
+
   hitbox = {-4,3,-6,1},
   bots_required = 1,
   carry_speed = .025,

@@ -1,4 +1,5 @@
-carryable = entity:extend({
+carryable = targetable:extend({
+  label = "carryable",
   bots_required = 1,
   can_carry = true,
   find_target = _noop,

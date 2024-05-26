@@ -1,4 +1,6 @@
-obstacle = entity:extend({
+obstacle = targetable:extend({
+  label = "obstacle",
+
   sprite = 67,
   health = 5,
   solid = true,

@@ -1,4 +1,6 @@
 pod = entity:extend({
+  label = "pod",
+
   door = false,
   solid = true,
   hitbox = {-12,12,-15,1},

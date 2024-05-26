@@ -1,4 +1,6 @@
 ship = entity:extend({
+  label = "ship",
+
   parts = {},
   has_cockpit = false,
   has_booster = false,

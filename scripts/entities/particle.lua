@@ -1,4 +1,6 @@
 particle = entity:extend({
+  label = "particle",
+
   frames = 30,
   opacity = 1,
   radius = 1,

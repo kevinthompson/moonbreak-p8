@@ -1,4 +1,6 @@
 bot = entity:extend({
+  label = "bot",
+
   width = 5,
   height = 4,
 
@@ -78,11 +80,8 @@ bot = entity:extend({
   end,
 
   recall = function(_ENV)
+    _ENV:set_target(player)
     sfx(1)
-    if (target) del(target.bots, _ENV)
-    add(player.bots, _ENV)
-    state = "follow"
-    target = player
 
     -- bot exclaimation animation
     async:call(function()
@@ -138,10 +137,8 @@ bot = entity:extend({
       -- move towards ground target
       elevation = 2.5 + arc(animation_frames,8,animation_frame)
 
-      local nx = lerp(start_pos.x, target.x, animation_frame / animation_frames)
-      local ny = lerp(start_pos.y, target.y, animation_frame / animation_frames)
-
-      _ENV:move(nx,ny)
+      x = lerp(start_pos.x, target.x, animation_frame / animation_frames)
+      y = lerp(start_pos.y, target.y, animation_frame / animation_frames)
 
       animation_frame = min(animation_frame + 1, animation_frames)
 
@@ -157,7 +154,7 @@ bot = entity:extend({
 
       -- find target
       for e in all(entity.objects) do
-        if (e.can_carry or e.can_attack)
+        if e:is(targetable)
         and #e.bots < e.max_bots
         and ccol({ x=x, y=y, r=target_radius }, e)
         then
@@ -170,9 +167,9 @@ bot = entity:extend({
       end
 
       if (new_target) then
-        if new_target.class.can_carry then
+        if new_target:is(carryable) then
           _ENV:carry(new_target)
-        elseif new_target.class == obstacle then
+        elseif new_target:is(obstacle) then
           _ENV:attack(new_target)
         end
       end

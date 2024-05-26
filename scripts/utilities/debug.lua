@@ -59,3 +59,9 @@ function enable_debug()
     end
   end
 end
+
+function profile(label, func)
+  local before = stat(1)
+  func()
+  log(label .. ": " .. stat(1) - before)
+end

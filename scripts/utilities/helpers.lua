@@ -104,7 +104,7 @@ function bframes()
   end
 end
 
-function handle_input()
+function apply_button_extensions()
   bframes()
   pbtn=btn()
 end

@@ -1,4 +1,6 @@
 person = entity:extend({
+  label = "person",
+
   x=64,
   y=64,
   angle = 0,
@@ -19,10 +21,18 @@ person = entity:extend({
 
   init = function(_ENV)
     entity.init(_ENV)
+
     cursor = cursor:new({
       x = x + 24,
       y = y
     })
+
+    add(bots, bot:new({
+      target = _ENV,
+      x = x - 16 + rnd(16),
+      y = y - 16 + rnd(16)
+    }))
+
     _ENV:animate("idle")
   end,
 
@@ -61,7 +71,8 @@ person = entity:extend({
         cy = lerp(cursor.y, y + sin(angle) * 24, .05)
       end
 
-      cursor:move(cx, cy)
+      cursor.x = cx
+      cursor.y = cy
     end
 
     if _ENV:move(nx,ny) then
