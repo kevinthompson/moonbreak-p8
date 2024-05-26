@@ -1,6 +1,7 @@
 title = scene:extend({
   init = function(_ENV)
     cls(1)
+    music(0,1000)
 
     for e in all(entity.objects) do
       e:destroy()
