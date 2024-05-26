@@ -19,7 +19,6 @@ entity=gameobject:extend({
 
   -- follow
   follow_distance = 0,
-  max_follow_distance = 24,
 
   -- collision
   map_collision = false,
