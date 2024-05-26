@@ -71,7 +71,7 @@ game = scene:extend({
     and ship_instance:complete()
     and ccol(ship_instance,player) then
       if (cursor_instance) cursor_instance.enabled = false
-      if btnp(5) then
+      if btnf(4) > 30 then
         -- remove player control
         -- play animation
         scene:load(ending)
@@ -87,24 +87,7 @@ game = scene:extend({
 
     -- draw shadows
     for e in all(entity.visible) do
-      local _ENV = e
-      if shadow then
-        local tile = mget(x\8,y\8)
-        local sy = y
-
-        if (fget(tile,flags.pit)) return
-        if (fget(tile,flags.raised)) sy -= 2
-
-        local shadow_scale = 1 / (elevation*.5 + 1)
-        local shadow_width = width * shadow_scale
-        line(
-          x - shadow_width/2 + ox,
-          sy + 1 + oy,
-          x-1+shadow_width/2 + ox,
-          sy + 1 + oy,
-          14
-        )
-      end
+      e:draw_shadow()
     end
 
     -- draw entities
@@ -123,7 +106,7 @@ game = scene:extend({
       circfill(bx, by+2, 4, 1)
       rectfill(bx, by - 2, bx + 64, by + 6, 1)
       circfill(bx + 66, by + 2, 4, 1)
-      printc("press ❎ to leave", 104, 7)
+      printc("hold 🅾️ to leave", 104, 7)
     end
   end
 })

@@ -147,6 +147,7 @@ bot = entity:extend({
       -- find target
       for e in all(entity.objects) do
         if e:is(targetable)
+        and e.active
         and #e.bots < e.max_bots
         and ccol({ x=x, y=y, r=target_radius }, e)
         then

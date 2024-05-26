@@ -1,1 +1,3 @@
-targetable = entity:extend()
+targetable = entity:extend({
+  active = true
+})

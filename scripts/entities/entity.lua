@@ -15,6 +15,7 @@ entity=gameobject:extend({
   elevation = 0,
   speed = 1,
   path = {},
+  use_pathfinding = false,
   layer = 1,
 
   -- follow
@@ -221,7 +222,7 @@ entity=gameobject:extend({
     target = new_target
     if (finding_path or not target) return
 
-    if map_collision and not _ENV:can_see(target) then
+    if use_pathfinding and not _ENV:can_see(target) then
       if #path == 0 then
         _ENV:find_path(target)
       else

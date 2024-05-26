@@ -12,6 +12,11 @@ supply = carryable:extend({
 
   draw = function(_ENV)
     sspr(24,8,width,height - yclip,x - width/2, y - height + 1 - elevation)
+    if yclip > 0 then
+      local lx = x - width/2
+      local ly = y - yclip + 1
+      line(lx, ly, lx + width - 1, ly, 7)
+    end
   end,
 
   find_target = function(_ENV)

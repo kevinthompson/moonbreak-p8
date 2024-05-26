@@ -1,6 +1,8 @@
 collector = entity:extend({
   label = "collector",
   layer = -1,
+  width = 16,
+  height = 8,
 
   init = function(_ENV)
     entity.init(_ENV)

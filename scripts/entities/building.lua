@@ -1,6 +1,7 @@
 building = entity:extend({
   label = "building",
-
+  width = 32,
+  height = 16,
   solid = true,
   hitbox = {-12,20,-7,1},
 

@@ -1,7 +1,7 @@
 carryable = targetable:extend({
   label = "carryable",
   bots_required = 1,
-  can_carry = true,
+  use_pathfinding = true,
   find_target = _noop,
   carry_speed = .1,
   shadow = true,
@@ -9,7 +9,7 @@ carryable = targetable:extend({
 
   on_follow_stop = function(_ENV)
     state = "idle"
-    can_carry = false
+    active = false
     for b in all(bots) do
       b:set_target(player)
     end
