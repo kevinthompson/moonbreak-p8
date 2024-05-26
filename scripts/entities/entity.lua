@@ -221,7 +221,7 @@ entity=gameobject:extend({
     target = new_target
     if (finding_path or not target) return
 
-    if map_collide and not _ENV:can_see(target) then
+    if map_collision and not _ENV:can_see(target) then
       if #path == 0 then
         _ENV:find_path(target)
       else
@@ -282,11 +282,11 @@ entity=gameobject:extend({
     if ((dx/d)*(dx/d)+(dy/d)*(dy/d)>1) return --fails mot's "within dist"
     if (adx>ady) then
      for i=0,dx,sgn(dx) do
-      if (fget(mget((x1+i)/8, (y1+i*dy/dx)/8),0)) return
+      if (fget(mget((x1+i)/8, (y1+i*dy/dx)/8),flags.solid)) return
      end
     else
      for i=0,dy,sgn(dy) do
-      if (fget(mget((x1+i*dx/dy)/8, (y1+i)/8),0)) return
+      if (fget(mget((x1+i*dx/dy)/8, (y1+i)/8),flags.solid)) return
      end
     end
     return true

@@ -20,7 +20,6 @@ obstacle = targetable:extend({
       _ENV:destroy()
     end
 
-
     if #bots > 0 then
       -- position bots
       local astep = 1/#bots

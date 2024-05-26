@@ -54,21 +54,13 @@ bot = entity:extend({
   end,
 
   attack = function(_ENV, new_target)
-    target = new_target
-    state = "attack"
+    _ENV:set_target(new_target, "attack")
     attack_timer = attack_frames
-
-    del(player.bots, _ENV)
-    add(target.bots, _ENV)
   end,
 
   carry = function(_ENV, new_target)
-    target = new_target
+    _ENV:set_target(new_target, "carry")
     target.state = "carry"
-    state = "carry"
-
-    del(player.bots, _ENV)
-    add(target.bots, _ENV)
   end,
 
   hover = function(_ENV)
@@ -98,7 +90,9 @@ bot = entity:extend({
     end)
   end,
 
-  set_target = function(_ENV, new_target)
+  set_target = function(_ENV, new_target, new_state)
+    new_state = new_state or "follow"
+
     if new_target != target then
       if target then
         del(target.bots, _ENV)
@@ -106,10 +100,11 @@ bot = entity:extend({
 
       target = new_target
 
-      if new_target then
-        state = "follow"
-        add(new_target.bots, _ENV)
+      if target then
+        add(target.bots, _ENV)
       end
+
+      state = new_state
     end
   end,
 
@@ -122,9 +117,7 @@ bot = entity:extend({
 
     follow = function(_ENV)
       if (dist(_ENV, player) > 64) then
-        del(player.bots, _ENV)
-        target = nil
-        state = "idle"
+        _ENV:set_target(nil, "idle")
         return
       end
 
