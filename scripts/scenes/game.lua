@@ -35,10 +35,16 @@ game = scene:extend({
         if tile_class then
           mset(mx,my,0)
 
-          local obj = tile_class:new({
+          local attrs = {
             x = 4 + mx * 8,
             y = 7 + my * 8
-          })
+          }
+
+          if tile_class == person then
+            attrs.player_control = true
+          end
+
+          local obj = tile_class:new(attrs)
 
           if tile == 16 then
             _g.player = obj
@@ -60,10 +66,6 @@ game = scene:extend({
   end,
 
   update=function(_ENV)
-    for e in all(entity.objects) do
-      e:update()
-    end
-
     local ship_instance = ship.objects[1]
     local cursor_instance = cursor.objects[1]
 

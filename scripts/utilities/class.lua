@@ -7,6 +7,7 @@ class=setmetatable({
     tbl=tbl or {}
     tbl.__index = tbl
     tbl.ancestors = {}
+    tbl.super = _ENV
 
     for a in all(_ENV.ancestors) do
       add(tbl.ancestors, a)

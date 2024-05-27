@@ -4,4 +4,10 @@ scene=gameobject:extend({
     current = scene_class:new()
     if (scene_class != splash) reset_palette()
   end,
+
+  destroy = function(_ENV)
+    for e in all(entity.objects) do
+      e:destroy()
+    end
+  end
 })

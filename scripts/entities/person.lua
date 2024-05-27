@@ -14,6 +14,7 @@ person = entity:extend({
   -- features
   dust_timer = 0,
   initial_bot_count = 1,
+  player_control = false,
 
   animations = {
     idle = {16},
@@ -23,10 +24,12 @@ person = entity:extend({
   init = function(_ENV)
     entity.init(_ENV)
 
-    cursor = cursor:new({
-      x = x + 24,
-      y = y
-    })
+    if player_control then
+      cursor = cursor:new({
+        x = x + 24,
+        y = y
+      })
+    end
 
     for i = 1, initial_bot_count do
       add(bots, bot:new({
@@ -50,10 +53,12 @@ person = entity:extend({
     local dx=0
     local dy=0
 
-    if (btn(0)) dx-=1
-    if (btn(1)) dx+=1
-    if (btn(2)) dy-=1
-    if (btn(3)) dy+=1
+    if player_control then
+      if (btn(0)) dx-=1
+      if (btn(1)) dx+=1
+      if (btn(2)) dy-=1
+      if (btn(3)) dy+=1
+    end
 
     if (dx < 0) flip = true
     if (dx > 0) flip = false
@@ -90,7 +95,9 @@ person = entity:extend({
       end
     end
 
-    camera(mid(0, x - 64, 896),mid(0, y - 64, 384))
+    if player_control then
+      camera(mid(0, x - 64, 896),mid(0, y - 64, 384))
+    end
   end,
 
   draw=function(_ENV)

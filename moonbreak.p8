@@ -45,6 +45,7 @@ __lua__
 #include scripts/entities/part.lua
 #include scripts/entities/ship.lua
 #include scripts/entities/building.lua
+#include scripts/entities/star.lua
 
 -- main
 #include scripts/main.lua
