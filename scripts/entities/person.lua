@@ -13,6 +13,7 @@ person = entity:extend({
 
   -- features
   dust_timer = 0,
+  initial_bot_count = 1,
 
   animations = {
     idle = {16},
@@ -27,11 +28,13 @@ person = entity:extend({
       y = y
     })
 
-    add(bots, bot:new({
-      target = _ENV,
-      x = x - 16 + rnd(16),
-      y = y - 16 + rnd(16)
-    }))
+    for i = 1, initial_bot_count do
+      add(bots, bot:new({
+        target = _ENV,
+        x = x - 16 + rnd(16),
+        y = y - 16 + rnd(16)
+      }))
+    end
 
     _ENV:animate("idle")
   end,
