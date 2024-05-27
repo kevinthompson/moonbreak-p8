@@ -46,6 +46,7 @@ title = scene:extend({
     end)
 
     printc("-JAM EDITION-",36,6)
-    printc("press ❎ to start",112,7)
+    printc("press    to play",112,7)
+    prints("❎", 56, 112, 9, 5)
   end
 })

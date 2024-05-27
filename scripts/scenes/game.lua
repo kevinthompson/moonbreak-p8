@@ -73,7 +73,7 @@ game = scene:extend({
     and ship_instance:complete()
     and ccol(ship_instance,player) then
       if (cursor_instance) cursor_instance.enabled = false
-      if btnf(4) > 30 then
+      if btnf(5) > 30 then
         -- remove player control
         -- play animation
         scene:load(ending)
@@ -108,7 +108,7 @@ game = scene:extend({
       circfill(bx, by+2, 4, 1)
       rectfill(bx, by - 2, bx + 64, by + 6, 1)
       circfill(bx + 66, by + 2, 4, 1)
-      printc("hold 🅾️ to leave", 104, 7)
+      printc("hold ❎ to leave", 104, 7)
     end
   end
 })

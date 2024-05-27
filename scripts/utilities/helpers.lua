@@ -12,8 +12,9 @@ function printc(str,y,clr,w)
 end
 
 -- print shadow
-function prints(str,x,y,clr)
-	print(str,x,y+1,0)
+function prints(str,x,y,clr,sclr)
+  sclr = sclr or 0
+	print(str,x,y+1,sclr)
 	print(str,x,y,clr)
 end
 

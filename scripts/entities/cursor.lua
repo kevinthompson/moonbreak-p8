@@ -46,8 +46,8 @@ cursor = entity:extend({
   end,
 
   handle_recall = function(_ENV)
-    if btn(4) then
-      if (btnf(4) == 20) sfx(3)
+    if btnf(5) > 15 then
+      if (btnf(5) == 20) sfx(3)
       recall_radius = lerp(recall_radius, 16, .1)
 
       if recall_radius >= 8 then
