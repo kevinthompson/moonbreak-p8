@@ -29,6 +29,15 @@ instructions = scene:extend({
     })
 
     spawner_instance = spawner.objects[1]
+    stars = {}
+
+    for i=1,30 do
+      add(stars, star:new({
+        x = rnd(128),
+        y = rnd(78),
+        c = rnd({5,6,7})
+      }))
+    end
   end,
 
   update = function(_ENV)
@@ -43,6 +52,9 @@ instructions = scene:extend({
 
   draw = function(_ENV)
     cls(1)
+    for s in all(stars) do
+      s:draw()
+    end
     circfill(64,164,132,13)
 
     printc("instructions",12,7)
