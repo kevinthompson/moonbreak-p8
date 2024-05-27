@@ -74,13 +74,7 @@ game = scene:extend({
     and ccol(ship_instance,player) then
       if (cursor_instance) cursor_instance.enabled = false
       if player.player_control and btnf(5) > 60 then
-        if (cursor_instance) cursor_instance:destroy()
-        if (player) player:destroy()
-
-        async:call(function()
-          wait(30)
-          scene:load(ending)
-        end)
+        scene:load(ending)
       end
     elseif player.player_control then
       if (cursor_instance) cursor_instance.enabled = true
