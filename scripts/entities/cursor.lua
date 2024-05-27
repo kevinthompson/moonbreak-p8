@@ -15,16 +15,18 @@ cursor = entity:extend({
 
     if (not enabled) return
 
-    _ENV:handle_recall()
+    if player.player_control then
+      _ENV:handle_recall()
 
-    if btnr(5) and btnf(5) < 15 and #player.bots > 0 then
-      local bot = player.bots[1]
-      bot:throw_at(_ENV)
-      async:call(function()
-        player.sprite = 32
-        wait(5)
-        player.sprite = nil
-      end)
+      if btnr(5) and btnf(5) < 15 and #player.bots > 0 then
+        local bot = player.bots[1]
+        bot:throw_at(_ENV)
+        async:call(function()
+          player.sprite = 32
+          wait(5)
+          player.sprite = nil
+        end)
+      end
     end
   end,
 

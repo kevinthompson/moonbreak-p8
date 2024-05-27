@@ -21,7 +21,8 @@ title = scene:extend({
 
     _g.player = person:new({
       x = 64,
-      y = 84
+      y = 84,
+      player_control = false
     })
   end,
 

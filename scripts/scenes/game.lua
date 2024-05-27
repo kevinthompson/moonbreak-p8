@@ -73,12 +73,21 @@ game = scene:extend({
     and ship_instance:complete()
     and ccol(ship_instance,player) then
       if (cursor_instance) cursor_instance.enabled = false
-      if btnf(5) > 30 then
-        -- remove player control
-        -- play animation
-        scene:load(ending)
+      if player.player_control and btnf(5) > 60 then
+        if (cursor_instance) cursor_instance:destroy()
+        if (player) player:destroy()
+
+        async:call(function()
+          while ship_instance.y > 0 do
+            ship_instance.x = lerp(ship_instance.x, 1024, .005)
+            ship_instance.y = lerp(ship_instance.y, -128, .005)
+            yield()
+          end
+
+          scene:load(ending)
+        end)
       end
-    else
+    elseif player.player_control then
       if (cursor_instance) cursor_instance.enabled = true
     end
   end,
@@ -109,6 +118,10 @@ game = scene:extend({
       rectfill(bx, by - 2, bx + 64, by + 6, 1)
       circfill(bx + 66, by + 2, 4, 1)
       printc("hold ❎ to leave", 104, 7)
+
+      if btnf(5) > 0 then
+        line(bx,by+7,bx+64 * btnf(5)/60,by+7,9)
+      end
     end
   end
 })

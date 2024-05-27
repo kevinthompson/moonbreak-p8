@@ -6,6 +6,7 @@ scene=gameobject:extend({
   end,
 
   destroy = function(_ENV)
+    camera()
     for e in all(entity.objects) do
       e:destroy()
     end
