@@ -78,12 +78,7 @@ game = scene:extend({
         if (player) player:destroy()
 
         async:call(function()
-          while ship_instance.y > 0 do
-            ship_instance.x = lerp(ship_instance.x, 1024, .005)
-            ship_instance.y = lerp(ship_instance.y, -128, .005)
-            yield()
-          end
-
+          wait(30)
           scene:load(ending)
         end)
       end

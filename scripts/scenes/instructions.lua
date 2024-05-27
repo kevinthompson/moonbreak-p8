@@ -9,7 +9,7 @@ instructions = scene:extend({
 
     person_instance = person:new({
       player_control = false,
-      x = 48,
+      x = 60,
       y = 67
     })
 
@@ -72,6 +72,18 @@ instructions = scene:extend({
 
   slides = {
     function(_ENV)
+      person_instance:draw()
+      for b in all(person_instance.bots) do
+        b.x = lerp(b.x, person_instance.x + 8, .1)
+        b.y = lerp(b.y, person_instance.y - 12, .1)
+        b:draw()
+      end
+      printc("the moon is collapsing,", 84, 7)
+      printc("you need to escape", 92, 7)
+    end,
+
+    function(_ENV)
+      person_instance.x = lerp(person_instance.x, 48, .1)
       person_instance:draw()
       cursor_instance:draw()
       for b in all(person_instance.bots) do
