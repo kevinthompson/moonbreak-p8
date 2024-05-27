@@ -2,9 +2,11 @@ instructions = scene:extend({
   slide = 1,
 
   init = function(_ENV)
+    input_enabled = false
     scene.init(_ENV)
     async:call(function()
       wait(60)
+      input_enabled = true
     end)
 
     person_instance = person:new({
@@ -41,7 +43,7 @@ instructions = scene:extend({
   end,
 
   update = function(_ENV)
-    if btnp(5) then
+    if input_enabled and btnp(5) then
       if slide == #slides then
         scene:load(game)
       else
@@ -61,12 +63,14 @@ instructions = scene:extend({
     line(32,20,96,20,5)
     slides[slide](_ENV)
 
-    if slide == #slides then
-      printc("   start game", 112, 7)
-      prints("❎", 38, 112, 9, 5)
-    else
-      printc("   next", 112, 7)
-      prints("❎", 50, 112, 9, 5)
+    if input_enabled then
+      if slide == #slides then
+        printc("   start game", 112, 7)
+        prints("❎", 38, 112, 9, 5)
+      else
+        printc("   next", 112, 7)
+        prints("❎", 50, 112, 9, 5)
+      end
     end
   end,
 

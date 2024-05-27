@@ -1,5 +1,12 @@
 ending = scene:extend({
   init = function(_ENV)
+    input_enabled = false
+    scene.init(_ENV)
+    async:call(function()
+      wait(60)
+      input_enabled = true
+    end)
+
     music(-1, 10000)
 
     for i = 1,30 do
@@ -15,7 +22,7 @@ ending = scene:extend({
   end,
 
   update = function(_ENV)
-    if btnp(5) then
+    if input_enabled and btnp(5) then
       scene:load(title)
     end
   end,
@@ -38,7 +45,9 @@ ending = scene:extend({
     ship_y = lerp(ship_y, 32, .005)
     spr(116, ship_x, ship_y)
 
-    printc("press    to start over",112,7)
-    prints("❎", 44, 112, 9, 5)
+    if input_enabled then
+      printc("press    to start over",112,7)
+      prints("❎", 44, 112, 9, 5)
+    end
   end
 })
