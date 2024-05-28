@@ -74,7 +74,12 @@ game = scene:extend({
     and ccol(ship_instance,player) then
       if (cursor_instance) cursor_instance.enabled = false
       if player.player_control and btnf(5) > 60 then
-        scene:load(ending)
+        player.player_control = false
+        player.state = "follow"
+        player.target = ship_instance
+        player.on_follow_stop = function()
+          scene:load(ending)
+        end
       end
     elseif player.player_control then
       if (cursor_instance) cursor_instance.enabled = true

@@ -17,6 +17,15 @@ ending = scene:extend({
       })
     end
 
+    pod_with_door:new({
+      x = 32,
+      y = 96
+    })
+
+    supply:new({ x = 92, y = 94 })
+    supply:new({ x = 87, y = 87 })
+    supply:new({ x = 82, y = 92 })
+
     ship_x = 84
     ship_y = 72
   end,
@@ -41,8 +50,8 @@ ending = scene:extend({
       printsc("you escaped!",34,7,8)
     end)
 
-    ship_x = lerp(ship_x, 256, .005)
-    ship_y = lerp(ship_y, 32, .005)
+    ship_x = lerp(ship_x, 256, .0025)
+    ship_y = lerp(ship_y, 32, .0025)
     spr(116, ship_x, ship_y)
 
     if input_enabled then

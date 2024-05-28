@@ -106,25 +106,34 @@ person = entity:extend({
     if (outside) sspr(24,4,4,3,x-1,y - (sprite == 18 and 5 or 6),4,3,flip)
   end,
 
+  animate_walk = function(_ENV)
+    _ENV:animate("walk")
+
+    dust_timer -= 1
+    if dust_timer <= 0 then
+      particle:new({
+        x = x-2 + rnd(4),
+        y = y-1 + rnd(2),
+        color = rnd({6,7}),
+        radius = rnd(1.5),
+        dy = -.1
+      })
+      dust_timer = 4+rnd(8)
+    end
+  end,
+
   states = {
     idle = function(_ENV)
       _ENV:animate("idle")
     end,
 
-    walking = function(_ENV)
-      _ENV:animate("walk")
+    follow = function(_ENV)
+      _ENV:follow(target)
+      _ENV:animate_walk()
+    end,
 
-      dust_timer -= 1
-      if dust_timer <= 0 then
-        particle:new({
-          x = x-2 + rnd(4),
-          y = y-1 + rnd(2),
-          color = rnd({6,7}),
-          radius = rnd(1.5),
-          dy = -.1
-        })
-        dust_timer = 4+rnd(8)
-      end
+    walking = function(_ENV)
+      _ENV:animate_walk()
     end
   }
 })
