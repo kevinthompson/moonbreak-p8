@@ -15,6 +15,7 @@ __lua__
 #include scripts/utilities/helpers.lua
 #include scripts/utilities/autotile.lua
 #include scripts/utilities/astar.lua
+#include scripts/utilities/transition.lua
 
 -- scenes
 #include scripts/scenes/scene.lua
@@ -49,6 +50,12 @@ __lua__
 
 -- main
 #include scripts/main.lua
+
+function _init()
+  cls()
+  scene:load(title)
+  transition:fade_in()
+end
 
 __gfx__
 0000000000000000000000000000006600000000550660080000000000000000001111000000000006666600000655e500000000000000000999990000000000

@@ -1,10 +1,10 @@
-class=setmetatable({
+class = setmetatable({
   label = "class",
   ancestors = {},
   descendants = {},
 
-  extend = function(_ENV,tbl)
-    tbl=tbl or {}
+  extend = function(_ENV, tbl)
+    tbl = tbl or {}
     tbl.__index = tbl
     tbl.ancestors = {}
     tbl.super = _ENV
@@ -16,15 +16,16 @@ class=setmetatable({
     add(tbl.ancestors, _ENV)
 
     setmetatable(tbl, {
-      __index=_ENV
+      __index = _ENV,
+      __call = tbl.__call
     })
 
     return tbl
   end,
 
-  new = function(_ENV,tbl)
-    tbl=tbl or {}
-    setmetatable(tbl,_ENV)
+  new = function(_ENV, tbl)
+    tbl = tbl or {}
+    setmetatable(tbl, _ENV)
     tbl.class = _ENV
     tbl:init()
     return tbl
@@ -35,6 +36,6 @@ class=setmetatable({
   end,
 
   init = _noop
-},{__index=_ENV})
+}, { __index = _ENV })
 
 class.__index = class

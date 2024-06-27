@@ -3,6 +3,7 @@ game = scene:extend({
     reload(0x1000, 0x1000, 0x2000)
     autotile(0,0,128,64,93,tile_rules[1])
     autotile(0,0,128,64,90,tile_rules[2])
+    music(0, 1000)
 
     local object_tiles = {
       [19] = supply,
@@ -78,7 +79,10 @@ game = scene:extend({
         player.state = "follow"
         player.target = ship_instance
         player.on_follow_stop = function()
-          scene:load(ending)
+          player.state = "idle"
+          transition:fade_out(function()
+            _g.load("ending.p8")
+          end)
         end
       end
     elseif player.player_control then

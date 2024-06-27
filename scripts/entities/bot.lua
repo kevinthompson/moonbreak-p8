@@ -75,7 +75,7 @@ bot = entity:extend({
     sfx(1)
 
     -- bot exclaimation animation
-    async:call(function()
+    async(function()
       for i = 1,9 do
         alert = i/9 * 100
         yield()

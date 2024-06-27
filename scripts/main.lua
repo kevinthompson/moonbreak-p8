@@ -1,10 +1,5 @@
 if (debug) enable_debug()
 
-function _init()
-  log("initializing...", true)
-  scene:load(splash)
-end
-
 function _update60()
   -- clear visible entities
   entity.visible = {}
@@ -21,10 +16,10 @@ function _update60()
   sort(entity.visible, "sort")
 
   async:update()
-  scene.current:update()
+  if (scene.current) scene.current:update()
   apply_button_extensions()
 end
 
 function _draw()
-  scene.current:draw()
+  if (scene.current) scene.current:draw()
 end

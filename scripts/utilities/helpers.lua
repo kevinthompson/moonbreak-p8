@@ -57,12 +57,6 @@ function lerp(a,b,t)
   return a+(b-a)*t
 end
 
-function wait(frames)
-  for i=1,frames do
-    yield()
-  end
-end
-
 function arc(max_x, max_y, x)
   return sin(.5 + (x/max_x) * .5) * max_y
 end

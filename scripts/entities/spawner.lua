@@ -24,7 +24,7 @@ spawner = entity:extend({
   end,
 
   spawn_bot = function(_ENV)
-    async:call(function()
+    async(function()
       open_percent = 50
       wait(6)
       open_percent = 100

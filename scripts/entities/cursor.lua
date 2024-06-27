@@ -21,7 +21,7 @@ cursor = entity:extend({
       if btnr(5) and btnf(5) < 15 and #player.bots > 0 then
         local bot = player.bots[1]
         bot:throw_at(_ENV)
-        async:call(function()
+        async(function()
           player.sprite = 32
           wait(5)
           player.sprite = nil

@@ -258,7 +258,7 @@ entity=gameobject:extend({
 
   find_path = function(_ENV, target)
     finding_path = true
-    async:call(function()
+    async(function()
       local full_path = astar({x\8,y\8}, {target.x\8, target.y\8})
       deli(full_path,1)
       path = full_path
