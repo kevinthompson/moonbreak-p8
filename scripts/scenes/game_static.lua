@@ -1,23 +1,6 @@
 game = scene:extend({
   init=function(_ENV)
-    local map_tiles = split(map_data)
-    local i = 1
-    local j = 0
-
-    while i < #map_tiles do
-      local tile_count = map_tiles[i]
-      local sprite_num = map_tiles[i+1]
-
-      for n = 1, tile_count do
-        local x = j % 128
-        local y = j \ 128
-        mset(x,y,sprite_num)
-        j += 1
-      end
-
-      i += 2
-    end
-
+    reload(0x1000, 0x1000, 0x2000)
     autotile(0,0,128,64,93,tile_rules[1])
     autotile(0,0,128,64,90,tile_rules[2])
     music(0, 1000)

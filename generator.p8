@@ -19,7 +19,7 @@ __lua__
 
 -- scenes
 #include scripts/scenes/scene.lua
-#include scripts/scenes/game.lua
+#include scripts/scenes/generator.lua
 
 -- entities
 
@@ -44,14 +44,11 @@ __lua__
 #include scripts/entities/building.lua
 #include scripts/entities/star.lua
 
----- data
-#include map.lua.p8l
-
 #include scripts/main.lua
 
 -- main
 function _init()
-  scene:load(game)
+  scene:load(generator)
 end
 
 
